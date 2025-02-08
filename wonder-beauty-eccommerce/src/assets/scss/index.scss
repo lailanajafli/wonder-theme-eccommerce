@@ -1,0 +1,25 @@
+// Global styles
+@use "./base";
+
+// Components
+@use "./components/header";
+@use "./components/footer";
+// @use "./components/loader";
+// @use "./components/car-card";
+// @use "./components/shop-card";
+
+// Pages
+@use "./pages/shop";
+// @use "./pages/home";
+// @use "./pages/car-details";
+// @use "./pages/register";
+// @use "./pages/login";
+// @use "./pages/not-found";
+// @use "./pages/cart";
+
+// Sections
+@use "./pages/hero";
+@use "./pages/skincarebanner";
+@use "./pages/threecart";
+@use "./pages/scrollwoman";
+// @use "./pages/our-cars";
