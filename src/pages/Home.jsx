@@ -5,6 +5,9 @@ import Hero from "../components/Header";
 import SkinCareBanner from "./sections/SkinCareBanner";
 import ThreeCart from "./sections/ThreeCart";
 import ScrollWoman from "./sections/ScrollWoman";
+import BrandCarousel from "./sections/BrandCarousel";
+import DailyRoutine from "./sections/DailyRoutine";
+
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
 
@@ -24,6 +27,8 @@ export default function Home() {
       <SkinCareBanner />
       <ThreeCart />
       <ScrollWoman />
+      <BrandCarousel />
+      <DailyRoutine />
     </div>
   );
 }

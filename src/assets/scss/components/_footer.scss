@@ -154,6 +154,7 @@
 
       .paymentMethods {
         gap: 5px;
+        flex-wrap: wrap;
 
         img {
           height: 30px;

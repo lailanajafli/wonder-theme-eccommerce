@@ -1,85 +1,129 @@
-.landingSection {
-  height: 100vh;
-  flex-direction: column;
-  position: sticky;
-  will-change: transform;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .container {
-    .row {
-      display: flex;
-      justify-content: center;
-      .pin{
+.scrollWoman{
+  .landingSection {
+    height: 100vh; 
+    flex-direction: column;
+    // position: sticky;
+    margin-bottom: 50px;
+    will-change: transform;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .container {
+      .row {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-
-        h2 {
-          color: #000000;
-          font-size: 80px;
-          font-weight: 500;
-          font-family: "Merriweather", serif;
-          font-style: normal;  
-        }
-
-        p {
-          font-size: 1.2rem;
-          margin-top: 1rem;
-          color: #000000;
-        }
-
-        .aboutus {
-          margin-top: 2rem;
-          padding: 0.8rem 2rem;
-          font-size: 1rem;
-          background-color: #000000;
-          color: white;
-          border: none;
-          border-radius: 30px;
-          cursor: pointer;
-          transition: background 0.3s;
-
-          &:hover {
-            background-color: #222222;
+        justify-content: center;
+        .pin{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          max-width: 100%;
+  
+          h2 {
+            color: #000000;
+            font-size: 80px;
+            font-weight: 500;
+            font-family: "Merriweather", serif;
+            font-style: normal;
+            @media (max-width: 1024px) {
+              font-size: 50px; 
+            }
+  
+            @media (max-width: 768px) {
+              font-size: 35px;
+            }
+          }
+  
+          p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: #000000;
+            @media (max-width: 1024px) {
+              font-size: 1rem;
+            }
+  
+            @media (max-width: 768px) {
+              font-size: 0.9rem;
+            }
+          }
+  
+          .aboutus {
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+  
+            &:hover {
+              background-color: #222222;
+            }
+  
+            @media (max-width: 768px) {
+              padding: 0.6rem 1.5rem;
+            }
           }
         }
       }
     }
   }
-}
-
-.imageContainer {
-  display: flex;
-  gap: 1rem;
-  align-items: stretch;
-  justify-content: space-between;
-  margin-top: 2rem;
-  margin-left: 40px;
-  margin-right: 40px;
-
-  img {
-    object-fit: cover;
-    border-radius: 30px;
-    display: block;
-    transition: transform .1s ease;
-    width: 60vw;
-    max-width: 460px;
-    height: auto;
-  }
-
-  .scrollimgone {
-    transform: translate3d(0px, 0px, 0px) rotate(-5.30065deg);
+  .imageContainer {
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-left: 40px;
+    margin-right: 40px;
+  
+    img {
+      object-fit: cover;
+      border-radius: 30px;
+      display: block;
+      transition: transform .2s ease;
+      width: 100%; 
+      max-width: 460px;
+      height: auto;
+  
+      @media (max-width: 1024px) {
+        width: 48%; 
+      }
+      @media (max-width: 768px) {
+        width: 40%; 
+        max-width: 100%;
+      }
+  
+      @media (max-width: 468px) {
+        width: 100%; 
+        max-width: 100%;
+      }
+    }
   }
   
-  .scrollimgtwo {
-    transform: translate3d(0px, 0px, 0px) rotate(6.15838deg);
+  .spacer {
+    height: 100vh;
+  }
+  @media (max-width: 1024px) {
+    .imageContainer {
+      padding: 0 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .imageContainer {
+      justify-content: space-between;
+      flex-wrap: wrap;
+      img {
+        max-width: 90%;
+      }
+    }
   }
 }
 
-.spacer {
-  height: 100vh;
-}
+
+
