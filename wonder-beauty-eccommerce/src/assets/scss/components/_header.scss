@@ -55,7 +55,7 @@
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   display: flex;
   align-items: center;
-  z-index: 10;
+  z-index: 1000;
 
   .barNav {
     display: flex;
