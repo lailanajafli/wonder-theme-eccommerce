@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import Header from "./sections/Hero";
-import Hero from "../components/Header";
+import Hero from "../../components/Header";
 import SkinCareBanner from "./sections/SkinCareBanner";
 import ThreeCart from "./sections/ThreeCart";
 import ScrollWoman from "./sections/ScrollWoman";

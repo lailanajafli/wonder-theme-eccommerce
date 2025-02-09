@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import products from "../../db/products";
+import products from "../../../db/products";
 
 const BrandCarousel = () => {
   const [isPaused, setIsPaused] = useState(false);
