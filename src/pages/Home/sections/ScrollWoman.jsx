@@ -6,7 +6,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ScrollWoman = () => {
   useEffect(() => {
-    // landingSection'ı sabit tutma
     gsap.to(".landingSection", {
       scrollTrigger: {
         trigger: ".landingSection",
@@ -19,7 +18,7 @@ const ScrollWoman = () => {
       },
     });
 
-    // Birinci resmin animasyonu
+    // Birinci seklin animasyonu
     gsap.fromTo(
       ".scrollimgone",
       {
@@ -28,19 +27,19 @@ const ScrollWoman = () => {
       {
         y: "-100%",
         rotate: -15,
-        duration: 40, // Süreyi daha da artırın
-        ease: "slow(0.2, 0.2, false)", // Daha yumuşak ve yavaş bir geçiş
+        duration: 40, 
+        ease: "slow(0.2, 0.2, false)", 
         scrollTrigger: {
           trigger: ".imageContainer",
           start: "top center",
-          scrub: 0.05, // Scrub değerini daha hassas bir hale getirin
-          end: "+=200%", // Bitiş noktasını daha da artırın
+          scrub: 0.05, 
+          end: "+=200%", 
           markers: false,
         },
       }
     );
 
-    // İkinci resim animasyonu
+    // İkinci sekil animasyonu
     gsap.fromTo(
       ".scrollimgtwo",
       {
@@ -49,13 +48,13 @@ const ScrollWoman = () => {
       {
         y: "-100%",
         rotate: 15,
-        duration: 40, // Süreyi daha da artırın
-        ease: "slow(0.2, 0.2, false)", // Daha yumuşak ve yavaş bir geçiş
+        duration: 40, 
+        ease: "slow(0.2, 0.2, false)", 
         scrollTrigger: {
           trigger: ".imageContainer",
-          scrub: 0.05, // Scrub değerini daha hassas bir hale getirin
+          scrub: 0.05,
           start: "top center-=80%",
-          end: "+=200%", // Bitiş noktasını daha da artırın
+          end: "+=200%", 
           markers: false,
         },
       }

@@ -1,0 +1,210 @@
+@use "../mixins" as *;
+
+.bestsellersSection {
+  text-align: center;
+  padding: 50px 20px;
+  position: relative;
+
+  .sectionTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  .bestsellersSlider {
+    position: relative;
+    padding-bottom: 40px;
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: black;
+      &::after {
+        font-size: 25px;
+      }
+    }
+
+    .swiper-pagination-progressbar {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 4px;
+      background: #000000;
+      z-index: 2;
+
+      .swiper-pagination-progressbar-fill {
+        background: black;
+        height: 100%;
+        transition: width 0.3s ease-in-out;
+      }
+    }
+
+    .productCard {
+      position: relative;
+      text-align: left;
+      display: flex;
+      padding: 20px;
+      flex-direction: column;
+      cursor: pointer;
+      background: #fff;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+
+      .newLabel {
+        position: absolute;
+        top: 10px;
+        left: 20%;
+        background: #e3f2e6;
+        color: black;
+        font-size: 0.875rem;
+        padding: 5px 11px;
+        font-weight: 500;
+        border-radius: 20px;
+        z-index: 1;
+      }
+
+      .sliderProductCont {
+        max-width: 350px;
+        position: relative;
+
+        .productImage {
+          width: 100%;
+          height: 100%;
+          margin-bottom: 10px;
+        }
+
+        .chooseOption {
+          position: absolute;
+          bottom: 17px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #fff;
+          width: 90%;
+          letter-spacing: 2px;
+          color: #000;
+          padding: 14px 10px;
+          font-size: 0.875rem;
+          text-align: center;
+          border: 1px solid rgba(198, 198, 198, 0.777);
+          border-radius: 25px;
+          font-weight: 500;
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+          &:hover {
+            background-color: black;
+            color: white;
+          }
+        }
+
+        &:hover .chooseOption {
+          opacity: 1;
+        }
+      }
+
+      .sliderTextCont {
+        .brandName {
+          font-size: 0.75rem;
+          color: #888;
+          letter-spacing: 1px;
+          margin-top: 10px;
+        }
+
+        .productName {
+          font-size: 1rem;
+          margin: 5px 0;
+        }
+
+        .productPrice {
+          font-size: 0.875rem;
+          text-align: left;
+          color: #333;
+        }
+      }
+    }
+  }
+
+  .viewAllContainer {
+    margin-top: 30px;
+
+    .viewAllButton {
+      font-size: 0.813rem;
+      color: #000;
+      font-weight: 500;
+      letter-spacing: 3px;
+      @include linkHoverTwo(#000, 0.3s, 3px);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .bestsellersSlider {
+      .productCard {
+        padding: 15px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 30px 15px;
+    .sectionTitle {
+      font-size: 1.5rem;
+    }
+    .bestsellersSlider {
+      .productCard {
+        padding: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 10px;
+    .sectionTitle {
+      font-size: 1.25rem;
+    }
+    .bestsellersSlider {
+      .productCard {
+        padding: 8px;
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    padding: 15px 5px;
+    .sectionTitle {
+      font-size: 1.1rem;
+    }
+
+    .bestsellersSlider {
+      .productCard {
+        padding: 5px;
+      }
+    }
+
+    .viewAllButton {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+    }
+
+    .productCard {
+      .sliderProductCont {
+        .productImage {
+          height: 150px; // Görselleri daha küçük yapmak için
+        }
+      }
+
+      .sliderTextCont {
+        .brandName {
+          font-size: 0.65rem;
+        }
+        .productName {
+          font-size: 0.85rem;
+        }
+        .productPrice {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}
+

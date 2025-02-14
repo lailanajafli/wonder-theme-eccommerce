@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Header from "./sections/Hero";
 import Hero from "../../components/Header";
@@ -7,6 +6,7 @@ import ThreeCart from "./sections/ThreeCart";
 import ScrollWoman from "./sections/ScrollWoman";
 import BrandCarousel from "./sections/BrandCarousel";
 import DailyRoutine from "./sections/DailyRoutine";
+import OurBestSeller from "./sections/OurBestSeller";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -29,11 +29,7 @@ export default function Home() {
       <ScrollWoman />
       <BrandCarousel />
       <DailyRoutine />
+      <OurBestSeller />
     </div>
   );
 }
-
-
-
-
-
