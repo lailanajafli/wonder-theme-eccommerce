@@ -7,7 +7,9 @@
 
   .sectionTitle {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 500;
+    font-family: "Merriweather", serif;
+    font-style: normal;
     margin-bottom: 30px;
   }
 
@@ -189,7 +191,7 @@
     .productCard {
       .sliderProductCont {
         .productImage {
-          height: 150px; // Görselleri daha küçük yapmak için
+          height: 150px; 
         }
       }
 
