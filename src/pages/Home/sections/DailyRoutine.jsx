@@ -1,14 +1,15 @@
 import React, { useRef, useState, useEffect } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import cart from "../../../assets/images/svg/cart.svg";
+import RoutineCard from "../../../components/RoutineCard";
 
 const products = [
   {
     id: 1,
     brand: "BKIND",
     name: "Algae Peel-Off Mask",
-    price: "$115.00",
+    price: 115.0,
+    currency: "USD",
     imageUrl:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/bkind-floral-face-2_718634ed-72d4-47b3-98aa-ab26bbc66519.jpg?v=1661113363&width=4096",
     displayTime: 0,
@@ -17,7 +18,8 @@ const products = [
     id: 2,
     brand: "MOKOSH",
     name: "Active Toning Essence",
-    price: "$59.00",
+    price: 59.0,
+    currency: "USD",
     imageUrl:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/esencja-Roza-PL.jpg?v=1660223483&width=1200",
     displayTime: 6,
@@ -26,12 +28,20 @@ const products = [
     id: 3,
     brand: "MOKOSH",
     name: "Figa Smoothing Face Cream",
-    price: "From $70.00",
+    price: 70.0,
+    currency: "USD",
     imageUrl:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/mokosh_eb6f0013-4fcc-4f5e-8693-7200be74e429.jpg?v=1661021258&width=600",
     displayTime: 14,
   },
 ];
+
+const formatPrice = (price, currency) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency,
+  }).format(price);
+};
 
 const DailyRoutine = () => {
   const videoRef = useRef(null);
@@ -93,32 +103,23 @@ const DailyRoutine = () => {
           }`}
         >
           {products.map((product, index) => (
-            <Link to="/shop" key={product.id}>  <div
-              className="routineCard"
+            <RoutineCard
               key={product.id}
+              product={product}
+              brand={product.brand}
+              imageUrl={product.imageUrl}
+              name={product.name}
+              price={formatPrice(product.price, product.currency)}
               style={{
-                transform: `translateX(${
-                  (index / 25 - visibleProductIndex) * 350
-                }px)`,
+                transform: `translateX(${(index / 25 - visibleProductIndex) * 350}px)`,
               }}
-            >
-              <div className="dailyMiniImg">
-                <img src={product.imageUrl} alt={product.name} />
-              </div>
-              <div className="productInfo">
-                <h3>{product.brand}</h3>
-                <p>{product.name}</p>
-                <span>{product.price}</span>
-              </div>
-              <div className="cartDailyIcon">
-                <img src={cart} alt="" />
-              </div>
-            </div>
-          </Link>
+            />
           ))}
         </div>
       </div>
-      <Link className="viewAllProducts" to="/shop"><p>VIEW ALL PRODUCTS</p></Link>
+      <Link className="viewAllProducts" to="/shop">
+        <p>VIEW ALL PRODUCTS</p>
+      </Link>
     </section>
   );
 };

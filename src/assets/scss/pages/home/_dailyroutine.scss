@@ -1,4 +1,5 @@
 @use "../mixins" as *;
+@use "../../components//routinecard"; 
 
 .dailyRoutineSection {
   display: flex;
@@ -8,10 +9,9 @@
   background-color: #faece6;
 
   .yourDailyText {
-    font-weight: 500;
     color: #000000;
+    font-weight: 500;
     font-family: "Merriweather", serif;
-    font-style: normal;
     font-size: 25px;
     margin-bottom: 40px;
     line-height: 1.5;
@@ -26,11 +26,10 @@
 
     video {
       width: 100%;
-      border-radius: 10px;
       height: 100%;
       object-fit: cover;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       border-radius: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .playPauseBtn {
@@ -63,101 +62,19 @@
       &.visible {
         opacity: 1;
       }
-
-      .routineCard {
-        background: white;
-        border-radius: 10px;
-        text-align: center;
-        padding: 18px;
-        align-items: center;
-        display: flex;
-        gap: 12px;
-        height: 130px;
-        width: 360px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-
-        &.active {
-          transform: scale(1.1);
-        }
-
-        &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .dailyMiniImg {
-          img {
-            width: 90px;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-          }
-        }
-
-        .productInfo {
-          text-align: left;
-          display: flex;
-          flex-direction: column;
-          gap: 7px;
-
-          h3 {
-            font-size: 11px;
-            font-weight: 500;
-            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-            color: #777;
-          }
-
-          p {
-            font-size: 15px;
-            font-weight: 500;
-            color: #000000;
-          }
-
-          span {
-            font-size: 15px;
-            font-weight: 500;
-            color: #000;
-          }
-        }
-
-        .cartDailyIcon {
-          img {
-            padding: 4px;
-            border: 1px solid rgb(160, 160, 160);
-            transition: color 0.3s ease;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            align-items: center;
-            transition: color 0.3s ease;
-
-            &:hover {
-              transition: color 0.3s ease;
-              background-color: #ffffff;
-              border-radius: 50%;
-              filter: invert(1);
-            }
-          }
-        }
-      }
     }
   }
 
   .viewAllProducts {
     p {
       font-size: 14px;
-      color: #000000;
+      color: #000;
       font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
       margin-top: 50px;
       letter-spacing: 3px;
       @include linkHoverTwo;
     }
   }
-
 
   @media (max-width: 1024px) {
     .videoContainer {
@@ -168,11 +85,6 @@
       right: 10px;
       bottom: auto;
       transform: none;
-    }
-    .productsSlider .routineCard {
-      width: 300px;
-      height: 110px;
-      padding: 15px;
     }
   }
 
@@ -186,19 +98,9 @@
       right: 0;
       width: 100%;
       display: flex;
-      flex-wrap: wrap; 
+      flex-wrap: wrap;
       justify-content: center;
       transform: none;
-    }
-    .productsSlider .routineCard {
-      width: 200px;
-      height: 80px;
-      padding: 12px;
-      margin: 0 5px; 
-    }
-    .cartDailyIcon img {
-      width: 25px;
-      height: 25px;
     }
   }
 
@@ -215,16 +117,6 @@
       flex-wrap: wrap;
       justify-content: center;
       transform: none;
-    }
-    .productsSlider .routineCard {
-      width: 200px;
-      height: 90px;
-      padding: 10px;
-      margin: 0 5px;
-    }
-    .cartDailyIcon img {
-      width: 20px;
-      height: 20px;
     }
   }
 }

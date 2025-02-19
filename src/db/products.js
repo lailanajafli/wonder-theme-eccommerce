@@ -11,6 +11,7 @@ const products = [
     currency: "USD",
     image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/bkind-floral-face-2_718634ed-72d4-47b3-98aa-ab26bbc66519.jpg?v=1661113363&width=4096",
+        productVideo:   "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/4d305e188b5b4865a3ec837303069d9e/4d305e188b5b4865a3ec837303069d9e.HD-1080p-2.5Mbps-25428248.mp4?v=0",
     category: "Face Care",
     url: "https://wonder-theme-beauty.myshopify.com/products/bkind-algae-peel-off-mask",
     created_at: "2024-08-15",
@@ -27,6 +28,7 @@ const products = [
     currency: "USD",
     image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/esencja-Roza-PL.jpg?v=1660223483&width=1200",
+      productVideo:   "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/c90d76a595684ce789cbb1d8c56c23ac/c90d76a595684ce789cbb1d8c56c23ac.HD-1080p-2.5Mbps-25428270.mp4?v=0",
     category: "Face Care",
     url: "https://wonder-theme-beauty.myshopify.com/products/mokosh-active-toning-essence",
     created_at: "2025-01-10",
@@ -42,6 +44,7 @@ const products = [
     currency: "USD",
     image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/mokosh_eb6f0013-4fcc-4f5e-8693-7200be74e429.jpg?v=1661021258&width=600",
+      productVideo:   "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/8de005ccc0de48af93bdb207cff33d51/8de005ccc0de48af93bdb207cff33d51.HD-1080p-3.3Mbps-25428504.mp4?v=0",
     category: "Face Care",
     url: "https://wonder-theme-beauty.myshopify.com/products/mokosh-figa-smoothing-face-cream",
     created_at: "2025-02-13",
@@ -57,6 +60,7 @@ const products = [
     currency: "USD",
     image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/jasmine-butelka.jpg?v=1660679672&width=1200",
+      productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/be85ff6dd7374d148021cc59efaba46d/be85ff6dd7374d148021cc59efaba46d.HD-1080p-3.3Mbps-25428588.mp4?v=0",
     category: "Body Care",
     url: "https://wonder-theme-beauty.myshopify.com/products/herbivore-jasmine-body-oil",
     created_at: "2024-11-07",
@@ -72,6 +76,7 @@ const products = [
     currency: "USD",
     image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/mokosh_a4c51963-4734-4185-a4cf-e05bcc808a17.jpg?v=1661076311&width=1000",
+      productVideo:   "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/ca87e6ef6c494a4181a81ba36d9d2c7b/ca87e6ef6c494a4181a81ba36d9d2c7b.HD-1080p-2.5Mbps-25428822.mp4?v=0",
     category: "Face Care",
     url: "https://wonder-theme-beauty.myshopify.com/products/herbivore-jasmine-body-oil",
     bestSeller: true,
@@ -104,6 +109,7 @@ const products = [
     currency: "USD",
     image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/1484-lotion-do-dloni-melon-z-ogorkiem-100ml.jpg?v=1644567435&width=750",
+      productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/cc2494dc8cde4dcfbbcd7cf208d20cec/cc2494dc8cde4dcfbbcd7cf208d20cec.HD-1080p-2.5Mbps-25428688.mp4?v=0",
     category: "Face Care",
     url: "https://wonder-theme-beauty.myshopify.com/products/herbivore-jasmine-body-oil",
     bestSeller: true,

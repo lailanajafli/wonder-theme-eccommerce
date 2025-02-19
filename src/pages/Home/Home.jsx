@@ -8,6 +8,7 @@ import BrandCarousel from "./sections/BrandCarousel";
 import DailyRoutine from "./sections/DailyRoutine";
 import OurBestSeller from "./sections/OurBestSeller";
 import TwoSlideShow from "./sections/TwoSlideShow";
+import VideoSlider from "./sections/VideoSlider";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -32,6 +33,7 @@ export default function Home() {
       <DailyRoutine />
       <OurBestSeller />
       <TwoSlideShow />
+      <VideoSlider />
     </div>
   );
 }

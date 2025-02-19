@@ -1,0 +1,95 @@
+@use "../mixins" as *;
+@use "../../components/routinecard";
+
+.videoReels {
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    .prevButton,
+    .nextButton {
+      display: block;
+    }
+  }
+
+  .prevButton,
+  .nextButton {
+    background: rgb(255, 255, 255);
+    border: none;
+    color: #000;
+    display: none;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .prevButton {
+    left: 10px;
+  }
+
+  .nextButton {
+    right: 10px;
+  }
+
+  .videosContainer {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    .bestSkincareText{
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 30px;
+    font-family: "Merriweather", serif;
+    font-size: 30px;
+    }
+    .videosWrapper {
+      display: flex;
+      align-items: center;
+
+      .slider-card {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+
+        .videoSlide {
+          cursor: pointer;
+          transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          margin-bottom: 20px;
+          &.active {
+            video {
+              width: 310px;
+              margin-top: 140px;
+              margin-bottom: 15px;
+              height: 510px;
+              opacity: 1;
+            }
+          }
+
+          &.inactive {
+            video {
+              width: 310px;
+              height: 450px;
+              opacity: 0.9;
+              filter: grayscale(1%);
+            }
+          }
+
+          video {
+            border-radius: 15px;
+            object-fit: cover;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
