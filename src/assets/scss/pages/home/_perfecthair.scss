@@ -1,0 +1,87 @@
+@use "../mixins" as *;
+
+.perfectHairCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .perfectHairLeft {
+    width: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .perfectHairProduct {
+      background-color: #f3ebe0;
+      height: 100vh;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .perfectHairText {
+      position: absolute;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      h3 {
+        @include styleText(#000, 27px, 500, normal);
+        margin-bottom: 10px;
+      }
+      button {
+        @include aboutUsBtn;
+        padding: 18px 30px;
+      }
+    }
+  }
+  .perfectHairVideo {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    video {
+      height: 100vh;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // Responsive ayarlar (mobil ve tablet)
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+    .perfectHairLeft,
+    .perfectHairVideo {
+      width: 100%;
+    }
+
+    .perfectHairLeft {
+      .perfectHairProduct {
+        height: auto;
+        img {
+          height: auto;
+        }
+      }
+      .perfectHairText {
+        // bottom: 50%;
+        margin: 20px auto 0;
+      }
+    }
+
+    .perfectHairVideo {
+      video {
+        height: auto;
+      }
+    }
+  }
+}

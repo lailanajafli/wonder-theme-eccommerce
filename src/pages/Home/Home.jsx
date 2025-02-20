@@ -9,6 +9,8 @@ import DailyRoutine from "./sections/DailyRoutine";
 import OurBestSeller from "./sections/OurBestSeller";
 import TwoSlideShow from "./sections/TwoSlideShow";
 import VideoSlider from "./sections/VideoSlider";
+import PerfectHair from "./sections/PerfectHair";
+import ColorfulBack from "./sections/ColorfulBack";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -34,6 +36,8 @@ export default function Home() {
       <OurBestSeller />
       <TwoSlideShow />
       <VideoSlider />
+      <PerfectHair />
+      <ColorfulBack/>
     </div>
   );
 }

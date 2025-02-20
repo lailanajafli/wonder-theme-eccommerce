@@ -1,3 +1,5 @@
+@use "../mixins" as *;
+
 .scrollWoman{
   .landingSection {
     height: 100vh; 
@@ -49,23 +51,7 @@
           }
   
           .aboutus {
-            margin-top: 2rem;
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-            background-color: #000000;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background 0.3s;
-  
-            &:hover {
-              background-color: #222222;
-            }
-  
-            @media (max-width: 768px) {
-              padding: 0.6rem 1.5rem;
-            }
+        @include aboutUsBtn;
           }
         }
       }

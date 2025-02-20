@@ -1,0 +1,103 @@
+@use "../mixins" as *;
+
+.dynamicSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 90px;
+
+    .contentItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: background-color 0.3s ease;
+
+      .link {
+        .textItem {
+          @include styleText(#000, 70px, 500, normal);
+          transition: color 0.3s ease, transform 0.3s ease;
+        }
+      }
+
+      .imageContainer {
+        width: 100px;
+        margin-left: 40px;
+        height: 100px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+        }
+      }
+
+      &:hover {
+        .imageContainer {
+          opacity: 1;
+          transform: translateX(15px);
+        }
+
+        .textItem {
+          transform: translateX(-15px);
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .contentContainer {
+      flex-direction: column;
+      align-items: center;
+      margin-left: 0;
+
+      .contentItem {
+        margin-bottom: 20px;
+        .link{
+            .textItem {
+              @include styleText(#000, 20px, 500, normal);
+            }
+
+        }
+
+        .imageContainer {
+          margin-left: 0;
+          width: 50px;
+          height: 50px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+
+    .contentContainer {
+      .contentItem {
+        .link{
+
+            .textItem {
+                @include styleText(#000, 30px, 500, normal);
+                font-size: 20px
+            }
+        }
+
+        .imageContainer {
+            width: 50px;
+            height: 50px;
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
+
 @mixin linkHover {
   color: #fff;
   text-decoration: none;
@@ -24,17 +26,13 @@
   }
 }
 
-
-
-
 @mixin linkHoverTwo($color: #000, $duration: 0.3s, $offset: 3px) {
   position: relative;
   display: inline-block;
   text-decoration: none;
-  &:hover{
+  &:hover {
     color: #715939;
-
-}
+  }
 
   &::before {
     content: "";
@@ -46,7 +44,6 @@
     background-color: $color;
     transition: opacity 0s ease;
     opacity: 1;
-    
   }
 
   &::after {
@@ -66,17 +63,63 @@
     &::before {
       opacity: 0;
     }
-   
-
     &::after {
       transform: scaleX(1);
       opacity: 1;
-     
     }
   }
 }
 
+@mixin aboutUsBtn {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  font-size: 15px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  letter-spacing: 3px;
+  font-family: "Figtree", serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
 
-// .viewAllProducts {
-//   @include linkHoverTwo(#000, 0.3s, 3px);
-// }
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: #222222;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1.5rem;
+  }
+}
+
+@mixin normalText($color: #000, $size: 16px, $weight: normal, $style: normal) {
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+  font-style: $style;
+  font-family: "Figtree", serif;
+  font-optical-sizing: auto;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+
+
+@mixin styleText($color: #000, $size: 16px, $weight: normal, $style: normal){
+  font-weight: 500;
+  font-family: "Merriweather", serif;
+  font-style: normal;
+  color: $color;
+  font-size: $size;
+  letter-spacing: 0.8px;
+  line-height: 1.5;
+  font-weight: $weight;
+  font-style: $style;
+
+
+}
+
+
