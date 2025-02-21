@@ -13,6 +13,7 @@ import PerfectHair from "./sections/PerfectHair";
 import ColorfulBack from "./sections/ColorfulBack";
 import SkinDetails from './sections/SkinDetails';
 import NewBeauty from './sections/NewBeauty';
+import CommentSlide from './sections/CommentSlide';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -42,6 +43,7 @@ export default function Home() {
       <ColorfulBack/>
       <SkinDetails/>
       <NewBeauty/>
+      <CommentSlide/>
     </div>
   );
 }

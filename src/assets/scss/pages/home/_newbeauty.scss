@@ -1,23 +1,57 @@
+@use "../mixins" as *;
+
 .newBeautyCont {
-  padding: 4rem 3rem 3rem 3rem;
+  padding: 4rem 1rem 3rem 1rem;
+  text-align: center;
+
   h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
   }
+
   .newBeautyFlex {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    align-items: center;
+    gap: 1px;
+    flex-wrap: wrap;
+
     .newBeautyCard {
+      padding: 10px;
+      border-radius: 15px;
+      text-align: center;
+
       .newBeautyImage {
-        width: 470px;
+        width: 478px;
         height: 520px;
+        overflow: hidden;
+        border-radius: 15px;
 
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 20px;
         }
+      }
+
+      .newtitle {
+        @include styleText(#000, 25px, 500, normal);
+        margin-top: 15px;
+        margin-bottom: 10px;
+      }
+
+      .newdescrp {
+        font-size: 1rem;
+        color: #313131;
+        font-weight: 500;
+      }
+
+      .newBeautyLink {
+        margin-top: 10px;
+        color: #000;
+        p {
+          @include normalText(#000, 14px, 500, normal);
+        }
+        @include linkHoverTwo(#000, #000000, 0.3s, 3px);
       }
     }
   }

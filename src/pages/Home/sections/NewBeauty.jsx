@@ -47,9 +47,9 @@ const NewBeauty = () => {
             <div className="newBeautyImage">
               <img src={newproduct.imageUrl} alt={newproduct.name} />
             </div>
-            <h3>{newproduct.title}</h3>
-            <p>{newproduct.description}</p>
-            <Link to="/shop">
+            <p className="newtitle">{newproduct.title}</p>
+            <p className="newdescrp" >{newproduct.description}</p>
+            <Link to="/shop" className="newBeautyLink">
               <p>CHECK NOW</p>
             </Link>
           </div>
