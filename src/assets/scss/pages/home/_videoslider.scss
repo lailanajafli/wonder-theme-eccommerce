@@ -44,12 +44,12 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    .bestSkincareText{
+    .bestSkincareText {
       text-align: center;
       font-weight: 500;
       margin-bottom: 30px;
-    font-family: "Merriweather", serif;
-    font-size: 30px;
+      font-family: "Merriweather", serif;
+      font-size: 30px;
     }
     .videosWrapper {
       display: flex;
@@ -67,7 +67,6 @@
           &.active {
             video {
               width: 310px;
-              margin-top: 140px;
               margin-bottom: 15px;
               height: 510px;
               opacity: 1;

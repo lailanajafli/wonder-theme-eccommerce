@@ -86,7 +86,7 @@ const SkinDetails = () => {
             position: "absolute",
             top: selectedProduct.position.top,
             left: selectedProduct.position.left,
-            transform: selectedProduct.cardPosition, 
+            transform: selectedProduct.cardPosition,
             zIndex: 999,
           }}
           onClick={(e) => e.stopPropagation()}
@@ -94,6 +94,7 @@ const SkinDetails = () => {
           <RoutineCard
             brand={selectedProduct.brand}
             imageUrl={selectedProduct.imageUrl}
+            showCartIcon= {false}
             name={selectedProduct.name}
             price={`$${selectedProduct.price}`}
             style={{
