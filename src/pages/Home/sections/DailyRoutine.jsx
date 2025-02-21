@@ -101,7 +101,7 @@ const DailyRoutine = () => {
           className={`productsSlider ${
             visibleProductIndex >= 0 ? "visible" : ""
           }`}
-        >
+        > 
           {products.map((product, index) => (
             <RoutineCard
               key={product.id}

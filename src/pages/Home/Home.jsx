@@ -11,6 +11,7 @@ import TwoSlideShow from "./sections/TwoSlideShow";
 import VideoSlider from "./sections/VideoSlider";
 import PerfectHair from "./sections/PerfectHair";
 import ColorfulBack from "./sections/ColorfulBack";
+import SkinDetails from './sections/SkinDetails';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -38,6 +39,7 @@ export default function Home() {
       <VideoSlider />
       <PerfectHair />
       <ColorfulBack/>
+      <SkinDetails/>
     </div>
   );
 }
