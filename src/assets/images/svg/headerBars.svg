@@ -1,0 +1,9 @@
+<svg class="svg-icon svg-icon--bars" aria-hidden="true" focusable="false" role="presentation"
+     xmlns="http://www.w3.org/2000/svg" data-icon-theme="option_1"
+     width="72" height="72" viewBox="0 0 72 72" fill="white">
+  <g id="Navi">
+    <rect x="8" y="15" rx="2" height="4" width="56" id="ico_bar_1"></rect>
+    <rect x="8" y="34" rx="2" height="4" width="56" id="ico_bar_2"></rect>
+    <rect x="8" y="53" rx="2" height="4" width="56" id="ico_bar_3"></rect>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 
-@mixin linkHover {
-  color: #fff;
+@mixin linkHover($color: #fff, $background: #fff) {
+  color: $color;
   text-decoration: none;
   position: relative;
   padding-bottom: 5px;
@@ -12,7 +12,7 @@
     display: block;
     width: 0;
     height: 1px;
-    background: #fff;
+    background: $background;
     position: absolute;
     left: 0;
     bottom: 0;

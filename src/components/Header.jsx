@@ -1,8 +1,11 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import headerBars from "../assets/images/svg/headerBars.svg";
+import search from "../assets/images/svg/search.svg";
+import login from "../assets/images/svg/login.svg";
+import cart from "../assets/images/svg/cart.svg";
 
 const Header = () => {
   const location = useLocation();
@@ -60,24 +63,29 @@ const Header = () => {
 
   return (
     <>
-      {/* Anasayfada video başlığı */}
       {isHomePage && (
-        <header className={`headerVideo ${isVideoPassed ? "hiddenHeaderVideo" : ""}`}>
+        <header
+          className={`headerVideo ${isVideoPassed ? "hiddenHeaderVideo" : ""}`}
+        >
           <div className="barNav">
-            <FontAwesomeIcon className="blackBar" icon={faBars} size="xl" />
+            <img src={headerBars} alt="header bars" />
             <nav className="navBar">
               <Link to="/shop">Shop</Link>
               <Link to="/bestseller">Bestseller</Link>
               <Link to="/sale">Sale</Link>
             </nav>
           </div>
+          <div className="navTeaser">
+            <img src={search} alt="search icon" />
+            <img src={login} alt="login icon" />
+            <img src={cart} alt="cart icon" />
+          </div>
         </header>
       )}
 
-      {/* Anasayfa dışındaki sayfalarda sadece .header */}
       <header className={`header ${isScrolled ? "" : "hiddenHeader"}`}>
         <div className="barNav">
-          <FontAwesomeIcon className="blackBar" icon={faBars} size="xl" />
+          <img src={headerBars} alt="header bars" />
           <nav className="navBar">
             <Link to="/shop">Shop</Link>
             <Link to="/bestseller">Bestseller</Link>
@@ -90,6 +98,11 @@ const Header = () => {
             alt="Beauty"
           />
         </div>
+        <div className="navTeaser">
+            <img src={search} alt="search icon" />
+            <img src={login} alt="login icon" />
+            <img src={cart} alt="cart icon" />
+          </div>
       </header>
     </>
   );

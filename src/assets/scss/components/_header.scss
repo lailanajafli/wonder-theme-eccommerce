@@ -1,3 +1,5 @@
+@use "../pages/mixins" as *;
+
 .headerVideo {
   position: fixed;
   top: 0;
@@ -15,17 +17,29 @@
   .barNav {
     display: flex;
     justify-content: center;
+    gap: 15px;
     align-items: center;
+
+    img {
+      filter: invert(0);
+      width: 30px;
+    }
 
     .navBar a {
       color: rgb(255, 255, 255);
       text-decoration: none;
-      margin: 0 15px;
+      margin: 0 10px;
       transition: color 0.3s ease;
+      @include linkHover(#fff, #fff);
     }
-
-    .navBar a:hover {
-      color: #f4a261;
+  }
+  .navTeaser {
+    display: flex;
+    gap: 13px;
+    img {
+      filter: invert(1);
+      width: 28px;
+      cursor: pointer;
     }
   }
 }
@@ -33,12 +47,10 @@
 .hiddenHeaderVideo {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-100%);
   transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
 .hiddenHeader {
-  transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -55,19 +67,33 @@
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   z-index: 1000;
 
   .barNav {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
 
-    .blackBar {
-      color: black;
+    img {
+      filter: invert(1);
+      width: 30px;
     }
 
     .navBar a {
       color: #151515;
+      margin: 0 8px;
+      @include linkHover(#000000, #000000);
+    }
+  }
+  .navTeaser {
+    display: flex;
+    gap: 13px;
+    img {
+      filter: invert(0);
+      cursor: pointer;
+      width: 28px;
     }
   }
 }
@@ -93,4 +119,3 @@
     font-size: 18px;
   }
 }
-
