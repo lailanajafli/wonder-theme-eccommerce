@@ -42,8 +42,8 @@ const NewBeauty = () => {
     <section className="newBeautyCont">
       <h2>New Beauty Products</h2>
       <div className="newBeautyFlex">
-        {newproducts.map((newproduct) => (
-          <div className="newBeautyCard">
+        {newproducts.map((newproduct, index) => (
+          <div className="newBeautyCard" key={index}>
             <div className="newBeautyImage">
               <img src={newproduct.imageUrl} alt={newproduct.name} />
             </div>

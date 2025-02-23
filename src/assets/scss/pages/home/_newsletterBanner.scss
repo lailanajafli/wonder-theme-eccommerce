@@ -1,0 +1,136 @@
+.newsletterSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 420px;
+    text-align: center;
+    background-color: #edf5f4;
+    padding: 20px;
+  }
+  
+  .newsletterTitle {
+    margin-bottom: 15px;
+    font-size: 60px;
+    font-weight: 500;
+    color: #000;
+  }
+  
+  .newsletterSubtitle {
+    font-size: 16px;
+    color: #2d2d2d;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+  
+  .newsletterForm {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  .newsletterInput {
+    flex: 1;
+    background: white;
+    border: 1px solid #c4c4c4d3;
+    padding: 14px 20px;
+    font-size: 16px;
+    outline: none;
+    border-radius: 30px;
+  }
+  
+  .newsletterButton {
+    background-color: #111;
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    font-weight: 600;
+    border-left: none;
+    border-radius: 0px 30px 30px 0px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .newsletterButton:hover {
+    background-color: #333;
+  }
+  
+  .subscriptionMessage {
+    font-size: 16px;
+    color: rgb(41, 190, 41);
+    background-color: rgb(230, 255, 230);
+    padding: 12px;
+    border-radius: 30px;
+    max-width: 700px;
+    width: 100%;
+    border: 1px solid rgb(41, 190, 41);
+    font-weight: 500;
+    margin-top: 20px; 
+    animation: fadeIn 0.5s ease-in-out; 
+  }
+
+  @media (max-width: 768px) {
+    .newsletterSection {
+      height: 400px;
+      padding: 40px 20px;
+    }
+  
+    .newsletterTitle {
+      font-size: 40px;
+    }
+  
+    .newsletterSubtitle {
+      font-size: 14px;
+    }
+  
+    .newsletterInput {
+      border-radius: 30px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .newsletterButton {
+      width: 100%;
+      top: 70px;
+      border-radius: 30px;
+    }
+    .subscriptionMessage{
+        margin-top: 70px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .newsletterTitle {
+      font-size: 30px;
+    }
+  
+    .newsletterSubtitle {
+      font-size: 12px;
+    }
+  
+    .newsletterForm .newsletterInput {
+      font-size: 14px;
+      padding: 12px;
+    }
+  
+    .newsletterForm .newsletterButton {
+      font-size: 14px;
+      padding: 12px;
+    }
+  }
+
+
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

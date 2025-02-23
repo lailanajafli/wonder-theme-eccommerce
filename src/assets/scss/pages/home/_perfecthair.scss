@@ -38,8 +38,8 @@
         margin-bottom: 10px;
       }
       button {
-        @include aboutUsBtn;
         padding: 18px 30px;
+        @include aboutUsBtn;
       }
     }
   }
