@@ -1,0 +1,75 @@
+@use "../mixins" as *;
+
+.featuresBannerSection {
+  display: flex;
+  justify-content: center;
+  .featuresBannerCont {
+    display: flex;
+    width: 90%;
+    gap: 10px;
+    flex-wrap: wrap;
+    height: 380px;
+    justify-content: space-between;
+    
+    .featuresBanner {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      
+      .featuresBannerImage {
+        width: 60px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      
+      .featuresText {
+        @include styleText(#000, 20px, 500, normal);
+      }
+      
+      .featuresTitle {
+        font-weight: 500;
+        color: #3c3c3c;
+      }
+    }
+  }
+}
+
+/* Responsive Ayarlar */
+@media (max-width: 768px) {
+  .featuresBannerSection {
+    .featuresBannerCont {
+      flex-direction: column;
+      align-items: center;
+      height: auto; // İçerik yüksekliğine göre ayarlar
+      
+      .featuresBanner {
+        width: 90%; // Ekran genişliğine göre orantılı genişlik
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .featuresBannerSection {
+    .featuresBannerCont {
+      padding: 10px;
+      
+      .featuresBanner {
+        width: 100%;
+        .featuresText {
+          @include styleText(#000, 18px, 500, normal); // Yazı boyutunu küçültebilirsiniz
+        }
+        .featuresTitle {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

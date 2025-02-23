@@ -12,7 +12,7 @@ const slides = [
     title: "Active Toning Essence",
     price: "$59.00",
     rightText: "Revitalizes the Skin!",
-    bgColor: "#ECF5E9", // Sol panel için arka plan rengi
+    bgColor: "#ECF5E9",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const slides = [
     title: "Another Product",
     price: "$69.00",
     rightText: "Improves Skin Hydration!",
-    bgColor: "#F0EDE5", // Farklı bir arka plan rengi
+    bgColor: "#F0EDE5", 
   },
 ];
 const leftVariants = {
@@ -115,7 +115,6 @@ export default function ProductSlider() {
           )}
         </div>
 
-        {/* Sağdaki bölüm */}
         <div className="rightPanel">
           <AnimatePresence mode="wait">
             <motion.div
@@ -137,7 +136,6 @@ export default function ProductSlider() {
                   alt={`${slides[currentIndex].title} Right Visual`}
                 />
               </div>
-              {/* Sağ paneldeki yazı alanı */}
               <div className="promoText">
                 <h2>{slides[currentIndex].rightText}</h2>
               </div>

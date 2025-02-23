@@ -1,3 +1,5 @@
+@use "../mixins" as *;
+
 .twoSlideShowCont {
     width: 100vw; 
     height: 100vh;
@@ -58,17 +60,7 @@
       }
   
       .navigationButton {
-        background-color: white;
-        border: none;
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 0.1rem;
-        border-radius: 50%;
-        display: none;
-        color: #000000;
-        transition: color 0.3s;
+     @include sliderPrevNext;
       }
   
       .previousButton {
@@ -121,24 +113,7 @@
     }
   
     .paginationDots {
-      position: absolute;
-      bottom: 5%;
-      left: 23%;
-      display: flex;
-      gap: 25px;
-  
-      .dotIndicator {
-        width: 9px;
-        height: 9px;
-        background: #ccc;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: background 0.3s;
-  
-        &.active {
-          background: #000;
-        }
-      }
+   @include paginationDots;
     }
   }
   

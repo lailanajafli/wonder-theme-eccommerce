@@ -5,8 +5,8 @@
   text-align: center;
 
   h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    @include styleText(#000, 30px, 500, normal);
+    margin-bottom: 1rem;
   }
 
   .newBeautyFlex {
@@ -52,6 +52,67 @@
           @include normalText(#000, 14px, 500, normal);
         }
         @include linkHoverTwo(#000, #000000, 0.3s, 3px);
+      }
+    }
+  }
+}
+
+/* Tablet ve Küçük Ekranlar İçin */
+@media (max-width: 768px) {
+  .newBeautyCont {
+    padding: 3rem 1rem 2rem 1rem;
+
+    h2 {
+      @include styleText(#000, 26px, 500, normal);
+    }
+
+    .newBeautyFlex {
+      .newBeautyCard {
+        margin-bottom: 20px;
+
+        .newBeautyImage {
+          width: 100%;
+          height: auto; // Resmin en-boy oranını korur
+        }
+
+        .newtitle {
+          @include styleText(#000, 22px, 500, normal);
+        }
+
+        .newdescrp {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+/* Mobil Ekranlar İçin */
+@media (max-width: 480px) {
+  .newBeautyCont {
+    padding: 2rem 0.5rem 1.5rem 0.5rem;
+
+    h2 {
+      @include styleText(#000, 22px, 500, normal);
+    }
+
+    .newBeautyFlex {
+      flex-direction: column;
+      .newBeautyCard {
+        width: 100%;
+
+        .newBeautyImage {
+          width: 100%;
+          height: auto;
+        }
+
+        .newtitle {
+          @include styleText(#000, 20px, 500, normal);
+        }
+
+        .newdescrp {
+          font-size: 0.85rem;
+        }
       }
     }
   }

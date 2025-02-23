@@ -14,6 +14,8 @@ import ColorfulBack from "./sections/ColorfulBack";
 import SkinDetails from './sections/SkinDetails';
 import NewBeauty from './sections/NewBeauty';
 import CommentSlide from './sections/CommentSlide';
+import FeaturesBanner from './sections/FeaturesBanner';
+import NewsletterBanner from './sections/NewsletterBanner';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -44,6 +46,8 @@ export default function Home() {
       <SkinDetails/>
       <NewBeauty/>
       <CommentSlide/>
+      <FeaturesBanner/>
+      <NewsletterBanner/>
     </div>
   );
 }

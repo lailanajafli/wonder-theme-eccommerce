@@ -40,7 +40,7 @@ const newproducts = [
 const NewBeauty = () => {
   return (
     <section className="newBeautyCont">
-      <h2>New Beauty</h2>
+      <h2>New Beauty Products</h2>
       <div className="newBeautyFlex">
         {newproducts.map((newproduct) => (
           <div className="newBeautyCard">

@@ -8,18 +8,16 @@ import { Navigation, Scrollbar } from "swiper/modules";
 import products from "../../../db/products";
 
 const OurBestSeller = () => {
-  // Yalnız məhsulları seç
   const allProducts = products.filter((product) => product.id);
-  // Bestseller məhsulları süz
   const bestSellers = allProducts.filter((product) => product.bestSeller);
 
   const checkIfNew = (created_at) => {
     const currentDate = new Date();
     const productDate = new Date(created_at);
     const timeDifference = currentDate - productDate;
-    const oneMonth = 30 * 24 * 60 * 60 * 1000; // 1 ay = 30 gün
+    const oneMonth = 30 * 24 * 60 * 60 * 1000; 
 
-    return timeDifference <= oneMonth; // 1 aydan azdırsa "New" etiketi göstər
+    return timeDifference <= oneMonth; 
   };
 
   return (
