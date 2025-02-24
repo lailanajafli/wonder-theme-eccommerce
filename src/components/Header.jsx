@@ -6,10 +6,12 @@ import headerBars from "../assets/images/svg/headerBars.svg";
 import search from "../assets/images/svg/search.svg";
 import login from "../assets/images/svg/login.svg";
 import cart from "../assets/images/svg/cart.svg";
+import DrawerMenu from "./DrawerMenu";
 
 const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [videoHeight, setVideoHeight] = useState(0);
@@ -37,7 +39,6 @@ const Header = () => {
       const currentScrollY = window.scrollY;
 
       if (isHomePage) {
-        // Video geçtiğinde başlık gizlensin ve .header görünsün
         if (currentScrollY > videoHeight - 60) {
           setIsVideoPassed(true);
           setIsScrolled(true);
@@ -47,7 +48,6 @@ const Header = () => {
         }
       }
 
-      // Yukarı scroll olduğunda .header görünsün, aşağı scroll olduğunda kaybolsun
       if (currentScrollY > lastScrollY && currentScrollY > videoHeight + 120) {
         setIsScrolled(false);
       } else if (currentScrollY < lastScrollY && currentScrollY > videoHeight) {
@@ -64,11 +64,9 @@ const Header = () => {
   return (
     <>
       {isHomePage && (
-        <header
-          className={`headerVideo ${isVideoPassed ? "hiddenHeaderVideo" : ""}`}
-        >
+        <header className={`headerVideo ${isVideoPassed ? "hiddenHeaderVideo" : ""}`}>
           <div className="barNav">
-            <img src={headerBars} alt="header bars" />
+            <img src={headerBars} alt="header bars" onClick={() => setIsDrawerOpen(true)} />
             <nav className="navBar">
               <Link to="/shop">Shop</Link>
               <Link to="/bestseller">Bestseller</Link>
@@ -85,7 +83,7 @@ const Header = () => {
 
       <header className={`header ${isScrolled ? "" : "hiddenHeader"}`}>
         <div className="barNav">
-          <img src={headerBars} alt="header bars" />
+          <img src={headerBars} alt="header bars" onClick={() => setIsDrawerOpen(true)} />
           <nav className="navBar">
             <Link to="/shop">Shop</Link>
             <Link to="/bestseller">Bestseller</Link>
@@ -99,11 +97,14 @@ const Header = () => {
           />
         </div>
         <div className="navTeaser">
-            <img src={search} alt="search icon" />
-            <img src={login} alt="login icon" />
-            <img src={cart} alt="cart icon" />
-          </div>
+          <img src={search} alt="search icon" />
+          <img src={login} alt="login icon" />
+          <img src={cart} alt="cart icon" />
+        </div>
       </header>
+
+      {/* Drawer Menu */}
+      <DrawerMenu isOpen={isDrawerOpen} onClose={setIsDrawerOpen} />
     </>
   );
 };

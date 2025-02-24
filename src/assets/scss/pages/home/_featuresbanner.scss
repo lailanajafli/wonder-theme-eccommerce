@@ -40,16 +40,15 @@
   }
 }
 
-/* Responsive Ayarlar */
 @media (max-width: 768px) {
   .featuresBannerSection {
     .featuresBannerCont {
       flex-direction: column;
       align-items: center;
-      height: auto; // İçerik yüksekliğine göre ayarlar
+      height: auto; 
       
       .featuresBanner {
-        width: 90%; // Ekran genişliğine göre orantılı genişlik
+        width: 90%; 
         margin-bottom: 20px;
       }
     }
@@ -64,7 +63,7 @@
       .featuresBanner {
         width: 100%;
         .featuresText {
-          @include styleText(#000, 18px, 500, normal); // Yazı boyutunu küçültebilirsiniz
+          @include styleText(#000, 18px, 500, normal); 
         }
         .featuresTitle {
           font-size: 16px;

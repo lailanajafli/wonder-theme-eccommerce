@@ -1,0 +1,98 @@
+.drawerSubCategory {
+  padding: 1rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+
+  .subCategoryList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      background-color: #fff;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+
+      &:hover {
+        background-color: #f4f4f4;
+      }
+
+      .expandIcon {
+        margin-left: 0.5rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, color 0.3s ease;
+        color: #333;
+      }
+
+      &:hover .expandIcon {
+        color: #009688;
+      }
+
+      &.active .expandIcon {
+        transform: rotate(45deg);
+        color: #009688;
+      }
+
+      .subCategoryItems {
+        list-style: none;
+        padding-left: 1rem;
+        margin-top: 0.5rem;
+        display: block;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.3s ease, max-height 0.3s ease;
+
+        li {
+          margin-bottom: 0.5rem;
+          padding-left: 1rem;
+          color: #555;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #009688;
+          }
+        }
+      }
+
+      &.active .subCategoryItems {
+        opacity: 1;
+        max-height: 200px;
+      }
+    }
+  }
+}
+
+.drawerFooter {
+  margin-top: auto; // En alt kısma yaslanması için
+  padding: 1rem;
+  background-color: #009688;
+  color: #fff;
+  border-top: 2px solid #fff;
+
+  .footerList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+      font-size: 14px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #f4f4f4;
+      }
+    }
+  }
+}
