@@ -1,6 +1,7 @@
 @use "../mixins" as *;
 
 .scrollWoman{
+  overflow: hidden;
   .landingSection {
     height: 100vh; 
     flex-direction: column;
@@ -8,6 +9,7 @@
     will-change: transform;
     top: 0;
     display: flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
   
@@ -60,34 +62,26 @@
   .imageContainer {
     display: flex;
     gap: 1rem;
+width: 97%;
     align-items: stretch;
+    margin: 0 auto;
     justify-content: space-between;
     margin-top: 2rem;
-    margin-left: 40px;
-    margin-right: 40px;
-  
+
+    .scrollimgone, .scrollimgtwo{
+      
+      max-width: 460px;
     img {
       object-fit: cover;
       border-radius: 30px;
       display: block;
       transition: transform .2s ease;
       width: 100%; 
-      max-width: 460px;
       height: auto;
   
-      @media (max-width: 1024px) {
-        width: 48%; 
-      }
-      @media (max-width: 768px) {
-        width: 40%; 
-        max-width: 100%;
-      }
-  
-      @media (max-width: 468px) {
-        width: 100%; 
-        max-width: 100%;
-      }
+
     }
+  }
   }
   
   .spacer {
@@ -102,10 +96,7 @@
   @media (max-width: 768px) {
     .imageContainer {
       justify-content: space-between;
-      flex-wrap: wrap;
-      img {
-        max-width: 90%;
-      }
+
     }
   }
 }

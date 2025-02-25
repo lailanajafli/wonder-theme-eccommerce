@@ -47,7 +47,7 @@ const ScrollWoman = () => {
       },
       {
         y: "-100%",
-        rotate: 15,
+        rotate: 25,
         duration: 40, 
         ease: "slow(0.2, 0.2, false)", 
         scrollTrigger: {
@@ -81,18 +81,20 @@ const ScrollWoman = () => {
         </div>
       </div>
       <div className="imageContainer">
+        <div className="scrollimgone">
         <img
-          className="scrollimgone"
           data-speed="2"
           src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/image-paralax-1_1c4bb8f6-2379-477a-844a-c205a34a1108.jpg?v=1727467142&width=600"
           alt="Product 1"
         />
+        </div>
+        <div className="scrollimgtwo">
         <img
-          className="scrollimgtwo"
           data-speed="1"
           src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/image-paralax-2_683c405d-ec27-405f-86b9-4bc077d1a1a8.jpg?v=1727467153&width=600"
           alt="Product 2"
         />
+        </div>
       </div>
       <div className="spacer"></div>
       <div className="spacer"></div>

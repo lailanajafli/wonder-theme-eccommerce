@@ -14,9 +14,12 @@
     .footerColumn {
       flex: 1;
       min-width: 200px;
-      margin-bottom: 20px;
-
-      h3 {
+      .footerColumnRes {
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+      }
+      div {
         font-size: 18px;
         margin-bottom: 15px;
         font-weight: bold;
@@ -85,33 +88,77 @@
   .footerBeauty {
     width: 100%;
     margin-top: 50px;
+
     img {
       width: 100%;
     }
   }
 
-  @media (max-width: 1024px) {
+  /* 900px və daha kiçik ekranlar üçün - dropdown görünüşü və plus/minus şəkilləri */
+  @media (max-width: 900px) {
     .footerContainer {
       flex-direction: column;
       align-items: center;
     }
 
     .footerColumn {
-      width: 80%;
-      text-align: center;
+      width: 100%;
+      text-align: left;
+      .footerColumnRes {
+border-bottom: 1px solid gray;
+      }
+      div {
+        position: relative;
+
+        cursor: pointer;
+      }
+
+      // h3 üçün pseudo-element: bağlı olduqda plus, açıq olduqda minus göstərmək
+      img {
+        filter: invert(1);
+        width: 30px;
+      }
+
+      &.open {
+        h3::after {
+          background-image: url("../assets/images/minus.svg");
+        }
+      }
     }
 
     .footerBottom {
       flex-direction: column;
       align-items: center;
       text-align: center;
+
+      .socialIcons {
+        margin-bottom: 20px;
+        gap: 10px;
+
+        svg {
+          font-size: 28px;
+        }
+      }
+
+      .paymentMethods {
+        gap: 12px;
+
+        img {
+          height: 30px;
+        }
+      }
     }
 
-    .socialIcons {
-      margin-bottom: 20px;
+    .footerBeauty {
+      margin-top: 30px;
+
+      img {
+        width: 100%;
+      }
     }
   }
 
+  /* 768px və daha kiçik ekranlar üçün */
   @media (max-width: 768px) {
     .footerContainer {
       .footerColumn {
@@ -131,10 +178,9 @@
     }
   }
 
+  /* 480px və daha kiçik ekranlar üçün */
   @media (max-width: 480px) {
-    .footer {
-      padding: 30px 15px;
-    }
+    padding: 30px 15px;
 
     .footerContainer {
       .footerColumn {
