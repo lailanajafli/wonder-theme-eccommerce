@@ -66,7 +66,11 @@ const Header = () => {
       {isHomePage && (
         <header className={`headerVideo ${isVideoPassed ? "hiddenHeaderVideo" : ""}`}>
           <div className="barNav">
-            <img src={headerBars} alt="header bars" onClick={() => setIsDrawerOpen(true)} />
+            <img 
+              src={headerBars} 
+              alt="header bars" 
+              onClick={() => setIsDrawerOpen(true)} 
+            />
             <nav className="navBar">
               <Link to="/shop">Shop</Link>
               <Link to="/bestseller">Bestseller</Link>
@@ -83,7 +87,11 @@ const Header = () => {
 
       <header className={`header ${isScrolled ? "" : "hiddenHeader"}`}>
         <div className="barNav">
-          <img src={headerBars} alt="header bars" onClick={() => setIsDrawerOpen(true)} />
+          <img 
+            src={headerBars} 
+            alt="header bars" 
+            onClick={() => setIsDrawerOpen(true)} 
+          />
           <nav className="navBar">
             <Link to="/shop">Shop</Link>
             <Link to="/bestseller">Bestseller</Link>
@@ -104,7 +112,7 @@ const Header = () => {
       </header>
 
       {/* Drawer Menu */}
-      <DrawerMenu isOpen={isDrawerOpen} onClose={setIsDrawerOpen} />
+      <DrawerMenu isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
     </>
   );
 };
