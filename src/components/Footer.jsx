@@ -34,9 +34,7 @@ const footerLinks = {
 };
 
 const Footer = () => {
-  // Ekran ölçüsünə görə "mobil" olub olmadığını təyin edirik (900px-dən aşağı)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
-  // Hər bir bölmənin (dropdown) açıq/bağlı vəziyyətini izləyirik
   const [openSections, setOpenSections] = useState({
     Categories: false,
     "Customer Service": false,
@@ -64,7 +62,8 @@ const Footer = () => {
           <div className="footerColumn" key={section}>
             <div
               onClick={() => isMobile && toggleSection(section)}
-              className="footerColumnRes" style={{
+              className="footerColumnRes"
+              style={{
                 cursor: isMobile ? "pointer" : "default",
               }}
             >
@@ -74,6 +73,7 @@ const Footer = () => {
                   <img src={minus} alt="minus" className="dropdownIcon" />
                 ) : (
                   <img src={plus} alt="plus" className="dropdownIcon" />
+                  
                 ))}
             </div>
             {(!isMobile || openSections[section]) && (
@@ -89,30 +89,20 @@ const Footer = () => {
         ))}
         <div className="footerColumn aboutUs">
           <div
+            className="footerColumnRes"
             onClick={() => isMobile && toggleSection("About Us")}
             style={{
-              cursor: isMobile ? "pointer" : "default",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
+              cursor: isMobile ? "pointer" : "default", borderBottom: "none", flexDirection: "column", alignItems: "flex-start", textAlign: "left"
             }}
           >
             <span>About Us</span>
-            {isMobile &&
-              (openSections["About Us"] ? (
-                <img src={minus} alt="minus" className="dropdownIcon" />
-              ) : (
-                <img src={plus} alt="plus" className="dropdownIcon" />
-              ))}
-          </div>
-          {(!isMobile || openSections["About Us"]) && (
             <p>
               We could not have created this demo without the help of an amazing
               source of content and products. Visit our about page to find out
               where all the products used in this demo care from.{" "}
               <Link to="/more-info">More Info</Link>
             </p>
-          )}
+          </div>
         </div>
       </div>
 

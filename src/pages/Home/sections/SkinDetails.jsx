@@ -87,7 +87,7 @@ const SkinDetails = () => {
             top: selectedProduct.position.top,
             left: selectedProduct.position.left,
             transform: selectedProduct.cardPosition,
-            zIndex: 999,
+            zIndex: 9,
           }}
           onClick={(e) => e.stopPropagation()}
         >

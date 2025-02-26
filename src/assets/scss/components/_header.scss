@@ -30,7 +30,7 @@
       text-decoration: none;
       margin: 0 10px;
       transition: color 0.3s ease;
-      @include linkHover(#fff, #fff);
+      @include linkHover(#fff, #fff, rgb(255, 255, 255));
     }
   }
   .navTeaser {
@@ -68,7 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1000;
+  z-index: 100;
 
   .barNav {
     display: flex;
@@ -117,5 +117,10 @@
   a {
     text-decoration: none;
     font-size: 18px;
+  }
+}
+ @media (max-width: 1024px) {
+  .navBar {
+display: none;
   }
 }

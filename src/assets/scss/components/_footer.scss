@@ -1,9 +1,9 @@
 @use "../pages/mixins" as *;
 
 .footer {
-  background-color: #111;
+  background-color: #151515;
   color: #fff;
-  padding: 50px 20px;
+  padding: 25px 20px;
 
   .footerContainer {
     display: flex;
@@ -17,12 +17,8 @@
       .footerColumnRes {
         justify-content: space-between;
         align-items: center;
+        padding: 32px 0;
         display: flex;
-      }
-      div {
-        font-size: 18px;
-        margin-bottom: 15px;
-        font-weight: bold;
       }
 
       ul {
@@ -32,6 +28,7 @@
         li {
           font-size: 14px;
           margin-bottom: 8px;
+          text-align: left;
 
           a {
             @include linkHover;
@@ -42,6 +39,7 @@
       &.aboutUs {
         p {
           font-size: 14px;
+
           line-height: 1.5;
           color: #ddd;
         }
@@ -53,6 +51,10 @@
           transition: color 0.3s;
           border-bottom: 1px solid white;
         }
+      }
+      span {
+    
+        @include styleText(#ffffff, 16px, 500, normal);
       }
     }
   }
@@ -94,7 +96,6 @@
     }
   }
 
-  /* 900px və daha kiçik ekranlar üçün - dropdown görünüşü və plus/minus şəkilləri */
   @media (max-width: 900px) {
     .footerContainer {
       flex-direction: column;
@@ -105,15 +106,13 @@
       width: 100%;
       text-align: left;
       .footerColumnRes {
-border-bottom: 1px solid gray;
+        border-bottom: 1px solid rgba(205, 205, 205, 0.342);
       }
       div {
         position: relative;
-
         cursor: pointer;
       }
 
-      // h3 üçün pseudo-element: bağlı olduqda plus, açıq olduqda minus göstərmək
       img {
         filter: invert(1);
         width: 30px;
@@ -158,7 +157,6 @@ border-bottom: 1px solid gray;
     }
   }
 
-  /* 768px və daha kiçik ekranlar üçün */
   @media (max-width: 768px) {
     .footerContainer {
       .footerColumn {
@@ -178,7 +176,6 @@ border-bottom: 1px solid gray;
     }
   }
 
-  /* 480px və daha kiçik ekranlar üçün */
   @media (max-width: 480px) {
     padding: 30px 15px;
 

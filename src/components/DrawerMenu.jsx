@@ -3,18 +3,21 @@ import CustomModal from "./CustomModal";
 import plus from "../assets/images/svg/plus.svg";
 import minus from "../assets/images/svg/minus.svg";
 
-const DrawerMenu = ({ isOpen, onClose, title = "Shop By", drawerStyle = {} }) => {
+const DrawerMenu = ({
+  isOpen,
+  onClose,
+  title = "Shop By",
+  drawerStyle = {},
+}) => {
   const [activeCategory, setActiveCategory] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // Pəncərə ölçüsünü izləyirik
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Üslub obyektinə 900px-dən aşağı olduqda width: 100% əlavə edirik
   const modalStyle = {
     ...drawerStyle,
     width: windowWidth < 900 ? "100%" : drawerStyle.width,
@@ -35,8 +38,11 @@ const DrawerMenu = ({ isOpen, onClose, title = "Shop By", drawerStyle = {} }) =>
       <div className="drawerContainer">
         <div className="drawerSubCategory">
           <ul className="subCategoryList">
-            <li onClick={() => toggleCategory("shop")}>
-              Shop
+            <li style={{paddingTop: "36px"}}
+              className="subCategoryListLi"
+              onClick={() => toggleCategory("shop")}
+            >
+              <p> Shop</p>
               <span
                 className={`expandIcon ${
                   activeCategory === "shop" ? "active" : ""
@@ -51,16 +57,31 @@ const DrawerMenu = ({ isOpen, onClose, title = "Shop By", drawerStyle = {} }) =>
             </li>
             {activeCategory === "shop" && (
               <ul className="subCategoryItems">
-                <li>Face Care</li>
-                <li>Body Care</li>
-                <li>Bath & Body</li>
-                <li>Hair Care</li>
-                <li>Hand Care</li>
-                <li>Essential oils</li>
+                <li>
+                  <span>Face Care</span>
+                </li>
+                <li>
+                  <span>Body Care</span>
+                </li>
+                <li>
+                  <span>Bath & Body</span>
+                </li>
+                <li>
+                  <span>Hair Care</span>
+                </li>
+                <li>
+                  <span>Hand Care</span>
+                </li>
+                <li>
+                  <span>Essential oils</span>
+                </li>
               </ul>
             )}
-            <li onClick={() => toggleCategory("bestseller")}>
-              Bestseller
+            <li
+              className="subCategoryListLi"
+              onClick={() => toggleCategory("bestseller")}
+            >
+              <p>Bestseller</p>
               <span
                 className={`expandIcon ${
                   activeCategory === "bestseller" ? "active" : ""
@@ -75,32 +96,23 @@ const DrawerMenu = ({ isOpen, onClose, title = "Shop By", drawerStyle = {} }) =>
             </li>
             {activeCategory === "bestseller" && (
               <ul className="subCategoryItems">
-                <li>Top Picks</li>
-                <li>Trending</li>
-                <li>New Arrivals</li>
+                <li>
+                  <span>Top Picks</span>
+                </li>
+                <li>
+                  <span>Trending</span>
+                </li>
+                <li>
+                  <span>New Arrivals</span>
+                </li>
               </ul>
             )}
-            <li onClick={() => toggleCategory("sale")}>
-              Sale
-              <span
-                className={`expandIcon ${
-                  activeCategory === "sale" ? "active" : ""
-                }`}
-              >
-                {activeCategory === "sale" ? (
-                  <img src={minus} alt="collapse" />
-                ) : (
-                  <img src={plus} alt="expand" />
-                )}
-              </span>
+            <li
+              className="subCategoryListLi"
+              onClick={() => toggleCategory("sale")}
+            >
+              <p> Sale</p>
             </li>
-            {activeCategory === "sale" && (
-              <ul className="subCategoryItems">
-                <li>Discounted Items</li>
-                <li>Clearance</li>
-                <li>Limited Time Offers</li>
-              </ul>
-            )}
           </ul>
         </div>
 

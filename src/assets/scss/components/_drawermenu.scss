@@ -1,3 +1,5 @@
+@use "../pages/mixins" as *;
+
 .drawerContainer {
   display: flex;
   flex-direction: column;
@@ -6,32 +8,30 @@
 
   .drawerSubCategory {
     flex-grow: 1;
-    padding: 1rem;
-    background-color: #f8f8f8;
+    padding: 4px 16px 16px 16px;
+    background-color: #ffff;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 
     .subCategoryList {
       list-style: none;
       padding: 0;
-
       margin: 0;
 
-      li {
+      .subCategoryListLi {
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-top: 1px solid rgba(207, 207, 207, 0.641);
         padding: 20px 15px 20px 15px;
-        background-color: #fff;
-        border-radius: 6px;
         transition: all 0.3s ease;
         position: relative;
-
-        &:hover {
-          background-color: #f4f4f4;
+        p {
+          @include linkHover(black, black, #715939);
+          &.active {
+            color: #555;
+          }
         }
 
         .expandIcon {
@@ -43,41 +43,27 @@
             width: 20px;
           }
         }
-
-        &:hover .expandIcon {
-          color: #009688;
+        &.active p {
+          color: #555;
         }
+      }
+      .subCategoryItems {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        transition: opacity 0.3s ease, max-height 0.3s ease;
 
-        &.active .expandIcon {
-          transform: rotate(45deg);
-          color: #009688;
-        }
-
-        .subCategoryItems {
-          list-style: none;
-          padding-left: 1rem;
-          margin-top: 2rem;
-          display: block;
-          opacity: 0;
-          max-height: 0;
-          overflow: hidden;
-          transition: opacity 0.3s ease, max-height 0.3s ease;
-
-          li {
-            margin-bottom: 0.5rem;
-            padding-left: 1rem;
-            color: #555;
-            transition: color 0.3s ease;
-
-            &:hover {
-              color: #009688;
-            }
+        li {
+          margin-bottom: 0.5rem;
+          padding: 6px 15px 6px 15px;
+          transition: color 0.3s ease;
+          cursor: pointer;
+          span {
+            @include linkHover(black, black, #715939);
           }
-        }
-
-        &.active .subCategoryItems {
-          opacity: 1;
-          max-height: 200px;
+          &:hover span {
+            color: #715939;
+          }
         }
       }
     }
@@ -110,12 +96,23 @@
   }
 }
 
+@media (min-width: 600px) {
+  .drawerContainer {
+    min-width: 500px;
+  }
+  .modalBox {
+    .modal {
+      min-width: 500px;
+      height: 100vh;
+    }
+  }
+}
+
+
 @media (max-width: 600px) {
   .drawerContainer {
     width: 100%;
   }
-}
-@media (max-width: 600px) {
   .modalBox {
     .modal {
       width: 100%;

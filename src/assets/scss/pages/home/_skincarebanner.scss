@@ -55,36 +55,45 @@
   
   /* Responsive Design */
   @media (max-width: 1024px) {
-    .mainText {
-      font-size: 2rem;
-    }
-  
-    a {
-      width: 45px;
-      height: 45px;
+    .bannerContainer{
+      .mainText {
+        font-size: 2rem;
+      }
+    
+      a {
+        width: 45px;
+        height: 45px;
+      }
+
     }
   }
   
   @media (max-width: 768px) {
-    .mainText {
-      font-size: 1.8rem;
-      gap: 5px;
-    }
-  
-    a {
-      width: 40px;
-      height: 40px;
+    .bannerContainer{
+
+      .mainText {
+        font-size: 1.8rem;
+        gap: 5px;
+      }
+    
+      a {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
   
   @media (max-width: 480px) {
-    .mainText {
-      font-size: 1.5rem;
-    }
-  
-    a {
-      width: 35px;
-      height: 35px;
+    .bannerContainer{
+      .mainText {
+        font-size: 1.5rem;
+      }
+    
+      a {
+        width: 35px;
+        height: 35px;
+      }
+
     }
   }
   
