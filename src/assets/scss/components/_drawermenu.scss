@@ -43,10 +43,14 @@
             width: 20px;
           }
         }
-        &.active p {
-          color: #555;
+        &.active {
+          p {
+            color: #715939 !important;
+          }
         }
+        
       }
+
       .subCategoryItems {
         list-style: none;
         display: flex;
@@ -87,6 +91,7 @@
         font-size: 15px;
         transition: color 0.3s ease;
         font-weight: 500;
+        cursor: pointer;
 
         &:hover {
           color: #f4f4f4;
@@ -107,7 +112,6 @@
     }
   }
 }
-
 
 @media (max-width: 600px) {
   .drawerContainer {

@@ -13,6 +13,7 @@
 
     .footerColumn {
       flex: 1;
+      flex-direction: column;
       min-width: 200px;
       .footerColumnRes {
         justify-content: space-between;
@@ -27,11 +28,11 @@
 
         li {
           font-size: 14px;
-          margin-bottom: 8px;
+          padding: 9px 0;
           text-align: left;
 
           a {
-            @include linkHover;
+            @include linkHover(white,white, white);
           }
         }
       }
@@ -53,8 +54,12 @@
         }
       }
       span {
-    
         @include styleText(#ffffff, 16px, 500, normal);
+      }
+      &.open {
+        .footerColumnRes {
+          border-bottom: none;
+        }
       }
     }
   }

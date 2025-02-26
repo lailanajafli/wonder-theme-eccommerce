@@ -39,7 +39,9 @@ const DrawerMenu = ({
         <div className="drawerSubCategory">
           <ul className="subCategoryList">
             <li style={{paddingTop: "36px"}}
-              className="subCategoryListLi"
+             className={`subCategoryListLi ${
+              activeCategory === "shop" ? "active" : ""
+            }`}
               onClick={() => toggleCategory("shop")}
             >
               <p> Shop</p>
@@ -78,7 +80,9 @@ const DrawerMenu = ({
               </ul>
             )}
             <li
-              className="subCategoryListLi"
+              className={`subCategoryListLi ${
+                activeCategory === "bestseller" ? "active" : ""
+              }`}
               onClick={() => toggleCategory("bestseller")}
             >
               <p>Bestseller</p>

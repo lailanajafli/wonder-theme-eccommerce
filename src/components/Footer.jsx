@@ -59,7 +59,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footerContainer">
         {Object.entries(footerLinks).map(([section, links]) => (
-          <div className="footerColumn" key={section}>
+          <div  className={`footerColumn ${openSections[section] ? "open" : ""}`} key={section}>
             <div
               onClick={() => isMobile && toggleSection(section)}
               className="footerColumnRes"
