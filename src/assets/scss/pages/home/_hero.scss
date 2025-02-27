@@ -55,7 +55,7 @@
       padding-bottom: 5px;
       display: inline-block;
       transition: color 0.3s;
-      @include linkHover;
+      @include linkHover(white, white, white);
     }
     
     .skincareBeginDown {

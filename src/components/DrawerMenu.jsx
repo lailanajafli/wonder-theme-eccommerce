@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import CustomModal from "./CustomModal";
 import plus from "../assets/images/svg/plus.svg";
 import minus from "../assets/images/svg/minus.svg";
+import { SwiperSlide } from "swiper/react";
+import "swiper/css";
 
-const DrawerMenu = ({
-  isOpen,
-  onClose,
-  title = "Shop By",
-  drawerStyle = {},
-}) => {
+const draweProducts = [
+  { name: "Firming face serum Orange", image: "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/mokosh-1.jpg?v=1673362597&width=800" },
+  { name: "Moisturizing hand lotion", image: "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/mokosh-2.jpg?v=1673362798&width=800" },
+  { name: "Floral face moisturized", image: "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/bkind-3.jpg?v=1673362986&width=800" },
+  { name: "Body salt scrub 300g", image: "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/mokosh-4.jpg?v=1673363219&width=800" },
+  { name: "Nourishing hand balm", image: "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/bkind-5.jpg?v=1673363672&width=800" },
+];
+
+const DrawerMenu = ({ isOpen, onClose, title = "Shop By", drawerStyle = {} }) => {
   const [activeCategory, setActiveCategory] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -28,94 +33,50 @@ const DrawerMenu = ({
   };
 
   return (
-    <CustomModal
-      isOpen={isOpen}
-      onClose={onClose}
-      title={title}
-      style={modalStyle}
-      className={`drawerModal ${isOpen ? "open" : ""}`}
-    >
+    <CustomModal isOpen={isOpen} onClose={onClose} title={title} style={modalStyle} className={`drawerModal ${isOpen ? "open" : ""}`}>
       <div className="drawerContainer">
         <div className="drawerSubCategory">
           <ul className="subCategoryList">
-            <li style={{paddingTop: "36px"}}
-             className={`subCategoryListLi ${
-              activeCategory === "shop" ? "active" : ""
-            }`}
-              onClick={() => toggleCategory("shop")}
-            >
-              <p> Shop</p>
-              <span
-                className={`expandIcon ${
-                  activeCategory === "shop" ? "active" : ""
-                }`}
-              >
-                {activeCategory === "shop" ? (
-                  <img src={minus} alt="collapse" />
-                ) : (
-                  <img src={plus} alt="expand" />
-                )}
+            <li className={`subCategoryListLi ${activeCategory === "shop" ? "active" : ""}`} onClick={() => toggleCategory("shop")}>
+              <p>Shop</p>
+              <span className={`expandIcon ${activeCategory === "shop" ? "active" : ""}`}>
+                {activeCategory === "shop" ? <img src={minus} alt="collapse" /> : <img src={plus} alt="expand" />}
               </span>
             </li>
             {activeCategory === "shop" && (
               <ul className="subCategoryItems">
-                <li>
-                  <span>Face Care</span>
-                </li>
-                <li>
-                  <span>Body Care</span>
-                </li>
-                <li>
-                  <span>Bath & Body</span>
-                </li>
-                <li>
-                  <span>Hair Care</span>
-                </li>
-                <li>
-                  <span>Hand Care</span>
-                </li>
-                <li>
-                  <span>Essential oils</span>
-                </li>
+                <li><span>Face Care</span></li>
+                <li><span>Body Care</span></li>
+                <li><span>Bath & Body</span></li>
+                <li><span>Hair Care</span></li>
+                <li><span>Hand Care</span></li>
+                <li><span>Essential oils</span></li>
               </ul>
             )}
-            <li
-              className={`subCategoryListLi ${
-                activeCategory === "bestseller" ? "active" : ""
-              }`}
-              onClick={() => toggleCategory("bestseller")}
-            >
+            <li className={`subCategoryListLi ${activeCategory === "bestseller" ? "active" : ""}`} onClick={() => toggleCategory("bestseller")}>
               <p>Bestseller</p>
-              <span
-                className={`expandIcon ${
-                  activeCategory === "bestseller" ? "active" : ""
-                }`}
-              >
-                {activeCategory === "bestseller" ? (
-                  <img src={minus} alt="collapse" />
-                ) : (
-                  <img src={plus} alt="expand" />
-                )}
+              <span className={`expandIcon ${activeCategory === "bestseller" ? "active" : ""}`}>
+                {activeCategory === "bestseller" ? <img src={minus} alt="collapse" /> : <img src={plus} alt="expand" />}
               </span>
             </li>
             {activeCategory === "bestseller" && (
-              <ul className="subCategoryItems">
-                <li>
-                  <span>Top Picks</span>
-                </li>
-                <li>
-                  <span>Trending</span>
-                </li>
-                <li>
-                  <span>New Arrivals</span>
-                </li>
-              </ul>
+              <div className="bestsellerScrollContainer">
+                <div className="scrollable">
+                  {draweProducts.map((product, index) => (
+                    <div key={`${product.id}-${index}`} className="drawerSlideCont">
+                      <div className="drawerSlideImage">
+                        <img src={product.image} alt={product.name} />
+                      </div>
+                      <div className="drawerSlideTextCont">
+                        <p className="drawerSlideText">{product.name}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
-            <li
-              className="subCategoryListLi"
-              onClick={() => toggleCategory("sale")}
-            >
-              <p> Sale</p>
+            <li className="subCategoryListLi" onClick={() => toggleCategory("sale")}>
+              <p>Sale</p>
             </li>
           </ul>
         </div>
