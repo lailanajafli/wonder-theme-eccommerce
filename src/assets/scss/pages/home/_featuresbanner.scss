@@ -40,25 +40,11 @@
   }
 }
 
-@media (max-width: 768px) {
-  .featuresBannerSection {
-    .featuresBannerCont {
-      flex-direction: column;
-      align-items: center;
-      height: auto; 
-      
-      .featuresBanner {
-        width: 90%; 
-        margin-bottom: 20px;
-      }
-    }
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .featuresBannerSection {
     .featuresBannerCont {
       padding: 10px;
+      height: auto;
       
       .featuresBanner {
         width: 100%;

@@ -13,14 +13,10 @@
   text-decoration: none;
   font-family: "Montserrat", sans-serif;}
 
-body {
-  overflow-x: hidden;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
+  html, body, #root, .heroSection {
+    overflow-x: hidden;
+  }
+  
 a {
   color: #fff;
 }

@@ -30,7 +30,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="heroSection">
+    <div className="heroSection" style={{ minHeight: "100vh" , overflowY: "hidden"}}>
       <Header scrollY={scrollY} />
       <Hero scrollY={scrollY} />
       <SkinCareBanner />
