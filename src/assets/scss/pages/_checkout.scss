@@ -1,0 +1,116 @@
+.checkoutPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f3f3;
+  
+    .checkoutContainer {
+      display: flex;
+      max-width: 1100px;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  
+      .checkoutLeft {
+        flex: 1;
+        padding: 30px;
+  
+        h2 {
+          font-size: 22px;
+          margin-bottom: 15px;
+        }
+  
+        .formGroup {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 15px;
+  
+          label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 600;
+          }
+  
+          input,
+          select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+          }
+        }
+  
+        .saveInfo {
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+  
+          input {
+            margin-right: 8px;
+          }
+        }
+  
+        .paymentSection {
+          margin-top: 20px;
+  
+          .paymentOption {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+        }
+  
+        .payButton {
+          margin-top: 20px;
+          width: 100%;
+          padding: 12px;
+          background-color: #0073e6;
+          color: #fff;
+          font-size: 18px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background 0.3s;
+  
+          &:hover {
+            background-color: #005bb5;
+          }
+        }
+      }
+  
+      .checkoutRight {
+        width: 35%;
+        background-color: #fafafa;
+        padding: 30px;
+        border-left: 1px solid #ddd;
+  
+        .orderSummary {
+          h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+          }
+  
+          .orderItems {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+          }
+  
+          .orderTotal {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+  
