@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // useLocation əlavə etdik
 import visa from "../assets/images/svg/visa.svg";
 import mastercard from "../assets/images/svg/mastercard.svg";
 import american from "../assets/images/svg/american.svg";
@@ -11,29 +11,10 @@ import { FaXTwitter } from "react-icons/fa6";
 import plus from "../assets/images/svg/plus.svg";
 import minus from "../assets/images/svg/minus.svg";
 
-const footerLinks = {
-  Categories: [
-    { name: "Bath & Body", path: "/bath-body" },
-    { name: "Body Care", path: "/body-care" },
-    { name: "Face Care", path: "/face-care" },
-    { name: "Hair Care", path: "/hair-care" },
-    { name: "Hand Care", path: "/hand-care" },
-    { name: "Essential oils", path: "/essential-oils" },
-    { name: "Sale %", path: "/sale" },
-  ],
-  "Customer Service": [
-    { name: "FAQ", path: "/faq" },
-    { name: "Shipping", path: "/shipping" },
-    { name: "Contact", path: "/contact" },
-  ],
-  Information: [
-    { name: "Return and Refunds", path: "/returns" },
-    { name: "Legal Area", path: "/legal" },
-    { name: "About us", path: "/about" },
-  ],
-};
-
 const Footer = () => {
+  const location = useLocation(); // URL-i almaq üçün
+  if (location.pathname === "/checkout") return null; // Əgər /checkout səhifəsindəyiksə, heç nə qaytarmırıq
+
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [openSections, setOpenSections] = useState({
     Categories: false,
@@ -58,14 +39,32 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footerContainer">
-        {Object.entries(footerLinks).map(([section, links]) => (
-          <div  className={`footerColumn ${openSections[section] ? "open" : ""}`} key={section}>
+        {Object.entries({
+          Categories: [
+            { name: "Bath & Body", path: "/bath-body" },
+            { name: "Body Care", path: "/body-care" },
+            { name: "Face Care", path: "/face-care" },
+            { name: "Hair Care", path: "/hair-care" },
+            { name: "Hand Care", path: "/hand-care" },
+            { name: "Essential oils", path: "/essential-oils" },
+            { name: "Sale %", path: "/sale" },
+          ],
+          "Customer Service": [
+            { name: "FAQ", path: "/faq" },
+            { name: "Shipping", path: "/shipping" },
+            { name: "Contact", path: "/contact" },
+          ],
+          Information: [
+            { name: "Return and Refunds", path: "/returns" },
+            { name: "Legal Area", path: "/legal" },
+            { name: "About us", path: "/about" },
+          ],
+        }).map(([section, links]) => (
+          <div className={`footerColumn ${openSections[section] ? "open" : ""}`} key={section}>
             <div
               onClick={() => isMobile && toggleSection(section)}
               className="footerColumnRes"
-              style={{
-                cursor: isMobile ? "pointer" : "default",
-              }}
+              style={{ cursor: isMobile ? "pointer" : "default" }}
             >
               <span>{section}</span>
               {isMobile &&
@@ -73,7 +72,6 @@ const Footer = () => {
                   <img src={minus} alt="minus" className="dropdownIcon" />
                 ) : (
                   <img src={plus} alt="plus" className="dropdownIcon" />
-                  
                 ))}
             </div>
             {(!isMobile || openSections[section]) && (
@@ -92,14 +90,18 @@ const Footer = () => {
             className="footerColumnRes"
             onClick={() => isMobile && toggleSection("About Us")}
             style={{
-              cursor: isMobile ? "pointer" : "default", borderBottom: "none", flexDirection: "column", alignItems: "flex-start", textAlign: "left"
+              cursor: isMobile ? "pointer" : "default",
+              borderBottom: "none",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              textAlign: "left",
             }}
           >
             <span>About Us</span>
             <p>
               We could not have created this demo without the help of an amazing
               source of content and products. Visit our about page to find out
-              where all the products used in this demo care from.{" "}
+              where all the products used in this demo come from.{" "}
               <Link to="/more-info">More Info</Link>
             </p>
           </div>

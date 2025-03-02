@@ -36,7 +36,6 @@ const CartPage = ({
   const modalStyle = {
     ...cartPageStyle,
     left: "auto",
-    height: "100vh",
     right: isOpen ? "0" : "-100%",
     width: windowWidth < 900 ? "100%" : "400px",
   };

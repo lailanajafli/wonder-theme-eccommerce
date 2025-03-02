@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import headerBars from "../assets/images/svg/headerBars.svg";
 import search from "../assets/images/svg/search.svg";
 import login from "../assets/images/svg/login.svg";
@@ -12,13 +10,13 @@ import CartPage from "../components/CartPage";
 const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const isCheckoutPage = location.pathname === "/checkout";
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isCartPageOpen, setIsCartPageOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [videoHeight, setVideoHeight] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVideoPassed, setIsVideoPassed] = useState(false);
-  
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -63,6 +61,10 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [videoHeight, lastScrollY, isHomePage]);
 
+  if (isCheckoutPage) {
+    return null; // Do not render the header on the checkout page
+  }
+
   return (
     <>
       {isHomePage && (
@@ -84,10 +86,10 @@ const Header = () => {
           <div className="navTeaser">
             <img src={search} alt="search icon" />
             <img src={login} alt="login icon" />
-            <div className="cartIcon"   onClick={() => setIsCartPageOpen(true)}>
-            <img src={cart} alt="cart icon" />
-            <span className="cartCount">3</span>
-          </div>
+            <div className="cartIcon" onClick={() => setIsCartPageOpen(true)}>
+              <img src={cart} alt="cart icon" />
+              <span className="cartCount">3</span>
+            </div>
           </div>
         </header>
       )}
@@ -114,7 +116,7 @@ const Header = () => {
         <div className="navTeaser">
           <img src={search} alt="search icon" />
           <img src={login} alt="login icon" />
-          <div className="cartIcon"    onClick={() => setIsCartPageOpen(true)}>
+          <div className="cartIcon" onClick={() => setIsCartPageOpen(true)}>
             <img src={cart} alt="cart icon" />
             <span className="cartCount">3</span>
           </div>
