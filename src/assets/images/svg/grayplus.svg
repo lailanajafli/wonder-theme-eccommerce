@@ -1,0 +1,7 @@
+<svg class="svg-icon svg-icon--plus" aria-hidden="true" id="" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" data-icon-theme="option_1" width="72" height="72" viewBox="0 0 72 72">
+    <title></title>
+    <g id="Plus">
+        <rect class="icon-plus-y" width="54" height="4" rx="2" y="34" x="9" fill="#717171"></rect>
+        <rect class="icon-plus-x" width="4" height="54" rx="2" y="9" x="34" fill="#717171"></rect>
+    </g>
+</svg>

@@ -1,13 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { Navigation, Scrollbar } from "swiper/modules";
+import { addItem } from "../../../redux/slices/cartSlices"; // Redux'tan addItem action'u getirildi
 import products from "../../../db/products";
 
 const OurBestSeller = () => {
+  const dispatch = useDispatch(); // Redux dispatch kullanımı
+
   const allProducts = products.filter((product) => product.id);
   const bestSellers = allProducts.filter((product) => product.bestSeller);
 
@@ -15,9 +19,13 @@ const OurBestSeller = () => {
     const currentDate = new Date();
     const productDate = new Date(created_at);
     const timeDifference = currentDate - productDate;
-    const oneMonth = 30 * 24 * 60 * 60 * 1000; 
+    const oneMonth = 30 * 24 * 60 * 60 * 1000;
 
-    return timeDifference <= oneMonth; 
+    return timeDifference <= oneMonth;
+  };
+
+  const handleAddToCart = (product) => {
+    dispatch(addItem(product)); // Redux store'a ürünü ekleme
   };
 
   return (
@@ -47,9 +55,12 @@ const OurBestSeller = () => {
                 alt={product.title}
                 className="productImage"
               />
-              <Link to={`/product/${product.id}`} className="chooseOption">
-                <p>CHOOSE OPTION</p>
-              </Link>
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="chooseOption"
+              >
+                <p>ADD TO CART</p>
+              </button>
             </div>
             <div className="sliderTextCont">
               <h4 className="brandName">{product.brand}</h4>

@@ -1,63 +1,60 @@
 @use "../pages/mixins" as *;
 
-.modalBox{
+.modalBox {
+  width: 100%;
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.5); 
-      width: 100%;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 101;
-      right: 0;
-      bottom: 0;
-      backdrop-filter: blur(4px); 
-    }
-    
-      .modal{
-        width: 33%;
-        height: 100vh;
-        background-color: #fff;
-        z-index: 1;
-        position: fixed;
-        top:0%;
-        left: 0%;
-        bottom: 0;
-        right: 0;
-        z-index: 110;
-        .modalHeader{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 30px 5px 30px;
-            height: 60px;
-            .modalTitle{
-                letter-spacing: 0.7px;
-                @include styleText(#000, 21px, 500, normal); 
-            }
-            img{
-                width: 30px;
-            }
-          }
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal {
+    width: 33%;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 1;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    bottom: 0;
+    right: 0;
+    z-index: 110;
+    .modalHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 30px 5px 30px;
+      height: 60px;
+      .modalTitle {
+        letter-spacing: 0.7px;
+        @include styleText(#000, 21px, 500, normal);
       }
+      img {
+        width: 30px;
+      }
+    }
   }
-  
-  .open{
-    display: flex;
-  }
-  
-  
+}
 
-  
+.open {
+  display: flex; 
+}
 
+.noscroll {
+  overflow: hidden; 
+}
 
-  
-  .modalBody{
-    height: 400px;
-    overflow-y: auto;
-  
-  }
+.modalBody {
+  height: 400px;
+  overflow-y: auto;
+}

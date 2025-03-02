@@ -11,7 +11,7 @@ const newproducts = [
     price: 170.0,
     currency: "USD",
     imageUrl:
-      "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/Herbivore_Lapis_BlueTansy_FaceOil_Main.webp?v=1661110797&width=500",
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/1_c99f225c-fa02-47fb-af9f-c0fd52ce7381.jpg?v=1645702698&width=750",
   },
   {
     id: 2,

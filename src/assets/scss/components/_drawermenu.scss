@@ -4,11 +4,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto;
   height: 95vh;
 
   .drawerSubCategory {
     flex-grow: 1;
-    padding: 4px 16px 16px 16px;
     background-color: #ffff;
     border-radius: 8px;
     transition: background-color 0.3s ease;
@@ -24,7 +24,7 @@
         justify-content: space-between;
         align-items: center;
         border-top: 1px solid rgba(207, 207, 207, 0.641);
-        padding: 20px 15px 20px 15px;
+        padding: 20px 31px 20px 30px;
         transition: all 0.3s ease;
         position: relative;
         p {
@@ -48,7 +48,6 @@
             color: #715939 !important;
           }
         }
-        
       }
 
       .subCategoryItems {
@@ -59,7 +58,7 @@
 
         li {
           margin-bottom: 0.5rem;
-          padding: 6px 15px 6px 15px;
+          padding: 6px 15px 6px 29px;
           transition: color 0.3s ease;
           cursor: pointer;
           span {
@@ -125,8 +124,6 @@
   }
 }
 
-
-
 .bestsellerScrollContainer {
   width: 100%;
   padding: 15px 0;
@@ -134,46 +131,35 @@
   .scrollable {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: scroll;  
+    gap: 25px;
+    overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory; 
-    scroll-behavior: smooth; 
-
-    &::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #333;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
   }
 
   .drawerSlideCont {
     display: flex;
     flex-direction: column;
     text-align: center;
+    gap: 20px;
     transition: transform 0.3s ease;
 
     .drawerSlideImage {
       width: 250px;
       height: 250px;
-      img{
+      img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
       }
     }
 
     .drawerSlideTextCont {
-
       .drawerSlideText {
         font-size: 16px;
-        font-weight: bold;
+        font-weight: 500;
+        margin-bottom: 20px;
         color: #333;
       }
     }

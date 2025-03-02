@@ -7,16 +7,18 @@ import search from "../assets/images/svg/search.svg";
 import login from "../assets/images/svg/login.svg";
 import cart from "../assets/images/svg/cart.svg";
 import DrawerMenu from "./DrawerMenu";
+import CartPage from "../components/CartPage";
 
 const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  const [isCartPageOpen, setIsCartPageOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [videoHeight, setVideoHeight] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVideoPassed, setIsVideoPassed] = useState(false);
+  
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -64,12 +66,14 @@ const Header = () => {
   return (
     <>
       {isHomePage && (
-        <header className={`headerVideo ${isVideoPassed ? "hiddenHeaderVideo" : ""}`}>
+        <header
+          className={`headerVideo ${isVideoPassed ? "hiddenHeaderVideo" : ""}`}
+        >
           <div className="barNav">
-            <img 
-              src={headerBars} 
-              alt="header bars" 
-              onClick={() => setIsDrawerOpen(true)} 
+            <img
+              src={headerBars}
+              alt="header bars"
+              onClick={() => setIsDrawerOpen(true)}
             />
             <nav className="navBar">
               <Link to="/shop">Shop</Link>
@@ -80,17 +84,20 @@ const Header = () => {
           <div className="navTeaser">
             <img src={search} alt="search icon" />
             <img src={login} alt="login icon" />
+            <div className="cartIcon"   onClick={() => setIsCartPageOpen(true)}>
             <img src={cart} alt="cart icon" />
+            <span className="cartCount">3</span>
+          </div>
           </div>
         </header>
       )}
 
       <header className={`header ${isScrolled ? "" : "hiddenHeader"}`}>
         <div className="barNav">
-          <img 
-            src={headerBars} 
-            alt="header bars" 
-            onClick={() => setIsDrawerOpen(true)} 
+          <img
+            src={headerBars}
+            alt="header bars"
+            onClick={() => setIsDrawerOpen(true)}
           />
           <nav className="navBar">
             <Link to="/shop">Shop</Link>
@@ -107,12 +114,23 @@ const Header = () => {
         <div className="navTeaser">
           <img src={search} alt="search icon" />
           <img src={login} alt="login icon" />
-          <img src={cart} alt="cart icon" />
+          <div className="cartIcon"    onClick={() => setIsCartPageOpen(true)}>
+            <img src={cart} alt="cart icon" />
+            <span className="cartCount">3</span>
+          </div>
         </div>
       </header>
 
       {/* Drawer Menu */}
-      <DrawerMenu isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
+      <DrawerMenu
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      />
+      {/* CartPage Menu */}
+      <CartPage
+        isOpen={isCartPageOpen}
+        onClose={() => setIsCartPageOpen(false)}
+      />
     </>
   );
 };

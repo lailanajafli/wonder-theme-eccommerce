@@ -37,7 +37,7 @@ const DrawerMenu = ({ isOpen, onClose, title = "Shop By", drawerStyle = {} }) =>
       <div className="drawerContainer">
         <div className="drawerSubCategory">
           <ul className="subCategoryList">
-            <li className={`subCategoryListLi ${activeCategory === "shop" ? "active" : ""}`} onClick={() => toggleCategory("shop")}>
+            <li style={{padding: "40px 31px 20px 30px"}} className={`subCategoryListLi ${activeCategory === "shop" ? "active" : ""}`} onClick={() => toggleCategory("shop")}>
               <p>Shop</p>
               <span className={`expandIcon ${activeCategory === "shop" ? "active" : ""}`}>
                 {activeCategory === "shop" ? <img src={minus} alt="collapse" /> : <img src={plus} alt="expand" />}
