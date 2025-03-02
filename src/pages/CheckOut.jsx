@@ -32,7 +32,7 @@ const CheckOut = () => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-    setErrors((prev) => ({ ...prev, [name]: "" })); // Hata varsa temizle
+    setErrors((prev) => ({ ...prev, [name]: "" })); 
   };
 
   const validateForm = () => {
@@ -132,6 +132,17 @@ const CheckOut = () => {
             />
             {errors.address && (
               <span className="errorText">{errors.address}</span>
+            )}
+            <input
+              type="text"
+              name="apartment"
+              placeholder="Apartment, suite, etc. (optional)"
+              value={formData.apartment}
+              onChange={handleChange}
+              className={errors.apartment ? "inputError" : ""}
+            />
+            {errors.apartment && (
+              <span className="errorText">{errors.apartment}</span>
             )}
           </div>
           <div className="cityFields">
@@ -248,8 +259,14 @@ const CheckOut = () => {
             ))}
           </ul>
           <div className="checkoutTotal">
-            <p>Subtotal: ${totalPrice.toFixed(2)}</p>
-            <p>Total: ${totalPrice.toFixed(2)}</p>
+            <div className="checkoutSubTotalCont">
+            <p>Subtotal:</p>
+            <p>${totalPrice.toFixed(2)}</p>
+            </div>
+            <div  className="checkoutTotalCont">
+            <p>Total:</p>
+            <p>${totalPrice.toFixed(2)}</p>
+            </div>
           </div>
         </div>
       </div>

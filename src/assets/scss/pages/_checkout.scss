@@ -30,7 +30,6 @@
             border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s ease-in-out;
-            background: #f9f9f9;
             
             &:focus {
                 border-color: #1773b0;
@@ -93,6 +92,7 @@
             padding: 0;
             max-height: 300px;
             overflow-y: auto;
+            padding-top: 10px;
             overflow-x: auto;
             
             li {
@@ -136,9 +136,19 @@
         .checkoutTotal {
             margin-top: 25px;
             font-size: 20px;
-            display: flex;
             color: #000000;
-            justify-content: space-between;
+            .checkoutSubTotalCont{
+                display: flex;
+                justify-content: space-between;
+            }
+            .checkoutTotalCont{
+                display: flex;
+                justify-content: space-between;
+                p{
+                    font-weight: 600;   
+                    font-size: 20px;
+                }
+            }
         }
     }
 }
