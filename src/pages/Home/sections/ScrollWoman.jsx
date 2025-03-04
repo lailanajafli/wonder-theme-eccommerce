@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ScrollWoman = () => {
   useEffect(() => {
+   
     gsap.to(".landingSection", {
       scrollTrigger: {
         trigger: ".landingSection",
@@ -96,8 +97,9 @@ const ScrollWoman = () => {
         />
         </div>
       </div>
-      <div className="spacer"></div>
-      <div className="spacer"></div>
+      <div className="spacerOne"></div>
+      <div className="spacerTwo"></div>
+      <div className="spacerThree"></div>
     </section>
   );
 };

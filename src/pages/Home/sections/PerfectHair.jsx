@@ -9,11 +9,11 @@ const PerfectHair = () => {
             src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/argan-oil-2b.jpg?v=1709589561&width=2000"
             alt="perfect Hair Product"
           />
-        </div>
         <div className="perfectHairText">
-          <h3>Perfect hair with Argan Oil</h3>
+          <h3 className="perfectHairTexth">Perfect hair with Argan Oil</h3>
           <p>Moisturizes and protects hair.</p>
           <button className="">CHECK PRODUCT</button>
+        </div>
         </div>
       </div>
       <div className="perfectHairVideo">

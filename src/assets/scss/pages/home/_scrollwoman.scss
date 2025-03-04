@@ -1,23 +1,27 @@
 @use "../mixins" as *;
 
-.scrollWoman{
+.scrollWoman {
   overflow: hidden;
+  padding-top: 10%;
+  
   .landingSection {
     height: 100vh; 
-    flex-direction: column;
     margin-bottom: 50px;
     will-change: transform;
-    top: 0;
-    display: flex;
+    display: block; // Flexbox kullanmıyoruz
+    position: relative; // Pozisyonu relative yapıyoruz
     width: 100%;
-    justify-content: center;
-    align-items: center;
   
     .container {
+      position: absolute; // Konteyneri mutlak pozisyonda yerleştiriyoruz
+      top: 50%; // Dikey olarak ortalamak için
+      left: 50%; // Yatay olarak ortalamak için
+      transform: translate(-50%, -50%); // Gerçekten ortalamak için
       .row {
         display: flex;
         justify-content: center;
-        .pin{
+        
+        .pin {
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -53,40 +57,47 @@
           }
   
           .aboutus {
-        @include aboutUsBtn;
+            @include aboutUsBtn;
           }
         }
       }
     }
   }
+
   .imageContainer {
     display: flex;
     gap: 1rem;
-width: 97%;
+    width: 97%;
     align-items: stretch;
     margin: 0 auto;
     justify-content: space-between;
     margin-top: 2rem;
 
-    .scrollimgone, .scrollimgtwo{
-      
+    .scrollimgone, .scrollimgtwo {
       max-width: 460px;
-    img {
-      object-fit: cover;
-      border-radius: 30px;
-      display: block;
-      transition: transform .2s ease;
-      width: 100%; 
-      height: auto;
-  
 
+      img {
+        object-fit: cover;
+        border-radius: 30px;
+        display: block;
+        transition: transform .2s ease;
+        width: 100%; 
+        height: auto;
+      }
     }
   }
-  }
   
-  .spacer {
+  .spacerOne {
     height: 100vh;
   }
+  .spacerTwo {
+    height: 100vh;
+  }
+  .spacerThree {
+    height: 43vh;
+    display: none;
+  }
+
   @media (max-width: 1024px) {
     .imageContainer {
       padding: 0 20px;
@@ -96,10 +107,28 @@ width: 97%;
   @media (max-width: 768px) {
     .imageContainer {
       justify-content: space-between;
-
     }
   }
+  @media (min-width: 1108px) {
+
+    .spacerThree {
+      display: block ;
+      height: 20vh;
+    }
 }
 
+  @media (max-width: 808px) {
 
+      .spacerThree {
+        display: block ;
+        height: 27vh;
+      }
+  }
+  @media (max-width: 500px) {
 
+      .spacerThree {
+        display: block ;
+        height: 66vh;
+      }
+  }
+}
