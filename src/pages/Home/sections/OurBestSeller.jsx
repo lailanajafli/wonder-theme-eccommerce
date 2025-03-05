@@ -25,7 +25,7 @@ const OurBestSeller = () => {
   };
 
   const handleAddToCart = (product) => {
-    dispatch(addItem(product)); // Redux store'a ürünü ekleme
+    dispatch(addItem(product));
   };
 
   return (

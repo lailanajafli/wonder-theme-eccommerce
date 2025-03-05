@@ -5,12 +5,14 @@ import CustomModal from "./CustomModal";
 import grayminus from "../assets/images/svg/grayminus.svg";
 import grayplus from "../assets/images/svg/grayplus.svg";
 import binImg from "../assets/images/svg/bin.svg";
+import cartSvg from "../assets/images/svg/cart.svg";
 
 import {
   removeItem,
   increaseDecrease,
   clearCart,
 } from "../redux/slices/cartSlices";
+import { div } from "framer-motion/client";
 
 const CartPage = ({
   isOpen,
@@ -48,70 +50,80 @@ const CartPage = ({
       style={modalStyle}
     >
       <div className="cartPageContainer">
-      {cart.length === 0 ? (
-        <p>Sepetiniz boş.</p>
-      ) : (
-        <ul className="cartList">
-          {cart.map((item, index) => (
-            <li className="cartItem" key={item.id}>
-              <div className="cartProductImg">
-                <img src={item.image} alt={item.name} />
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                }}
-              >
-                <p className="cartProductName">{item.title}</p>
-                <div className="counterBin">
-                  <div className="counter">
+        {cart.length === 0 ? (
+          <div className="emptyCart">
+            <img className="emptyCartSvg" src={cartSvg} alt="cart" />
+            <p className="emptyCartTextP">Your cart is empty.</p>
+            <Link to="/" className="emptyCartLink"  onClick={() => (window.location.href = "/")}>
+              <p>CONTINUE SHOPPING</p>
+            </Link>
+          </div>
+        ) : (
+          <ul className="cartList">
+            {cart.map((item, index) => (
+              <li className="cartItem" key={item.id}>
+                <div className="cartProductImg">
+                  <img src={item.image} alt={item.name} />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "20px",
+                  }}
+                >
+                  <p className="cartProductName">{item.title}</p>
+                  <div className="counterBin">
+                    <div className="counter">
+                      <img
+                        src={grayminus}
+                        alt="grayminus"
+                        className="plusminusImg"
+                        style={{ fill: "rgb(215, 215, 215)" }}
+                        onClick={() =>
+                          dispatch(
+                            increaseDecrease({ item, type: "increment" })
+                          )
+                        }
+                      />
+                      <span>{item.quantity}</span>
+                      <img
+                        src={grayplus}
+                        alt="grayplus"
+                        className="plusminusImg"
+                        style={{ fill: "rgb(215, 215, 215)" }}
+                        onClick={() =>
+                          dispatch(
+                            increaseDecrease({ item, type: "decrement" })
+                          )
+                        }
+                      />
+                    </div>
                     <img
-                      src={grayminus}
-                      alt="grayminus"
-                      className="plusminusImg"
-                      style={{ fill: "rgb(215, 215, 215)" }}
-                      onClick={() =>
-                        dispatch(increaseDecrease({ item, type: "increment" }))
-                      }
-                    />
-                    <span>{item.quantity}</span>
-                    <img
-                      src={grayplus}
-                      alt="grayplus"
-                      className="plusminusImg"
-                      style={{ fill: "rgb(215, 215, 215)" }}
-                      onClick={() =>
-                        dispatch(increaseDecrease({ item, type: "decrement" }))
-                      }
+                      src={binImg}
+                      alt=" bin image"
+                      className="removecartProduct"
+                      onClick={() => dispatch(removeItem(item.id))}
                     />
                   </div>
-                  <img
-                    src={binImg}
-                    alt=" bin image"
-                    className="removecartProduct"
-                    onClick={() => dispatch(removeItem(item.id))}
-                  />
                 </div>
-              </div>
-              <span className="cartProductPrice">{item.price}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-      <div className="cartFooterBottom">
-      <div className="cartInfo">
-        <p className="subtotalText">Subtotal</p>
-        <p className="totalPrice">{totalPrice.toFixed(2)}</p>
-      </div>
-      <button
-        onClick={() => handleAddToCart(product)}
-        className="checkoutButton"
-      >
-        <p>CHECK OUT</p>
-      </button>
-      </div>
+                <span className="cartProductPrice">{`$${item.price.toFixed(2)}`}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className="cartFooterBottom">
+          <div className="cartInfo">
+            <p className="subtotalText">Subtotal</p>
+            <p className="totalPrice">{`$${totalPrice.toFixed(2)} USD`}</p>
+            </div>
+          <button
+            onClick={() => handleAddToCart(product)}
+            className="checkoutButton"
+          >
+            <p>CHECK OUT</p>
+          </button>
+        </div>
       </div>
     </CustomModal>
   );

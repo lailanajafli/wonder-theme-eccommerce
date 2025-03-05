@@ -5,6 +5,28 @@
   justify-content: space-between;
   flex-direction: column;
   height: 100vh;
+  border-top: 1px solid rgba(222, 222, 222, 0.693);
+  .emptyCart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    justify-content: center;
+    .emptyCartSvg{
+      width: 40px;
+      height: 40px;
+    }
+.emptyCartTextP{
+  @include styleText(#000000, 20px, 500, normal);
+}
+    .emptyCartLink{
+      @include aboutUsBtn;
+      font-size: 14px;
+      padding: 20px 20px;
+      margin-top: 0;
+    }
+  }
   .cartList {
     display: flex;
     flex-direction: column;
