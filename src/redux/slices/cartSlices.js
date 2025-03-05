@@ -3,11 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   totalPrice: JSON.parse(localStorage.getItem("totalPrice")) || 0,
+  cartCount: JSON.parse(localStorage.getItem("cartCount")) || 0, // cartCount əlavə edilir
 };
 
 const updateLocalStorage = (state) => {
   localStorage.setItem("cart", JSON.stringify(state.cart));
   localStorage.setItem("totalPrice", JSON.stringify(state.totalPrice));
+  localStorage.setItem("cartCount", JSON.stringify(state.cartCount)); // cartCount da saxlanır
 };
 
 const cartSlice = createSlice({
@@ -24,7 +26,12 @@ const cartSlice = createSlice({
         state.cart.push({ ...newItem, quantity: 1 });
       }
 
+      // totalPrice hesablanır
       state.totalPrice = parseFloat((state.totalPrice + newItem.price).toFixed(2));
+
+      // cartCount hesablama
+      state.cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);
+
       updateLocalStorage(state);
     },
 
@@ -37,6 +44,10 @@ const cartSlice = createSlice({
           (state.totalPrice - itemToRemove.price * itemToRemove.quantity).toFixed(2)
         );
         state.cart = state.cart.filter((item) => item.id !== id);
+        
+        // cartCount yenilənir
+        state.cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);
+
         updateLocalStorage(state);
       }
     },
@@ -54,10 +65,16 @@ const cartSlice = createSlice({
             item.quantity -= 1;
             state.totalPrice = parseFloat((state.totalPrice - item.price).toFixed(2));
           } else {
+            state.totalPrice = parseFloat(
+              (state.totalPrice - item.price * item.quantity).toFixed(2)
+            );
             state.cart = state.cart.filter((cartItem) => cartItem.id !== id);
-            state.totalPrice = parseFloat((state.totalPrice - item.price).toFixed(2));
           }
         }
+        
+        // cartCount yenilənir
+        state.cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);
+        
         updateLocalStorage(state);
       }
     },
@@ -65,6 +82,7 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cart = [];
       state.totalPrice = 0;
+      state.cartCount = 0; // cartCount da sıfırlanır
       updateLocalStorage(state);
     },
   },

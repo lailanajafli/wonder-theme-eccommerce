@@ -6,6 +6,7 @@ import login from "../assets/images/svg/login.svg";
 import cart from "../assets/images/svg/cart.svg";
 import DrawerMenu from "./DrawerMenu";
 import CartPage from "../components/CartPage";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const location = useLocation();
@@ -17,6 +18,10 @@ const Header = () => {
   const [videoHeight, setVideoHeight] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVideoPassed, setIsVideoPassed] = useState(false);
+
+const cartCount = useSelector((state) =>
+  state.cart.cart.reduce((total, item) => total + item.quantity, 0)
+)
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -62,7 +67,7 @@ const Header = () => {
   }, [videoHeight, lastScrollY, isHomePage]);
 
   if (isCheckoutPage) {
-    return null; // Do not render the header on the checkout page
+    return null; 
   }
 
   return (
@@ -88,7 +93,7 @@ const Header = () => {
             <img src={login} alt="login icon" />
             <div className="cartIcon" onClick={() => setIsCartPageOpen(true)}>
               <img src={cart} alt="cart icon" />
-              <span className="cartCount">3</span>
+              <span className="cartCount">{cartCount}</span>
             </div>
           </div>
         </header>
@@ -118,7 +123,7 @@ const Header = () => {
           <img src={login} alt="login icon" />
           <div className="cartIcon" onClick={() => setIsCartPageOpen(true)}>
             <img src={cart} alt="cart icon" />
-            <span className="cartCount">3</span>
+            <span className="cartCount">{cartCount}</span>
           </div>
         </div>
       </header>

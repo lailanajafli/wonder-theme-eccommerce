@@ -54,7 +54,11 @@ const CartPage = ({
           <div className="emptyCart">
             <img className="emptyCartSvg" src={cartSvg} alt="cart" />
             <p className="emptyCartTextP">Your cart is empty.</p>
-            <Link to="/" className="emptyCartLink"  onClick={() => (window.location.href = "/")}>
+            <Link
+              to="/"
+              className="emptyCartLink"
+              onClick={() => (window.location.href = "/")}
+            >
               <p>CONTINUE SHOPPING</p>
             </Link>
           </div>
@@ -82,7 +86,7 @@ const CartPage = ({
                         style={{ fill: "rgb(215, 215, 215)" }}
                         onClick={() =>
                           dispatch(
-                            increaseDecrease({ item, type: "increment" })
+                            increaseDecrease({ id: item.id, type: "decrement" })
                           )
                         }
                       />
@@ -94,7 +98,7 @@ const CartPage = ({
                         style={{ fill: "rgb(215, 215, 215)" }}
                         onClick={() =>
                           dispatch(
-                            increaseDecrease({ item, type: "decrement" })
+                            increaseDecrease({ id: item.id, type: "increment" })
                           )
                         }
                       />
@@ -107,22 +111,26 @@ const CartPage = ({
                     />
                   </div>
                 </div>
-                <span className="cartProductPrice">{`$${item.price.toFixed(2)}`}</span>
+                <span className="cartProductPrice">{`$${item.price.toFixed(
+                  2
+                )}`}</span>
               </li>
             ))}
           </ul>
         )}
         <div className="cartFooterBottom">
           <div className="cartInfo">
-            <p className="subtotalText">Subtotal</p>
+            <p className="subtotalText">Subtotal<span></span></p>
             <p className="totalPrice">{`$${totalPrice.toFixed(2)} USD`}</p>
-            </div>
-          <button
+          </div>
+         <Link to="/checkout"> 
+         <button
             onClick={() => handleAddToCart(product)}
             className="checkoutButton"
           >
-            <p>CHECK OUT</p>
+            <span>CHECK OUT</span>
           </button>
+          </Link>
         </div>
       </div>
     </CustomModal>

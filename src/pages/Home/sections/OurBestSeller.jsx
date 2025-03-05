@@ -6,11 +6,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { Navigation, Scrollbar } from "swiper/modules";
-import { addItem } from "../../../redux/slices/cartSlices"; // Redux'tan addItem action'u getirildi
+import { addItem } from "../../../redux/slices/cartSlices";
 import products from "../../../db/products";
 
 const OurBestSeller = () => {
-  const dispatch = useDispatch(); // Redux dispatch kullanımı
+  const dispatch = useDispatch(); 
 
   const allProducts = products.filter((product) => product.id);
   const bestSellers = allProducts.filter((product) => product.bestSeller);
