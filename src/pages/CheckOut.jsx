@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import checkoutHeaderCart from "../assets/images/svg/checkoutHeaderCart.svg";
 
 const CheckOut = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -62,8 +64,30 @@ const CheckOut = () => {
     }
   };
 
+  window.addEventListener("scroll", function () {
+    var scroll = window.scrollY;
+
+    if (scroll > 65) {
+      document.querySelector(".checkoutSummary").style.top = "0";
+    } else {
+      document.querySelector(".checkoutSummary").style.top = "65px";
+    }
+  });
+
   return (
-    <section className="checkoutContainerHeader">
+    <section className="checkoutContainerHeaderCont">
+      <div className="checkoutContainerHeader">
+        <div className="container">
+          <div className="row">
+            <Link className="websiteNameCont" to="/">
+              <p className="websiteName">wonder-theme-beauty</p>
+            </Link>
+            <Link className="checkoutHeaderCart" to="">
+              <img src={checkoutHeaderCart} alt="Checkout Header Cart" />
+            </Link>
+          </div>
+        </div>
+      </div>
       <div className="checkoutContainer">
         <div className="checkoutForm">
           <div style={{ margin: "unset" }} className="container">
@@ -188,62 +212,95 @@ const CheckOut = () => {
                 />
                 {errors.zip && <span className="errorText">{errors.zip}</span>}
               </div>
+              
             </div>
-
+            <label>
+              <input
+                type="checkbox"
+                name="DeliverysaveInfo"
+                checked={formData.DeliverysaveInfo}
+                onChange={handleChange}
+              />{" "}
+            Save this information for next time
+            </label>
             <h2>Payment</h2>
-            <div className="inputErrorCont">
-              <input
-                type="text"
-                name="cardNumber"
-                placeholder="Card number"
-                value={formData.cardNumber}
-                onChange={handleChange}
-                className={errors.cardNumber ? "inputError" : ""}
-              />
-              {errors.cardNumber && (
-                <span className="errorText">{errors.cardNumber}</span>
-              )}
-            </div>
-            <div className="cardDetails">
-              <div className="inputErrorCont">
-                <input
-                  type="text"
-                  name="expiryDate"
-                  placeholder="Expiration date (MM / YY)"
-                  value={formData.expiryDate}
-                  onChange={handleChange}
-                  className={errors.expiryDate ? "inputError" : ""}
-                />
-                {errors.expiryDate && (
-                  <span className="errorText">{errors.expiryDate}</span>
-                )}
+            <div className="paymentCreditCart">
+              <div className="creditCardBlue">
+                <p>Credit card</p>
+                <div>
+                  <img
+                    src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/bogus.CIsYlO1z.svg"
+                    alt=""
+                  />
+                </div>
               </div>
-              <div className="inputErrorCont">
-                <input
-                  type="text"
-                  name="securityCode"
-                  placeholder="Security code"
-                  value={formData.securityCode}
-                  onChange={handleChange}
-                  className={errors.securityCode ? "inputError" : ""}
-                />
-                {errors.securityCode && (
-                  <span className="errorText">{errors.securityCode}</span>
-                )}
+              <div className="paymentContainer">
+                <div className="inputErrorCont">
+                  <input
+                    type="text"
+                    name="cardNumber"
+                    placeholder="Card number"
+                    value={formData.cardNumber}
+                    onChange={handleChange}
+                    className={errors.cardNumber ? "inputError" : ""}
+                  />
+                  {errors.cardNumber && (
+                    <span className="errorText">{errors.cardNumber}</span>
+                  )}
+                </div>
+
+                <div className="cardDetails">
+                  <div className="inputErrorCont">
+                    <input
+                      type="text"
+                      name="expiryDate"
+                      placeholder="Expiration date (MM / YY)"
+                      value={formData.expiryDate}
+                      onChange={handleChange}
+                      className={errors.expiryDate ? "inputError" : ""}
+                    />
+                    {errors.expiryDate && (
+                      <span className="errorText">{errors.expiryDate}</span>
+                    )}
+                  </div>
+                  <div className="inputErrorCont">
+                    <input
+                      type="text"
+                      name="securityCode"
+                      placeholder="Security code"
+                      value={formData.securityCode}
+                      onChange={handleChange}
+                      className={errors.securityCode ? "inputError" : ""}
+                    />
+                    {errors.securityCode && (
+                      <span className="errorText">{errors.securityCode}</span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="inputErrorCont">
+                  <input
+                    type="text"
+                    name="cardName"
+                    placeholder="Name on card"
+                    value={formData.cardName}
+                    onChange={handleChange}
+                    className={errors.cardName ? "inputError" : ""}
+                  />
+                  {errors.cardName && (
+                    <span className="errorText">{errors.cardName}</span>
+                  )}
+                </div>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="paymentsaveInfo"
+                    checked={formData.paymentsaveInfo}
+                    onChange={handleChange}
+                  />{" "}
+                  Use shipping address as billing address
+                </label>
               </div>
-            </div>
-            <div className="inputErrorCont">
-              <input
-                type="text"
-                name="cardName"
-                placeholder="Name on card"
-                value={formData.cardName}
-                onChange={handleChange}
-                className={errors.cardName ? "inputError" : ""}
-              />
-              {errors.cardName && (
-                <span className="errorText">{errors.cardName}</span>
-              )}
             </div>
             <button onClick={handleSubmit}>Pay now</button>
           </div>
@@ -274,14 +331,23 @@ const CheckOut = () => {
                 <p>${totalPrice.toFixed(2)}</p>
               </div>
               <div className="checkoutSubTotalCont">
-                <p>
-                Shipping
-                </p>
-                <p style={{color: "#666666"}}>Enter shipping address</p>
+                <p>Shipping</p>
+                <p style={{ color: "#666666" }}>Enter shipping address</p>
               </div>
               <div className="checkoutTotalCont">
                 <p>Total:</p>
-                <p><span style={{color: "#666666", fontSize: "13px", fontWeight: "400"}}>USD</span> ${totalPrice.toFixed(2)}</p>
+                <p>
+                  <span
+                    style={{
+                      color: "#666666",
+                      fontSize: "13px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    USD
+                  </span>{" "}
+                  ${totalPrice.toFixed(2)}
+                </p>
               </div>
             </div>
           </div>
