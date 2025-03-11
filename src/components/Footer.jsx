@@ -12,8 +12,8 @@ import plus from "../assets/images/svg/plus.svg";
 import minus from "../assets/images/svg/minus.svg";
 
 const Footer = () => {
-  const location = useLocation(); // URL-i almaq üçün
-  if (location.pathname === "/checkout") return null; // Əgər /checkout səhifəsindəyiksə, heç nə qaytarmırıq
+  const location = useLocation();
+  if (location.pathname === "/checkout") return null;
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
   const [openSections, setOpenSections] = useState({
