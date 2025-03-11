@@ -1,0 +1,209 @@
+@use "../mixins" as *;
+.productDetailContainer {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 80px;
+  padding: 40px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  .productGallery {
+    display: flex;
+    flex: 1;
+    align-items: flex-start;
+    justify-content: space-between;
+    .thumbnailContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .thumbnailImage {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover,
+        &.active {
+          border-color: #000000;
+          opacity: 0.8;
+        }
+      }
+    }
+    .mainImageContainer {
+      flex-grow: 1;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .mainImage {
+        width: 600px;
+        max-width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .prevButton,
+      .nextButton {
+        @include sliderPrevNext;
+        background-color: #fffc;
+      }
+
+      .prevButton {
+        left: 10px;
+      }
+
+      .nextButton {
+        right: 10px;
+      }
+      &:hover {
+        .prevButton,
+        .nextButton {
+          display: block;
+        }
+      }
+    }
+  }
+  .productInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+    gap: 15px;
+    .brandLogo {
+      font-size: 14px;
+      color: #666;
+    }
+    .productTitle {
+      @include styleText(#000000, 29px, 500, normal);
+    }
+
+    .productCode,
+    .productDescription {
+      font-size: 16px;
+      color: #666;
+    }
+    .priceContainer {
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      .oldPrice {
+        text-decoration: line-through;
+        color: #a00;
+      }
+      .newPrice {
+        @include styleText(#000000, 24px, 500, normal);
+      }
+    }
+
+    .counterAndBtn {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      justify-content: flex-start;
+      .counter {
+        border: 1px solid rgb(215, 215, 215);
+        padding: 16px 18px;
+        border-radius: 30px;
+        gap: 20px;
+        display: flex;
+        align-items: center;
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          user-select: none;
+        }
+        .plusminusImg {
+          width: 20px;
+          cursor: pointer;
+        }
+      }
+
+      .addToCartButton {
+        @include aboutUsBtn;
+        margin-top: 0px;
+        padding: 1rem 2rem;
+        width: 100%;
+        min-width: max-content;
+        white-space: nowrap;
+      }
+    }
+    .detailDescriptionList {
+      line-height: 0.8;
+      .detailDescription {
+        font-size: 17px;
+        display: flex;
+        font-weight: 400;
+        align-items: center;
+        gap: 10px;
+        span {
+          font-size: 30px;
+          color: #000000;
+        }
+      }
+    }
+
+    .featuresBanner {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      gap: 10px;
+      justify-content: start;
+
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .productDetailContainer {
+    .productGallery {
+      .thumbnailContainer {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .productDetailContainer {
+    flex-direction: column;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-from-right {
+  animation: slideInFromRight 0.5s ease-out;
+}
+
+.slide-from-left {
+  animation: slideInFromLeft 0.5s ease-out;
+}

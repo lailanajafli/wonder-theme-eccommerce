@@ -7,21 +7,23 @@ import cart from "../assets/images/svg/cart.svg";
 import DrawerMenu from "./DrawerMenu";
 import CartPage from "../components/CartPage";
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { toggleCartModal } from '../redux/slices/cartSlices';
 
 const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const isCheckoutPage = location.pathname === "/checkout";
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isCartPageOpen, setIsCartPageOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [videoHeight, setVideoHeight] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVideoPassed, setIsVideoPassed] = useState(false);
+  const dispatch = useDispatch();
+  const cartCount = useSelector((state) => state.cart.cartCount);
 
-const cartCount = useSelector((state) =>
-  state.cart.cart.reduce((total, item) => total + item.quantity, 0)
-)
+const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
+
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -70,6 +72,10 @@ const cartCount = useSelector((state) =>
     return null; 
   }
 
+  const openCartModal = () => {
+    dispatch(toggleCartModal());
+  };
+
   return (
     <>
       {isHomePage && (
@@ -91,7 +97,7 @@ const cartCount = useSelector((state) =>
           <div className="navTeaser">
             <img src={search} alt="search icon" />
             <img src={login} alt="login icon" />
-            <div className="cartIcon" onClick={() => setIsCartPageOpen(true)}>
+            <div className="cartIcon" onClick={openCartModal}>
               <img src={cart} alt="cart icon" />
               <span className="cartCount">{cartCount}</span>
             </div>
@@ -121,9 +127,10 @@ const cartCount = useSelector((state) =>
         <div className="navTeaser">
           <img src={search} alt="search icon" />
           <img src={login} alt="login icon" />
-          <div className="cartIcon" onClick={() => setIsCartPageOpen(true)}>
+          <div className="cartIcon"  onClick={openCartModal}>
             <img src={cart} alt="cart icon" />
-            <span className="cartCount">{cartCount}</span>
+            {cartCount > 0 && <span className="cartCount">{cartCount}</span>}
+
           </div>
         </div>
       </header>
@@ -135,8 +142,7 @@ const cartCount = useSelector((state) =>
       />
       {/* CartPage Menu */}
       <CartPage
-        isOpen={isCartPageOpen}
-        onClose={() => setIsCartPageOpen(false)}
+        isOpen={isCartModalOpen} onClose={() => dispatch(toggleCartModal())} 
       />
     </>
   );

@@ -7,7 +7,6 @@
     display: flex;
     width: 90%;
     gap: 10px;
-    flex-wrap: wrap;
     height: 380px;
     justify-content: space-between;
     
@@ -45,6 +44,7 @@
     .featuresBannerCont {
       padding: 10px;
       height: auto;
+      flex-wrap: wrap;
       
       .featuresBanner {
         width: 100%;

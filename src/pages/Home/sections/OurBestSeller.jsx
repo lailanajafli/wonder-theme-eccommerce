@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,27 +6,29 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { Navigation, Scrollbar } from "swiper/modules";
-import { addItem } from "../../../redux/slices/cartSlices";
+import { addItem, toggleCartModal } from "../../../redux/slices/cartSlices";
 import products from "../../../db/products";
 
 const OurBestSeller = () => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
-  const allProducts = products.filter((product) => product.id);
-  const bestSellers = allProducts.filter((product) => product.bestSeller);
+  const bestSellers = useMemo(() => {
+    return products.filter((product) => product.bestSeller);
+  }, []);
 
-  const checkIfNew = (created_at) => {
+  const checkIfNew = useCallback((created_at) => {
+    if (!created_at) return false;
     const currentDate = new Date();
     const productDate = new Date(created_at);
     const timeDifference = currentDate - productDate;
     const oneMonth = 30 * 24 * 60 * 60 * 1000;
-
     return timeDifference <= oneMonth;
-  };
+  }, []);
 
-  const handleAddToCart = (product) => {
-    dispatch(addItem(product));
-  };
+  const handleAddToCart = useCallback((product) => {
+    dispatch(addItem({ ...product, quantity: 1 }));
+    dispatch(toggleCartModal());
+  }, [dispatch]);
 
   return (
     <div className="bestsellersSection">
@@ -46,15 +48,11 @@ const OurBestSeller = () => {
       >
         {bestSellers.map((product) => (
           <SwiperSlide key={product.id} className="productCard">
-            {checkIfNew(product.created_at) && (
-              <span className="newLabel">New</span>
-            )}
+            {checkIfNew(product.created_at) && <span className="newLabel">New</span>}
             <div className="sliderProductCont">
-              <img
-                src={product.image}
-                alt={product.title}
-                className="productImage"
-              />
+              <Link to={`/detail/${product.id}`}>
+                <img src={product.image} alt={product.title} className="productImage" />
+              </Link>
               <button
                 onClick={() => handleAddToCart(product)}
                 className="chooseOption"
