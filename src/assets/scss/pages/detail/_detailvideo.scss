@@ -1,0 +1,65 @@
+@use "../mixins" as *;
+@use "../../components//routinecard";
+
+.detailVideoSection {
+  .videoContainer {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0 auto;
+
+    video {
+      width: 100%;
+      height: 90%;
+      object-fit: cover;
+    }
+
+    .playPauseBtn {
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      background-color: rgba(63, 64, 66, 0.45);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .detailVideoText {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .detailVideoTextMini {
+        color: white;
+        font-weight: 500;
+      }
+
+      .naturalIngredients {
+        text-align: center;
+        @include styleText(white, 75px, 500, normal);
+        
+        font-size: 5vw;  
+
+        &::before {
+          content: "100% Natural";
+          display: block;
+        }
+
+        &::after {
+          content: "Ingredients";
+          display: block;
+        }
+      }
+    }
+  } 
+}
