@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import DetailProduct from "../Detail/sections/DetailProduct";
 import Header from "../../components/Header";
-import Hero from "../Home/sections/Hero";
 import DetailVideo from "./sections/DetailVideo";
 import ProductHighLight from "./sections/ProductHighLight";
+import FeaturesBanner from "../Home/sections/FeaturesBanner";
+import AfterBeforeSlider from "./sections/AfterBeforeSlider";
 
 export default function Detail() {
   const [scrollY, setScrollY] = useState(0);
@@ -23,6 +24,8 @@ export default function Detail() {
       <DetailProduct />
       <DetailVideo/>
       <ProductHighLight/>
+      <FeaturesBanner/>
+      <AfterBeforeSlider/>
       </>
   );
 }

@@ -1,0 +1,81 @@
+.afterBeforeSection {
+    display: flex;
+    .sliderContainer {
+      position: relative;
+      width: 100%;
+      max-width: 60%;
+      overflow: hidden;
+      height: 90vh;
+      user-select: none;
+      .imageContainer {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        .afterImage,
+        .beforeImage {
+          height: 100%;
+          object-fit: cover;
+        }
+        .beforeImageContainer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          overflow: hidden;
+        }
+        .sliderHandle {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: #fff;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transform: translateX(-50%);
+          .sliderCircle {
+            width: 55px;
+            height: 55px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+              width: 37px;
+            }
+          }
+        }
+        .imageLabel {
+          position: absolute;
+          bottom: 10px;
+          font-size: 14px;
+          padding: 5px 10px;
+          background: rgba(255, 255, 255, 0.8);
+          border-radius: 5px;
+        }
+        
+        .beforeLabel {
+          left: 10px;
+          z-index: 50;
+        }
+        
+        .afterLabel {
+          right: 10px;
+        }
+      }
+    }
+    .afterBeforeLeftSide{
+background-color: #F7EFE3;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+    }
+}
+
+
+
+
