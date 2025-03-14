@@ -1,40 +1,62 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import leftRightIcon from "../../../assets/images/left-right-icon.png";
 
 const BeforeAfterSlider = ({ beforeSrc, afterSrc }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const sliderRef = useRef(null);
   const isDragging = useRef(false);
+  const lastTap = useRef(0);
+  const isTapDragging = useRef(false);
 
-  const handleMouseDown = (e) => {
-    isDragging.current = true;
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging.current || !sliderRef.current) return;
+  const updatePosition = (clientX) => {
+    if (!sliderRef.current) return;
     const { left, width } = sliderRef.current.getBoundingClientRect();
-    let clientX = e.clientX || (e.touches && e.touches[0].clientX);
     let newPosition = ((clientX - left) / width) * 100;
     newPosition = Math.max(0, Math.min(100, newPosition));
     setSliderPosition(newPosition);
   };
+
+  const handleMove = (e) => {
+    if ((!isDragging.current && !isTapDragging.current) || !sliderRef.current) return;
+    let clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+    if (clientX) updatePosition(clientX);
+  };
+
+  const handleDown = (e) => {
+    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+    if (clientX) updatePosition(clientX); // İlk tıklamada slider'ı hareket ettir
+
+    const currentTime = new Date().getTime();
+    if (currentTime - lastTap.current < 300) {
+      isTapDragging.current = true;
+    }
+    lastTap.current = currentTime;
+
+    isDragging.current = true;
+    document.addEventListener("pointermove", handleMove);
+    document.addEventListener("pointerup", handleUp);
+  };
+
+  const handleUp = () => {
+    isDragging.current = false;
+    isTapDragging.current = false;
+    document.removeEventListener("pointermove", handleMove);
+    document.removeEventListener("pointerup", handleUp);
+  };
+
+  useEffect(() => {
+    return () => {
+      document.removeEventListener("pointermove", handleMove);
+      document.removeEventListener("pointerup", handleUp);
+    };
+  }, []);
 
   return (
     <section className="afterBeforeSection">
       <div
         className="sliderContainer"
         ref={sliderRef}
-        onMouseMove={handleMouseMove}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchMove={handleMouseMove}
-        onTouchStart={handleMouseDown}
-        onTouchEnd={handleMouseUp}
+        onPointerDown={handleDown} // Tıklanan yere sliderı götür
       >
         <div className="imageContainer">
           <img
@@ -52,9 +74,13 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }) => {
               className="beforeImage"
             />
           </div>
-          <div className="sliderHandle" style={{ left: `${sliderPosition}%` }}>
+          <div
+            className="sliderHandle"
+            style={{ left: `${sliderPosition}%` }}
+            onPointerDown={handleDown} 
+          >
             <div className="sliderCircle">
-              <img src={leftRightIcon} alt="" />
+              <img src={leftRightIcon} alt="Slider Handle" />
             </div>
           </div>
           <div className="imageLabel beforeLabel">Before</div>
@@ -62,12 +88,14 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }) => {
         </div>
       </div>
       <div className="afterBeforeLeftSide">
-        <h2>We know you are unique.</h2>
+        <div className="afterBeforeLefText">
+        <h2 className="">We know you are unique.</h2>
         <p>
           Take care of your complexion to make it healthy and radiant. In the
           range of facial care products you will find creams, scrubs, masks,
           toners, gels and much more.
         </p>
+        </div>
       </div>
     </section>
   );
