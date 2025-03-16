@@ -10,8 +10,7 @@
     overflow: hidden;
     height: 85vh;
     width: 70%;
-    user-select: none;
-
+    -webkit-user-select: none;
     .imageContainer {
       position: relative;
       height: 100%;
@@ -20,7 +19,6 @@
       .beforeImage {
         height: 100%;
         object-fit: cover;
-        
       }
 
       .beforeImageContainer {
@@ -36,18 +34,17 @@
         top: 0;
         bottom: 0;
         width: 5px;
-        background: rgba(255, 255, 255, 0.8);
+        background: #ffffff;
         cursor: grab;
         display: flex;
         align-items: center;
         justify-content: center;
         transform: translateX(-50%);
-        transition: all 0.3s ease; 
 
         .sliderCircle {
           width: 50px;
-          height: 50px;
-          background: rgba(255, 255, 255, 0.9);
+          padding: 5px;
+          background: #ffffff;
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -65,10 +62,9 @@
         bottom: 15px;
         font-size: 15px;
         padding: 6px 12px;
-        background: rgba(255, 255, 255, 0.6);
+        background: #ffffff;
         color: #000000;
-        border-radius: 5px;
-        font-weight: bold;
+        border-radius: 25px;
       }
 
       .beforeLabel {
@@ -94,7 +90,7 @@
     text-align: center;
 
     .afterBeforeLefText {
-width: 68%;
+      width: 68%;
       h2 {
         margin-bottom: 10px;
         @include styleText(black, 48px, 500, normal);
@@ -105,14 +101,14 @@ width: 68%;
   // ✅ Tablet ve Küçük Ekranlar (900px ve altı)
   @media (max-width: 900px) {
     flex-direction: column;
-
+    width: 100%;
     .sliderContainer {
-      height: 60vh;
+      height: 100vh;
       width: 100%;
     }
 
     .afterBeforeLeftSide {
-      width: 90%;
+      width: 100%;
       padding: 25px;
 
       .afterBeforeLefText {
@@ -126,10 +122,10 @@ width: 68%;
   }
 
   // ✅ Mobil Ekranlar (600px ve altı)
-  @media (max-width: 600px) {
+  @media (max-width: 680px) {
     .sliderContainer {
-      height: 50vh;
-      width: 95%;
+      height: 80vh;
+      width: 100%;
 
       .sliderHandle {
         width: 6px;
@@ -153,6 +149,24 @@ width: 68%;
 
         h2 {
           font-size: 28px;
+        }
+      }
+    }
+  }
+
+  // ✅ Çok Küçük Ekranlar (400px ve altı)
+  @media (max-width: 450px) {
+    .sliderContainer {
+      height: 50vh;
+    }
+
+    .afterBeforeLeftSide {
+      padding: 15px;
+
+      .afterBeforeLefText {
+        width: 100%;
+        h2 {
+          font-size: 24px;
         }
       }
     }

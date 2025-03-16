@@ -5,6 +5,7 @@ import DetailVideo from "./sections/DetailVideo";
 import ProductHighLight from "./sections/ProductHighLight";
 import FeaturesBanner from "../Home/sections/FeaturesBanner";
 import AfterBeforeSlider from "./sections/AfterBeforeSlider";
+import DetailVogue from "./sections/DetailVogue";
 
 export default function Detail() {
   const [scrollY, setScrollY] = useState(0);
@@ -26,6 +27,7 @@ export default function Detail() {
       <ProductHighLight/>
       <FeaturesBanner/>
       <AfterBeforeSlider/>
+      <DetailVogue/>
       </>
   );
 }

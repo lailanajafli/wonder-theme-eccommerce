@@ -17,7 +17,8 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }) => {
   };
 
   const handleMove = (e) => {
-    if ((!isDragging.current && !isTapDragging.current) || !sliderRef.current) return;
+    if ((!isDragging.current && !isTapDragging.current) || !sliderRef.current)
+      return;
     let clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
     if (clientX) updatePosition(clientX);
   };
@@ -77,24 +78,24 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }) => {
           <div
             className="sliderHandle"
             style={{ left: `${sliderPosition}%` }}
-            onPointerDown={handleDown} 
+            onPointerDown={handleDown}
           >
             <div className="sliderCircle">
               <img src={leftRightIcon} alt="Slider Handle" />
             </div>
           </div>
-          <div className="imageLabel beforeLabel">Before</div>
-          <div className="imageLabel afterLabel">After</div>
+          {/* <div className="imageLabel beforeLabel">Before</div>
+          <div className="imageLabel afterLabel">After</div> */}
         </div>
       </div>
       <div className="afterBeforeLeftSide">
         <div className="afterBeforeLefText">
-        <h2 className="">We know you are unique.</h2>
-        <p>
-          Take care of your complexion to make it healthy and radiant. In the
-          range of facial care products you will find creams, scrubs, masks,
-          toners, gels and much more.
-        </p>
+          <h2 className="">We know you are unique.</h2>
+          <p>
+            Take care of your complexion to make it healthy and radiant. In the
+            range of facial care products you will find creams, scrubs, masks,
+            toners, gels and much more.
+          </p>
         </div>
       </div>
     </section>
