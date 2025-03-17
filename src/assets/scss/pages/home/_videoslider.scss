@@ -88,6 +88,21 @@
             object-fit: cover;
             width: 100%;
           }
+          .detailSliderTextCont{
+            text-align: center;
+            .detailSliderTextTitle{
+font-weight: 700;
+font-size: 17px;
+margin-bottom: 10px;
+            }
+            .detailSliderTextDesc{
+              font-size: 15px;
+              font-weight: 500;
+              line-height: 25px;
+              word-spacing: 1.2px;
+
+            }
+          }
         }
       }
     }

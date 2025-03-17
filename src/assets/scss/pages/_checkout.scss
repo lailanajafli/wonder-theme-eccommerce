@@ -222,10 +222,11 @@
 @media (max-width: 968px) {
   .checkoutContainerHeaderCont {
     .checkoutContainer {
-      flex-direction: column;
+      flex-direction: column-reverse;
       .checkoutForm,
       .checkoutSummary {
         width: 100%;
+        position: static;
         justify-content: center;
       }
     }
@@ -234,10 +235,9 @@
 @media (max-width: 568px) {
   .checkoutContainerHeaderCont {
     .checkoutContainer {
-      flex-direction: column;
+      flex-direction: column-reverse;
       .checkoutForm,
       .checkoutSummary {
-        padding: 1px;
         width: 100%;
         justify-content: center;
         .nameFields,

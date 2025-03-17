@@ -96,7 +96,6 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
           </div>
           <div className="navTeaser">
             <img src={search} alt="search icon" />
-            <img src={login} alt="login icon" />
             <div className="cartIcon" onClick={openCartModal}>
               <img src={cart} alt="cart icon" />
               <span className="cartCount">{cartCount}</span>
@@ -126,7 +125,6 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
         </div>
         <div className="navTeaser">
           <img src={search} alt="search icon" />
-          <img src={login} alt="login icon" />
           <div className="cartIcon"  onClick={openCartModal}>
             <img src={cart} alt="cart icon" />
             {cartCount > 0 && <span className="cartCount">{cartCount}</span>}

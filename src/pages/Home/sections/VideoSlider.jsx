@@ -3,10 +3,39 @@ import { ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import RoutineCard from "../../../components/RoutineCard";
 import products from "../../../db/products";
 
-export default function VideoSlider() {
-  const filteredProducts = products.filter(
-    (product) => product.productVideo
-  );
+export default function VideoSlider({ style, showRoutineCard = true, useStaticData = false, title= "Best Skincare Products" }) {
+  const staticProducts = [
+    {
+      id: 1,
+      productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/5260809aed13475683dc2a595bd383f3/5260809aed13475683dc2a595bd383f3.HD-1080p-2.5Mbps-38609087.mp4?v=0",
+      image: "image1.jpg",
+      title: "Cleanse",
+      description: "Wash your face with a gentle cleanser to remove dirt and oil."
+    },
+    {
+      id: 2,
+      productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/ae5a7ac3efcf47f58774352d8df0e0e8/ae5a7ac3efcf47f58774352d8df0e0e8.HD-1080p-2.5Mbps-38609088.mp4?v=0",
+      title: "Moisturize",
+      description: "Use a rich moisturizer based on your skin type."
+    },
+    {
+      id: 3,
+      productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/b57ae292fe77451eab209f3991b09bf2/b57ae292fe77451eab209f3991b09bf2.HD-1080p-2.5Mbps-38609089.mp4?v=0",
+      title: "Massage",
+      description: "Use your fingertips in circular motions to clean thoroughly without over-scrubbing."
+    },
+    {
+      id: 4,
+      productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/940c2b7570244388b421df338a0f62d3/940c2b7570244388b421df338a0f62d3.HD-1080p-2.5Mbps-38609090.mp4?v=0",
+      title: "Eye Care",
+      description: "Gently apply a small amount of eye cream under your eyes."
+    }
+  ];
+
+  const filteredProducts = useStaticData
+    ? staticProducts
+    : products.filter((product) => product.productVideo);
+
   const originalLength = filteredProducts.length;
 
   const extendedProducts = useMemo(() => {
@@ -22,7 +51,7 @@ export default function VideoSlider() {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
-  const slideWidth = 300; 
+  const slideWidth = 300;
   const gap = 20;
 
   const dragStartRef = useRef(0);
@@ -67,15 +96,15 @@ export default function VideoSlider() {
   };
 
   const handleTransitionEnd = () => {
-    if (currentIndex < originalLength) {
+    if (currentIndex >= 2 * originalLength) {
       setTransitionEnabled(false);
-      setCurrentIndex((prev) => prev + originalLength);
+      setCurrentIndex(originalLength);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setTransitionEnabled(true));
       });
-    } else if (currentIndex >= 2 * originalLength) {
+    } else if (currentIndex <= originalLength - 1) {
       setTransitionEnabled(false);
-      setCurrentIndex((prev) => prev - originalLength);
+      setCurrentIndex(2 * originalLength - 1);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setTransitionEnabled(true));
       });
@@ -93,13 +122,13 @@ export default function VideoSlider() {
 
   const handlePointerDown = (e) => {
     isDraggingRef.current = true;
-    dragStartRef.current = e.clientX || e.touches[0].clientX;
+    dragStartRef.current = e.clientX || e.touches[0]?.clientX;
     setTransitionEnabled(false);
   };
 
   const handlePointerMove = (e) => {
     if (!isDraggingRef.current) return;
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
     const delta = clientX - dragStartRef.current;
     setDragOffset(delta);
   };
@@ -118,12 +147,9 @@ export default function VideoSlider() {
   };
 
   return (
-    <div className="videoReels">
-      <button className="prevButton" onClick={handlePrev}>
-        <ChevronLeft />
-      </button>
+    <div className="videoReels" style={style}>
       <div className="videosContainer" ref={containerRef}>
-        <p className="bestSkincareText">Best Skincare Products</p>
+        <p className="bestSkincareText">{title}</p>
         <div
           className="videosWrapper"
           style={{
@@ -154,7 +180,9 @@ export default function VideoSlider() {
             >
               <div
                 className={`videoSlide ${
-                  index % originalLength === realActiveIndex ? "active" : "inactive"
+                  index % originalLength === realActiveIndex
+                    ? "active"
+                    : "inactive"
                 }`}
                 onClick={() => {
                   const targetIndex = originalLength + (index % originalLength);
@@ -168,23 +196,32 @@ export default function VideoSlider() {
                   muted={muted}
                   style={{ width: "100%" }}
                 />
-                {index % originalLength === realActiveIndex && (
-                  <RoutineCard
-                    brand={product.brand}
-                    imageUrl={product.image}
-                    name={product.title}
-                    price={`${"$"}${product.price} `}
-                    style={{ border: "1px solid #c9c9c975", width: "auto" }}
-                  />
-                )}
-              </div>  
+                {index % originalLength === realActiveIndex &&
+                  (showRoutineCard ? (
+                    <RoutineCard
+                      brand={product.brand}
+                      imageUrl={product.image}
+                      name={product.title}
+                      price={`${"$"}${product.price} `}
+                      style={{ border: "1px solid #c9c9c975", width: "auto" }}
+                    />
+                  ) : (
+                    <div className="detailSliderTextCont">
+                       <p className="detailSliderTextTitle">{product.title}</p>
+                      <p className="detailSliderTextDesc">{product.description}</p>
+                    </div>
+                  ))}
+              </div>
             </div>
           ))}
         </div>
+        <button className="prevButton" onClick={handlePrev}>
+          <ChevronLeft />
+        </button>
+        <button className="nextButton" onClick={handleNext}>
+          <ChevronRight />
+        </button>
       </div>
-      <button className="nextButton" onClick={handleNext}>
-        <ChevronRight />
-      </button>
     </div>
   );
 }

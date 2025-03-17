@@ -40,7 +40,7 @@ export default function Home() {
       <DailyRoutine />
       <OurBestSeller />
       <TwoSlideShow />
-      <VideoSlider />
+      <VideoSlider/>
       <PerfectHair />
       <ColorfulBack/>
       <SkinDetails/>
