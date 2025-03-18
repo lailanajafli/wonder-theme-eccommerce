@@ -89,9 +89,9 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
               onClick={() => setIsDrawerOpen(true)}
             />
             <nav className="navBar">
-              <Link to="/shop">Shop</Link>
-              <Link to="/bestseller">Bestseller</Link>
-              <Link to="/sale">Sale</Link>
+            <a onClick={() => setIsDrawerOpen(true)}>Shop</a>
+            <a onClick={() => setIsDrawerOpen(true)}>Bestseller</a>
+            <a>Sale</a>
             </nav>
           </div>
           <div className="navTeaser">
@@ -112,9 +112,9 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
             onClick={() => setIsDrawerOpen(true)}
           />
           <nav className="navBar">
-            <Link to="/shop">Shop</Link>
-            <Link to="/bestseller">Bestseller</Link>
-            <Link to="/sale">Sale</Link>
+            <a onClick={() => setIsDrawerOpen(true)}>Shop</a>
+            <a onClick={() => setIsDrawerOpen(true)}>Bestseller</a>
+            <a >Sale</a>
           </nav>
         </div>
         <div className="headerBeauty">

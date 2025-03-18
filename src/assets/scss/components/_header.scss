@@ -22,6 +22,7 @@
 
     img {
       filter: invert(0);
+      cursor: pointer;
       width: 30px;
     }
 
@@ -95,11 +96,13 @@
 
     img {
       filter: invert(1);
+      cursor: pointer;
       width: 30px;
     }
 
     .navBar a {
       color: #151515;
+      cursor: pointer;
       margin: 0 10px;
       @include linkHover(#000000, #000000);
     }
@@ -151,6 +154,7 @@
   a {
     text-decoration: none;
     font-size: 18px;
+    cursor: pointer;
   }
 }
  @media (max-width: 1024px) {

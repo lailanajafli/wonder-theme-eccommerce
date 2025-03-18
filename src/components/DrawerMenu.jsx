@@ -4,6 +4,7 @@ import plus from "../assets/images/svg/plus.svg";
 import minus from "../assets/images/svg/minus.svg";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Link } from "react-router-dom";
 
 const draweProducts = [
   { name: "Firming face serum Orange", image: "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/mokosh-1.jpg?v=1673362597&width=800" },
@@ -44,15 +45,15 @@ const DrawerMenu = ({ isOpen, onClose, title = "Shop By", drawerStyle = {} }) =>
               </span>
             </li>
             {activeCategory === "shop" && (
-              <ul className="subCategoryItems">
-                <li><span>Face Care</span></li>
-                <li><span>Body Care</span></li>
-                <li><span>Bath & Body</span></li>
-                <li><span>Hair Care</span></li>
-                <li><span>Hand Care</span></li>
-                <li><span>Essential oils</span></li>
-              </ul>
-            )}
+        <ul className="subCategoryItems">
+          <Link to="/shop/face-care"><li><span>Face Care</span></li></Link>
+          <Link to="/shop/body-care"><li><span>Body Care</span></li></Link>
+          <Link to="/shop/bath-body"><li><span>Bath & Body</span></li></Link>
+          <Link to="/shop/hair-care"><li><span>Hair Care</span></li></Link>
+          <Link to="/shop/hand-care"><li><span>Hand Care</span></li></Link>
+          <Link to="/shop/essential-oils"><li><span>Essential Oils</span></li></Link>
+        </ul>
+      )}
             <li className={`subCategoryListLi ${activeCategory === "bestseller" ? "active" : ""}`} onClick={() => toggleCategory("bestseller")}>
               <p>Bestseller</p>
               <span className={`expandIcon ${activeCategory === "bestseller" ? "active" : ""}`}>

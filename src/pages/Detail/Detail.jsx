@@ -10,8 +10,6 @@ import DetailAboutMokosh from "./sections/DetailAboutMokosh";
 import NewsletterBanner from "../Home/sections/NewsletterBanner";
 import VideoSlider from "../Home/sections/VideoSlider";
 
-// import DetailWomenSlider from "./sections/DetailWomenSlider";
-
 export default function Detail() {
   const [scrollY, setScrollY] = useState(0);
 

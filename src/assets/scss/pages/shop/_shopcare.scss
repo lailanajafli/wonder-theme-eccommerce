@@ -1,0 +1,36 @@
+@use "../mixins" as *;
+
+.shopCareSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+
+  .shopCarecontent {
+    width: 100%;
+    text-align: left;
+    margin-left: 5%;
+  }
+
+  h2 {
+@include styleText(black, 45px, 500, normal);
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #000000;
+    line-height: 27px;
+    font-weight: 500;
+    word-spacing: 1px;
+  }
+
+  .imageContainer {
+
+    img {
+      width: 100%;
+    }
+  }
+}

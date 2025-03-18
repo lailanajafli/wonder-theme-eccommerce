@@ -14,6 +14,9 @@
 // Pages
 @use "./pages/shop";
 @use "./pages/checkout";
+
+
+// Detail Pages
 @use "./pages//detail//detail";
 @use "./pages/detail/detailproduct";
 @use "./pages/detail/detailvideo";
@@ -21,9 +24,10 @@
 @use "./pages/detail/afterbeforeslider";
 @use "./pages/detail/detailvogue";
 @use "./pages/detail/detailaboutmokosh";
-@use "./pages/detail/detailwomenslider";
 
 
+// Shop Pages
+@use "./pages//shop//shopcare";
 
 
 // Home Sections
