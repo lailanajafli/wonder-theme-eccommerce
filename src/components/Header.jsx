@@ -98,7 +98,7 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
             <img src={search} alt="search icon" />
             <div className="cartIcon" onClick={openCartModal}>
               <img src={cart} alt="cart icon" />
-              <span className="cartCount">{cartCount}</span>
+              {cartCount > 0 && <span className="cartCount">{cartCount}</span>}
             </div>
           </div>
         </header>

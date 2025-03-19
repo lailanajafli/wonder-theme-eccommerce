@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 25px 50px;
+  padding: 25px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,7 +29,8 @@
     .navBar a {
       color: rgb(255, 255, 255);
       text-decoration: none;
-      margin: 0 10px;
+      font-size: 16px;
+      margin: 0 3px;
       transition: color 0.3s ease;
       @include linkHover(#fff, #fff, rgb(255, 255, 255));
     }
@@ -42,22 +43,21 @@
       width: 28px;
       cursor: pointer;
     }
-    .cartIcon{
+    .cartIcon {
       position: relative;
-      img{
-        
+      img {
       }
-    .cartCount{
-      position: absolute;
-      top: 14px;
-      right: -10px;
-      background: #000000;
-      color: #fff;
-      border-radius: 50%;
-      padding: 2px 5px;
-      font-size: 12px;
-      font-weight: 500;
-    }
+      .cartCount {
+        position: absolute;
+        top: 14px;
+        right: -10px;
+        background: #000000;
+        color: #fff;
+        border-radius: 50%;
+        padding: 2px 5px;
+        font-size: 12px;
+        font-weight: 500;
+      }
     }
   }
 }
@@ -79,7 +79,7 @@
   top: 0;
   width: 100%;
   border-bottom: 1px solid rgba(190, 190, 190, 0.386);
-  padding: 25px 50px;
+  padding: 25px 30px;
   background-color: #ffffff;
   color: #151515;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -103,7 +103,8 @@
     .navBar a {
       color: #151515;
       cursor: pointer;
-      margin: 0 10px;
+      font-size: 16px;
+      margin: 0 3px;
       @include linkHover(#000000, #000000);
     }
   }
@@ -115,22 +116,21 @@
       cursor: pointer;
       width: 28px;
     }
-    .cartIcon{
+    .cartIcon {
       position: relative;
-      img{
-        
+      img {
       }
-    .cartCount{
-      position: absolute;
-      top: 14px;
-      right: -10px;
-      background: #000000;
-      color: #fff;
-      border-radius: 50%;
-      padding: 2px 5px;
-      font-size: 12px;
-      font-weight: 500;
-    }
+      .cartCount {
+        position: absolute;
+        top: 14px;
+        right: -10px;
+        background: #000000;
+        color: #fff;
+        border-radius: 50%;
+        padding: 2px 5px;
+        font-size: 12px;
+        font-weight: 500;
+      }
     }
   }
 }
@@ -157,8 +157,13 @@
     cursor: pointer;
   }
 }
- @media (max-width: 1024px) {
+@media (max-width: 1024px) {
   .navBar {
-display: none;
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .header, .headerVideo {
+   padding: 25px 17px;
   }
 }

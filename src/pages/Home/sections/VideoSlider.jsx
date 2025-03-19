@@ -276,26 +276,26 @@ export default function VideoSlider({ style, showRoutineCard = true, useStaticDa
       description: "Gently apply a small amount of eye cream under your eyes."
     },
     {
-      id: 1,
+      id: 5,
       productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/5260809aed13475683dc2a595bd383f3/5260809aed13475683dc2a595bd383f3.HD-1080p-2.5Mbps-38609087.mp4?v=0",
       image: "image1.jpg",
       title: "Cleanse",
       description: "Wash your face with a gentle cleanser to remove dirt and oil."
     },
     {
-      id: 2,
+      id: 6,
       productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/ae5a7ac3efcf47f58774352d8df0e0e8/ae5a7ac3efcf47f58774352d8df0e0e8.HD-1080p-2.5Mbps-38609088.mp4?v=0",
       title: "Moisturize",
       description: "Use a rich moisturizer based on your skin type."
     },
     {
-      id: 3,
+      id: 7,
       productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/b57ae292fe77451eab209f3991b09bf2/b57ae292fe77451eab209f3991b09bf2.HD-1080p-2.5Mbps-38609089.mp4?v=0",
       title: "Massage",
       description: "Use your fingertips in circular motions to clean thoroughly without over-scrubbing."
     },
     {
-      id: 4,
+      id: 8,
       productVideo: "https://wonder-theme-beauty.myshopify.com/cdn/shop/videos/c/vp/940c2b7570244388b421df338a0f62d3/940c2b7570244388b421df338a0f62d3.HD-1080p-2.5Mbps-38609090.mp4?v=0",
       title: "Eye Care",
       description: "Gently apply a small amount of eye cream under your eyes."

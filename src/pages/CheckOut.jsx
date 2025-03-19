@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import checkoutHeaderCart from "../assets/images/svg/checkoutHeaderCart.svg";
+import { Slide, toast } from "react-toastify";
 
 const CheckOut = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -60,7 +61,17 @@ const CheckOut = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      alert("Payment Successful!");
+      toast.success('Payment Successful!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+        });
     }
   };
 

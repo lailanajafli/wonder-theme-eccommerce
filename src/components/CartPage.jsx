@@ -6,7 +6,11 @@ import grayminus from "../assets/images/svg/grayminus.svg";
 import grayplus from "../assets/images/svg/grayplus.svg";
 import binImg from "../assets/images/svg/bin.svg";
 import cartSvg from "../assets/images/svg/cart.svg";
-import { removeItem, increaseDecrease, toggleCartModal } from "../redux/slices/cartSlices";
+import {
+  removeItem,
+  increaseDecrease,
+  toggleCartModal,
+} from "../redux/slices/cartSlices";
 
 const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
   const dispatch = useDispatch();
@@ -38,13 +42,18 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
   };
 
   return (
-    <CustomModal isOpen={isCartModalOpen} onClose={closeModal} title={title} style={modalStyle}> 
+    <CustomModal
+      isOpen={isCartModalOpen}
+      onClose={closeModal}
+      title={title}
+      style={modalStyle}
+    >
       <div className="cartPageContainer">
         {cart.length === 0 ? (
           <div className="emptyCart">
             <img className="emptyCartSvg" src={cartSvg} alt="cart" />
             <p className="emptyCartTextP">Your cart is empty.</p>
-            <Link to="/" className="emptyCartLink">
+            <Link to="/" className="emptyCartLink" onClick={closeModal}>
               <p>CONTINUE SHOPPING</p>
             </Link>
           </div>
@@ -63,7 +72,9 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
                       className="plusminusImg"
                       onClick={() => {
                         if (item.quantity > 1) {
-                          dispatch(increaseDecrease({ id: item.id, type: "decrement" }));
+                          dispatch(
+                            increaseDecrease({ id: item.id, type: "decrement" })
+                          );
                         } else {
                           dispatch(removeItem(item.id));
                         }
@@ -75,7 +86,9 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
                       alt="grayplus"
                       className="plusminusImg"
                       onClick={() =>
-                        dispatch(increaseDecrease({ id: item.id, type: "increment" }))
+                        dispatch(
+                          increaseDecrease({ id: item.id, type: "increment" })
+                        )
                       }
                     />
                   </div>
@@ -98,8 +111,13 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
             <p className="subtotalText">Subtotal</p>
             <p className="totalPrice">${totalPrice.toFixed(2)} USD</p>
           </div>
-          <Link to="/checkout">
-            <button className="checkoutButton">
+          <Link to="/checkout" onClick={closeModal}>
+            <button
+              className={`checkoutButton ${
+                cart.length === 0 ? "disabled" : ""
+              }`}
+              disabled={cart.length === 0}
+            >
               <span>CHECKOUT</span>
             </button>
           </Link>

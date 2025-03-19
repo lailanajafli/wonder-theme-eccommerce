@@ -7,6 +7,7 @@ import CheckOut from "../pages/CheckOut";
 import Detail from "../pages/Detail/Detail";
 import DetailProduct from "../pages/Detail/sections/DetailProduct";
 import ShopCare from "../pages/Shop/sections/ShopCare";
+import { ToastContainer } from "react-toastify";
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
         </Routes>
       </main>
       <Footer />
+      <ToastContainer />
     </>
   );
 };
