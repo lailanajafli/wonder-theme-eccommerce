@@ -111,6 +111,7 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
             <p className="subtotalText">Subtotal</p>
             <p className="totalPrice">${totalPrice.toFixed(2)} USD</p>
           </div>
+          <p className="cartInfoBottom">Shipping & taxes calculated at checkout</p>
           <Link to="/checkout" onClick={closeModal}>
             <button
               className={`checkoutButton ${

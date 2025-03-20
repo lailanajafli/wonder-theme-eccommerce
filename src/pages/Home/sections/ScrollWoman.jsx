@@ -11,7 +11,7 @@ const ScrollWoman = () => {
       scrollTrigger: {
         trigger: ".landingSection",
         start: "center center",
-        end: "+=310%",
+        end: "+=200%",
         pin: true,
         pinSpacing: false,
         scrub: 0.1, // Daha yavaş senkronizasyon
