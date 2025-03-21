@@ -1,36 +1,38 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import RoutineCard from "../../../components/RoutineCard";
+import { useDispatch } from "react-redux";
+import { addItem, toggleCartModal } from "../../../redux/slices/cartSlices"; // 🔹 Redux Action-ları import edildi
 
 const products = [
   {
     id: 1,
     brand: "BKIND",
-    name: "Algae Peel-Off Mask",
+    title: "Algae Peel-Off Mask",
     price: 115.0,
     currency: "USD",
-    imageUrl:
+    image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/bkind-floral-face-2_718634ed-72d4-47b3-98aa-ab26bbc66519.jpg?v=1661113363&width=4096",
     displayTime: 0,
   },
   {
     id: 2,
     brand: "MOKOSH",
-    name: "Active Toning Essence",
+    title: "Active Toning Essence",
     price: 59.0,
     currency: "USD",
-    imageUrl:
+    image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/esencja-Roza-PL.jpg?v=1660223483&width=1200",
     displayTime: 6,
   },
   {
     id: 3,
     brand: "MOKOSH",
-    name: "Figa Smoothing Face Cream",
+    title: "Figa Smoothing Face Cream",
     price: 70.0,
     currency: "USD",
-    imageUrl:
+    image:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/mokosh_eb6f0013-4fcc-4f5e-8693-7200be74e429.jpg?v=1661021258&width=600",
     displayTime: 14,
   },
@@ -44,10 +46,11 @@ const formatPrice = (price, currency) => {
 };
 
 const DailyRoutine = () => {
+  const dispatch = useDispatch();
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [visibleProductIndex, setVisibleProductIndex] = useState(0);
-
+                                                                                                          
   const togglePlayPause = () => {
     if (videoRef.current.paused) {
       videoRef.current.play();
@@ -82,6 +85,18 @@ const DailyRoutine = () => {
     };
   }, []);
 
+  const handleAddToCart = useCallback((product) => {
+    dispatch(addItem({ 
+      id: product.id,
+      brand: product.brand,
+      title: product.title,  
+      price: product.price,
+      image: product.image,
+      quantity: 1
+    }));
+    dispatch(toggleCartModal());
+  }, [dispatch]);
+
   return (
     <section className="dailyRoutineSection">
       <p className="yourDailyText">Your Daily Routine</p>
@@ -101,19 +116,21 @@ const DailyRoutine = () => {
           className={`productsSlider ${
             visibleProductIndex >= 0 ? "visible" : ""
           }`}
-        > 
+        >
           {products.map((product, index) => (
-            <RoutineCard
-              key={product.id}
-              product={product}
-              brand={product.brand}
-              imageUrl={product.imageUrl}
-              name={product.name}
-              price={formatPrice(product.price, product.currency)}
-              style={{
-                transform: `translateX(${(index / 25 - visibleProductIndex) * 350}px)`,
-              }}
-            />
+           <RoutineCard
+           key={product.id}
+           product={product}
+           brand={product.brand}
+           image={product.image}
+           title={product.title}
+           price={formatPrice(product.price, product.currency)}
+           style={{
+             transform: `translateX(${(index / 25 - visibleProductIndex) * 350}px)`,
+           }}
+           onCartClick={() => handleAddToCart(product)} // 🔹 Buraya əlavə et
+         />
+         
           ))}
         </div>
       </div>

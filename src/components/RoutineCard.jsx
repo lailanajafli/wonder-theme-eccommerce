@@ -3,34 +3,42 @@ import { Link } from "react-router-dom";
 import cart from "../../src/assets/images/svg/cart.svg";
 
 const RoutineCard = ({
+  product,
+  id,
   brand,
-  imageUrl,
+  image,
   border,
-  name,
+  title,
   price,
   style = {},
   className = "",
-  linkTo = "/shop",
   showCartIcon = true,
   onCardClick = () => {},
+  onCartClick = () => {},
 }) => {
+  const handleCartClick = (event) => {
+    event.stopPropagation(); 
+    event.preventDefault(); 
+    onCartClick(); 
+  };
+
   return (
     <Link
-      to={linkTo}
+    to={`/detail/${product?.id}`}
       onClick={onCardClick}
       className={`routineCard ${className}`}
       style={style}
     >
       <div className="dailyMiniImg">
-        <img src={imageUrl} alt={name} />
+        <img src={image} alt={title} />
       </div>
       <div className="productInfo">
         <h3>{brand}</h3>
-        <p>{name}</p>
+        <p>{title}</p>
         <span>{price}</span>
       </div>
       {showCartIcon && (
-        <div className="cartDailyIcon">
+        <div onClick={handleCartClick} className="cartDailyIcon">
           <img src={cart} alt="Add to cart" />
         </div>
       )}

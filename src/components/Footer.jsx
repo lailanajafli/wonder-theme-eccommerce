@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom"; // useLocation əlavə etdik
+import { Link, useLocation } from "react-router-dom";
 import visa from "../assets/images/svg/visa.svg";
 import mastercard from "../assets/images/svg/mastercard.svg";
 import american from "../assets/images/svg/american.svg";
@@ -41,11 +41,11 @@ const Footer = () => {
       <div className="footerContainer">
         {Object.entries({
           Categories: [
-            { name: "Bath & Body", path: "/bath-body" },
-            { name: "Body Care", path: "/body-care" },
-            { name: "Face Care", path: "/face-care" },
-            { name: "Hair Care", path: "/hair-care" },
-            { name: "Hand Care", path: "/hand-care" },
+            { name: "Bath & Body", path: "/shop/bath-body" },
+            { name: "Body Care", path: "/shop/body-care" },
+            { name: "Face Care", path: "/shop/face-care" },
+            { name: "Hair Care", path: "/shop/hair-care" },
+            { name: "Hand Care", path: "/shop/hand-care" },
             { name: "Essential oils", path: "/essential-oils" },
             { name: "Sale %", path: "/sale" },
           ],
@@ -60,7 +60,10 @@ const Footer = () => {
             { name: "About us", path: "/about" },
           ],
         }).map(([section, links]) => (
-          <div className={`footerColumn ${openSections[section] ? "open" : ""}`} key={section}>
+          <div
+            className={`footerColumn ${openSections[section] ? "open" : ""}`}
+            key={section}
+          >
             <div
               onClick={() => isMobile && toggleSection(section)}
               className="footerColumnRes"
@@ -110,10 +113,18 @@ const Footer = () => {
 
       <div className="footerBottom">
         <div className="socialIcons">
-          <FaFacebookF />
-          <FaXTwitter />
-          <FaInstagram />
-          <FaPinterestP />
+          <Link target="blank" to="https://www.facebook.com/">
+            <FaFacebookF />
+          </Link>
+          <Link target="blank" to="https://x.com/">
+            <FaXTwitter />
+          </Link>
+          <Link target="blank" to="https://www.instagram.com/">
+            <FaInstagram />
+          </Link>
+          <Link target="blank" to="https://pl.pinterest.com/">
+            <FaPinterestP />
+          </Link>
         </div>
 
         <div className="paymentMethods">

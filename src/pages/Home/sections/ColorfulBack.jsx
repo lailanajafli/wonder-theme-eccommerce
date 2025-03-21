@@ -39,23 +39,35 @@ const ColorfulBack = () => {
           activeSection !== null ? sections[activeSection].hoverColor : "#fff",
       }}
     >
-      <p style={{marginTop: "50px", marginBottom: "20px"}}>Popular Collection</p>
+      <p style={{ marginTop: "50px", marginBottom: "20px" }}>
+        Popular Collection
+      </p>
       <div className="contentContainer">
-        {sections.map((section, index) => (
-          <div
-            key={index}
-            className="contentItem"
-            onMouseEnter={() => setActiveSection(index)}
-            onMouseLeave={() => setActiveSection(null)}
-          >
-            <Link className="link" >
-              <h2 className="textItem">{section.text}</h2>
-            </Link>
-            <div className="imageContainer">
-              <img src={section.image} alt={section.text} />
+        {sections.map((section, index) => {
+          // URL formatına uyğun olaraq `text` dəyərini çevirmək
+          const formattedText = section.text
+            .toLowerCase()
+            .replace(/ & /g, "-")
+            .replace(/\s+/g, "-");
+
+          return (
+            <div
+              key={index}
+              className="contentItem"
+              onMouseEnter={() => setActiveSection(index)}
+              onMouseLeave={() => setActiveSection(null)}
+            >
+              <Link className="link" to={`/shop/${formattedText}`}>
+                <h2 className="textItem">{section.text}</h2>
+              </Link>
+              <div className="imageContainer">
+                <Link to={`/shop/${formattedText}`}>
+                  <img src={section.image} alt={section.text} />
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

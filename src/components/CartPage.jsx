@@ -59,11 +59,16 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
           </div>
         ) : (
           <ul className="cartList">
-            {cart.map((item) => (
-              <li className="cartItem" key={item.id}>
+            {cart.map((item, index) => (
+              <li className="cartItem" key={item.id || index}>
                 <div className="cartProductImg">
-                  <img src={item.image} alt={item.name} />
+                  <img src={item.image} alt={item.title} />
                 </div>
+                <div className="cartProductNameContTop">
+                <h4 className="cartProductName">
+                  <Link>{item.title}</Link>
+                </h4>
+                <div className="counterAndPrice">
                 <div className="counterBin">
                   <div className="counter">
                     <img
@@ -99,9 +104,9 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
                     onClick={() => dispatch(removeItem(item.id))}
                   />
                 </div>
-                <span className="cartProductPrice">
-                  ${item.price.toFixed(2)}
-                </span>
+                <span className="cartProductPrice">${item.price}</span>
+                </div>
+                </div>
               </li>
             ))}
           </ul>
@@ -111,7 +116,9 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
             <p className="subtotalText">Subtotal</p>
             <p className="totalPrice">${totalPrice.toFixed(2)} USD</p>
           </div>
-          <p className="cartInfoBottom">Shipping & taxes calculated at checkout</p>
+          <p className="cartInfoBottom">
+            Shipping & taxes calculated at checkout
+          </p>
           <Link to="/checkout" onClick={closeModal}>
             <button
               className={`checkoutButton ${

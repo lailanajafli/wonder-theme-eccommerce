@@ -92,10 +92,12 @@ const SkinDetails = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <RoutineCard
+            key={selectedProduct.id}
+            product={selectedProduct}
             brand={selectedProduct.brand}
-            imageUrl={selectedProduct.imageUrl}
+            image={selectedProduct.imageUrl}
             showCartIcon= {false}
-            name={selectedProduct.name}
+            title={selectedProduct.name}
             price={`$${selectedProduct.price}`}
             style={{
               border: "1px solid #c9c9c975",

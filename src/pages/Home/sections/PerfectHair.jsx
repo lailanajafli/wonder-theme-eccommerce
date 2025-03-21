@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PerfectHair = () => {
+  const product = {
+    id: 5, // ✅ Məhsulun ID-sini buradan idarə edə bilərsən
+  };
+
   return (
     <div className="perfectHairCont">
       <div className="perfectHairLeft">
@@ -9,11 +14,13 @@ const PerfectHair = () => {
             src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/argan-oil-2b.jpg?v=1709589561&width=2000"
             alt="perfect Hair Product"
           />
-        <div className="perfectHairText">
-          <h3 className="perfectHairTexth">Perfect hair with Argan Oil</h3>
-          <p>Moisturizes and protects hair.</p>
-          <button className="">CHECK PRODUCT</button>
-        </div>
+          <div className="perfectHairText">
+            <h3 className="perfectHairTexth">Perfect hair with Argan Oil</h3>
+            <p>Moisturizes and protects hair.</p>
+            <Link to={`/detail/${product.id}`}>
+              <button>CHECK PRODUCT</button>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="perfectHairVideo">
