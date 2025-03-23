@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import ShopProducts from "./ShopProducts";
 
 const categoryData = {
   "face-care": {
@@ -56,6 +57,7 @@ const ShopCare = () => {
   }
 
   return (
+    <>
     <section
       className="shopCareSection"
       style={{ backgroundColor: categoryInfo.bgColor }} 
@@ -68,6 +70,8 @@ const ShopCare = () => {
         <img src={categoryInfo.imageSrc} alt={categoryInfo.title} />
       </div>
     </section>
+          <ShopProducts category={category}/>
+          </>
   );
 };
 

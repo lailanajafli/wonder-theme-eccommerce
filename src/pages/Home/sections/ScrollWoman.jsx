@@ -14,7 +14,7 @@ const ScrollWoman = () => {
         end: "+=200%",
         pin: true,
         pinSpacing: false,
-        scrub: 0.1, // Daha yavaş senkronizasyon
+        scrub: 0.55, // Daha yavaş senkronizasyon
         markers: false,
       },
     });
@@ -28,12 +28,12 @@ const ScrollWoman = () => {
       {
         y: "-100%",
         rotate: -15,
-        duration: 40, 
+        duration: 100, 
         ease: "slow(0.2, 0.2, false)", 
         scrollTrigger: {
           trigger: ".imageContainer",
           start: "top center",
-          scrub: 0.05, 
+          scrub: 0.55, 
           end: "+=200%", 
           markers: false,
         },
@@ -49,11 +49,11 @@ const ScrollWoman = () => {
       {
         y: "-100%",
         rotate: 25,
-        duration: 40, 
+        duration: 100, 
         ease: "slow(0.2, 0.2, false)", 
         scrollTrigger: {
           trigger: ".imageContainer",
-          scrub: 0.05,
+          scrub: 0.55,
           start: "top center-=80%",
           end: "+=200%", 
           markers: false,

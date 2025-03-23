@@ -24,9 +24,9 @@ const newproducts = [
 
 const ThreeCart = () => {
   return (
-    <div className="beautyProducts">
+    <section className="threeCartsSection">
       {newproducts.map((product) => (
-        <div className="productCard" key={product.id}>
+        <div className="threCartProductCard" key={product.id}>
           <div className="productImageWrapper">
             <img src={product.image} alt={product.name} className="productImage" />
           </div>
@@ -39,7 +39,7 @@ const ThreeCart = () => {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 };
 
