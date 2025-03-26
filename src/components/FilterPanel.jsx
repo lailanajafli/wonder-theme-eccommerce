@@ -5,12 +5,48 @@ import CustomModal from "./CustomModal";
 import grayminus from "../assets/images/svg/grayminus.svg";
 import grayplus from "../assets/images/svg/grayplus.svg";
 
-const FilterPanel = ({ isOpen, onClose, title = "Filter", cartPageStyle = {} }) => {
+const FilterPanel = ({
+  isOpen,
+  onClose,
+  title = "Filter",
+  cartPageStyle = {},
+}) => {
   const dispatch = useDispatch();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
-  const [priceRange, setPriceRange] = useState({ min: 40, max: 175 });
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(150);
+
+
+
+  const minLimit = 0;
+  const maxLimit = 150;
+
+  useEffect(() => {
+    updateTrackBackground();
+  }, [minPrice, maxPrice]);
+
+  const handleMinChange = (e) => {
+    const value = Math.min(Number(e.target.value), maxPrice - 1);
+    setMinPrice(value);
+  };
+
+  const handleMaxChange = (e) => {
+    const value = Math.max(Number(e.target.value), minPrice + 1);
+    setMaxPrice(value);
+  };
+
+  const updateTrackBackground = () => {
+    const range = maxLimit - minLimit;
+    const minPercent = ((minPrice - minLimit) / range) * 100;
+    const maxPercent = ((maxPrice - minLimit) / range) * 100;
+
+    document.documentElement.style.setProperty(
+      "--track-bg",
+      `linear-gradient(to right, #E7E7E7 ${minPercent}%, black ${minPercent}%, black ${maxPercent}%, #E7E7E7 ${maxPercent}%)`
+    );
+  };
 
   const toggleDropdown = (index) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
@@ -43,7 +79,8 @@ const FilterPanel = ({ isOpen, onClose, title = "Filter", cartPageStyle = {} }) 
 
   return (
     <CustomModal
-    isOpen={isOpen} onClose={onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       title={title}
       style={modalStyle}
     >
@@ -51,8 +88,15 @@ const FilterPanel = ({ isOpen, onClose, title = "Filter", cartPageStyle = {} }) 
         <ul className="cartList">
           {/* First Dropdown (Brand) */}
           <li className="cartItem">
-            <div className={`detailDropdown ${openDropdownIndex === 0 ? "open" : ""}`}>
-              <div className="detailDropdownHeader" onClick={() => toggleDropdown(0)}>
+            <div
+              className={`detailDropdown ${
+                openDropdownIndex === 0 ? "open" : ""
+              }`}
+            >
+              <div
+                className="detailDropdownHeader"
+                onClick={() => toggleDropdown(0)}
+              >
                 <span>Brand</span>
                 <img
                   src={openDropdownIndex === 0 ? grayminus : grayplus}
@@ -60,7 +104,11 @@ const FilterPanel = ({ isOpen, onClose, title = "Filter", cartPageStyle = {} }) 
                   className="dropdownIcon"
                 />
               </div>
-              <div className={`detailDropdownContent ${openDropdownIndex === 0 ? "open" : ""}`}>
+              <div
+                className={`detailDropdownContent ${
+                  openDropdownIndex === 0 ? "open" : ""
+                }`}
+              >
                 {openDropdownIndex === 0 && (
                   <>
                     <label>
@@ -92,9 +140,16 @@ const FilterPanel = ({ isOpen, onClose, title = "Filter", cartPageStyle = {} }) 
               </div>
             </div>
 
-            {/* Second Dropdown (Price Range) */}
-            <div className={`detailDropdown ${openDropdownIndex === 1 ? "open" : ""}`}>
-              <div className="detailDropdownHeader" onClick={() => toggleDropdown(1)}>
+            {/* Price Range */}
+            <div
+              className={`detailDropdown ${
+                openDropdownIndex === 1 ? "open" : ""
+              }`}
+            >
+              <div
+                className="detailDropdownHeader"
+                onClick={() => toggleDropdown(1)}
+              >
                 <span>Price Range</span>
                 <img
                   src={openDropdownIndex === 1 ? grayminus : grayplus}
@@ -102,84 +157,57 @@ const FilterPanel = ({ isOpen, onClose, title = "Filter", cartPageStyle = {} }) 
                   className="dropdownIcon"
                 />
               </div>
-              <div className={`detailDropdownContent ${openDropdownIndex === 1 ? "open" : ""}`}>
+              <div
+                className={`detailDropdownContent ${
+                  openDropdownIndex === 1 ? "open" : ""
+                }`}
+              >
                 {openDropdownIndex === 1 && (
                   <>
-                    <label>
-                      <input
-                        type="range"
-                        min="0"
-                        max="200"
-                        step="1"
-                        value={priceRange.max}
-                        onChange={handlePriceChange}
-                        name="max"
-                        className="priceRangeSlider"
-                      />
-                      <span>${priceRange.max}</span>
-                    </label>
-                    <label>
-                      Min: $
-                      <input
-                        type="number"
-                        name="min"
-                        value={priceRange.min}
-                        onChange={handlePriceChange}
-                        className="priceInput"
-                      />
-                    </label>
-                    <label>
-                      Max: $
-                      <input
-                        type="number"
-                        name="max"
-                        value={priceRange.max}
-                        onChange={handlePriceChange}
-                        className="priceInput"
-                      />
-                    </label>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {/* Third Dropdown (Category) */}
-            <div className={`detailDropdown ${openDropdownIndex === 2 ? "open" : ""}`}>
-              <div className="detailDropdownHeader" onClick={() => toggleDropdown(2)}>
-                <span>Category</span>
-                <img
-                  src={openDropdownIndex === 2 ? grayminus : grayplus}
-                  alt={openDropdownIndex === 2 ? "minus" : "plus"}
-                  className="dropdownIcon"
-                />
-              </div>
-              <div className={`detailDropdownContent ${openDropdownIndex === 2 ? "open" : ""}`}>
-                {openDropdownIndex === 2 && (
-                  <>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedFilters?.category?.includes("Face Care")}
-                        onChange={() => handleFilterChange("category", "Face Care")}
-                      />
-                      Face Care
-                    </label>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedFilters?.category?.includes("Hair Care")}
-                        onChange={() => handleFilterChange("category", "Hair Care")}
-                      />
-                      Hair Care
-                    </label>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedFilters?.category?.includes("Body Care")}
-                        onChange={() => handleFilterChange("category", "Body Care")}
-                      />
-                      Body Care
-                    </label>
+                    <div className="price-range">
+                      <div className="range-slider">
+                        <input
+                          type="range"
+                          min="0"
+                          max="150"
+                          value={minPrice}
+                          onChange={handleMinChange}
+                          className="range-input"
+                        />
+                        <input
+                          type="range"
+                          min="0"
+                          max="150"
+                          value={maxPrice}
+                          onChange={handleMaxChange}
+                          className="range-input"
+                        />
+                        <div className="slider-track"></div>
+                      </div>
+                      <div className="price-inputs">
+                        <div className="price-box">
+                          <span>USD</span>
+                          <input
+                            type="number"
+                            value={minPrice}
+                            onChange={handleMinChange}
+                            min={minLimit}
+                            max={maxPrice - 1}
+                          />
+                        </div>
+                        <span className="divider">—</span>
+                        <div className="price-box">
+                          <span>USD</span>
+                          <input
+                            type="number"
+                            value={maxPrice}
+                            onChange={handleMaxChange}
+                            min={minPrice + 1}
+                            max={maxLimit}
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </>
                 )}
               </div>

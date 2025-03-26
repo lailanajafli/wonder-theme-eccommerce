@@ -77,7 +77,7 @@ const ShopProducts = ({ category }) => {
   return (
     <div className="shopProductsContainer">
       <div className="countFilterFeaturedCont">
-        <p className="productCount">Toplam Ürün: {filteredProducts.length}</p>
+        <p className="productCount">{filteredProducts.length} products</p>
 
         <div className="filterFeaturedCont">
           <div onClick={() => setIsFilterOpen(true)} className="filterProductsCont">

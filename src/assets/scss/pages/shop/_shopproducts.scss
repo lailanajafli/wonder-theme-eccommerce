@@ -1,10 +1,13 @@
 .shopProductsContainer {
+margin-bottom: 80px;
   .countFilterFeaturedCont {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
     padding: 25px 25px 0px 25px;
     .productCount {
+      font-weight: 500;
     }
     .filterFeaturedCont {
       display: flex;
@@ -14,6 +17,7 @@
         display: flex;
         justify-content: center;
         padding: 5px 20px;
+        cursor: pointer;
         gap: 10px;
         align-items: center;
         img {

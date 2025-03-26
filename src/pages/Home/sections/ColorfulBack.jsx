@@ -28,23 +28,21 @@ const sections = [
   },
 ];
 
-const ColorfulBack = () => {
+const ColorfulBack = ({ sectionTitle = "Popular Collection", backgroundColor = "#fff" }) => {
   const [activeSection, setActiveSection] = useState(null);
 
   return (
     <section
       className="dynamicSection"
       style={{
-        backgroundColor:
-          activeSection !== null ? sections[activeSection].hoverColor : "#fff",
+        backgroundColor: activeSection !== null ? sections[activeSection].hoverColor : backgroundColor,
       }}
     >
       <p style={{ marginTop: "50px", marginBottom: "20px" }}>
-        Popular Collection
+        {sectionTitle}
       </p>
       <div className="contentContainer">
         {sections.map((section, index) => {
-          // URL formatına uyğun olaraq `text` dəyərini çevirmək
           const formattedText = section.text
             .toLowerCase()
             .replace(/ & /g, "-")
