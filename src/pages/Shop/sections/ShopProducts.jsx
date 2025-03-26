@@ -3,13 +3,19 @@ import axios from "axios";
 import { API_URL, BASE_URL } from "../../../api/api";
 import { Link } from "react-router-dom";
 import filterIcon from "../../../assets/images/svg/filterIcon.svg";
+import { toggleCartModal } from '../../../redux/slices/cartSlices';
+import { useDispatch, useSelector } from "react-redux";
+import FilterPanel from "../../../components/FilterPanel";
 
 const ShopProducts = ({ category }) => {
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState(
     sessionStorage.getItem("sortOption") || "featured"
   );
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isFeaturedOpen, setIsFeaturedOpen] = useState(false);
+  const isFilterPanel = useSelector((state) => state.cart.isFilterPanel);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,32 +38,41 @@ const ShopProducts = ({ category }) => {
   let filteredProducts = products.filter(
     (product) => product.category === category
   );
+  
 
   switch (sortOption) {
-    case "priceLowToHigh":
+    case "PriceLowToHigh":
       filteredProducts.sort((a, b) => a.price - b.price);
       break;
-    case "priceHighToLow":
+    case "PriceHighToLow":
       filteredProducts.sort((a, b) => b.price - a.price);
       break;
-    case "newest":
+    case "Newest":
       filteredProducts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
       break;
-    case "oldest":
+    case "Oldest":
       filteredProducts.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
       break;
-    case "alphabeticalAZ":
+    case "AlphabeticalAZ":
       filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
       break;
-    case "alphabeticalZA":
+    case "AlphabeticalZA":
       filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
       break;
-    case "bestSelling":
+    case "BestSelling":
       filteredProducts.sort((a, b) => b.sold - a.sold);
       break;
     default:
       break;
   }
+
+  const handleDropdownSelection = (option) => {
+    handleSortChange(option);
+  };
+
+    const openFilterPanel = () => {
+      dispatch(toggleCartModal());
+    };
 
   return (
     <div className="shopProductsContainer">
@@ -65,7 +80,7 @@ const ShopProducts = ({ category }) => {
         <p className="productCount">Toplam Ürün: {filteredProducts.length}</p>
 
         <div className="filterFeaturedCont">
-          <div className="filterProductsCont">
+          <div onClick={() => setIsFilterOpen(true)} className="filterProductsCont">
             <img src={filterIcon} alt="filter Icon" />
             <p className="filterProductsText">Filter</p>
           </div>
@@ -80,14 +95,54 @@ const ShopProducts = ({ category }) => {
 
             {isFeaturedOpen && (
               <ul className="featuredDropdown active">
-                <li onClick={() => handleSortChange("Featured")}>Featured</li>
-                <li onClick={() => handleSortChange("BestSelling")}>Best Selling</li>
-                <li onClick={() => handleSortChange("AlphabeticalAZ")}>Alphabetically, A-Z</li>
-                <li onClick={() => handleSortChange("AlphabeticalZA")}>Alphabetically, Z-A</li>
-                <li onClick={() => handleSortChange("PriceLowToHigh")}>Price: Low to High</li>
-                <li onClick={() => handleSortChange("PriceHighToLow")}>Price: High to Low</li>
-                <li onClick={() => handleSortChange("Oldest")}>Date: Old to New</li>
-                <li onClick={() => handleSortChange("Newest")}>Date: New to Old</li>
+                <li
+                  onClick={() => handleDropdownSelection("Featured")}
+                  className={sortOption === "Featured" ? "selected" : ""}
+                >
+                  Featured
+                </li>
+                <li
+                  onClick={() => handleDropdownSelection("BestSelling")}
+                  className={sortOption === "BestSelling" ? "selected" : ""}
+                >
+                  Best Selling
+                </li>
+                <li
+                  onClick={() => handleDropdownSelection("AlphabeticalAZ")}
+                  className={sortOption === "AlphabeticalAZ" ? "selected" : ""}
+                >
+                  Alphabetically, A-Z
+                </li>
+                <li
+                  onClick={() => handleDropdownSelection("AlphabeticalZA")}
+                  className={sortOption === "AlphabeticalZA" ? "selected" : ""}
+                >
+                  Alphabetically, Z-A
+                </li>
+                <li
+                  onClick={() => handleDropdownSelection("PriceLowToHigh")}
+                  className={sortOption === "PriceLowToHigh" ? "selected" : ""}
+                >
+                  Price, Low to High
+                </li>
+                <li
+                  onClick={() => handleDropdownSelection("PriceHighToLow")}
+                  className={sortOption === "PriceHighToLow" ? "selected" : ""}
+                >
+                  Price, High to Low
+                </li>
+                <li
+                  onClick={() => handleDropdownSelection("Oldest")}
+                  className={sortOption === "Oldest" ? "selected" : ""}
+                >
+                  Date, Old to New
+                </li>
+                <li
+                  onClick={() => handleDropdownSelection("Newest")}
+                  className={sortOption === "Newest" ? "selected" : ""}
+                >
+                  Date, New to Old
+                </li>
               </ul>
             )}
           </div>
@@ -123,7 +178,12 @@ const ShopProducts = ({ category }) => {
           </div>
         ))}
       </div>
+      <FilterPanel
+         isOpen={isFilterOpen}
+         onClose={() => setIsFilterOpen(false)}
+      />
     </div>
+    
   );
 };
 

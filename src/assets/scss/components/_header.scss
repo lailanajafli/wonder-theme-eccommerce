@@ -84,7 +84,6 @@
   color: #151515;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   z-index: 100;
 
@@ -134,16 +133,17 @@
     }
   }
 }
+a {
+  .headerBeauty {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 
-.headerBeauty {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-
-  img {
-    width: 100%;
-    min-width: 100px;
-    height: auto;
+    img {
+      width: 100%;
+      min-width: 100px;
+      height: auto;
+    }
   }
 }
 
@@ -163,7 +163,8 @@
   }
 }
 @media (max-width: 400px) {
-  .header, .headerVideo {
-   padding: 25px 17px;
+  .header,
+  .headerVideo {
+    padding: 25px 17px;
   }
 }

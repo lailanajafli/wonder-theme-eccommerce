@@ -9,6 +9,7 @@ import CartPage from "../components/CartPage";
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux';
 import { toggleCartModal } from '../redux/slices/cartSlices';
+import SearchComponent from "./SearchComponent";
 
 const Header = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [videoHeight, setVideoHeight] = useState(0);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isVideoPassed, setIsVideoPassed] = useState(false);
   const dispatch = useDispatch();
   const cartCount = useSelector((state) => state.cart.cartCount);
@@ -95,7 +97,8 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
             </nav>
           </div>
           <div className="navTeaser">
-            <img src={search} alt="search icon" />
+            <img   onClick={() => setIsSearchOpen(true)} src={search} alt="search icon" />
+            {isSearchOpen && <SearchComponent onClose={() => setIsSearchOpen(false)} />}
             <div className="cartIcon" onClick={openCartModal}>
               <img src={cart} alt="cart icon" />
               {cartCount > 0 && <span className="cartCount">{cartCount}</span>}
@@ -117,14 +120,17 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
             <a >Sale</a>
           </nav>
         </div>
+        <Link to="/">
         <div className="headerBeauty">
           <img
             src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/Path_849.svg?v=1707730068&width=120"
             alt="Beauty"
           />
         </div>
+        </Link>
         <div className="navTeaser">
-          <img src={search} alt="search icon" />
+        <img   onClick={() => setIsSearchOpen(true)} src={search} alt="search icon" />
+        {isSearchOpen && <SearchComponent onClose={() => setIsSearchOpen(false)} />}
           <div className="cartIcon"  onClick={openCartModal}>
             <img src={cart} alt="cart icon" />
             {cartCount > 0 && <span className="cartCount">{cartCount}</span>}
@@ -133,12 +139,10 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
         </div>
       </header>
 
-      {/* Drawer Menu */}
       <DrawerMenu
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
       />
-      {/* CartPage Menu */}
       <CartPage
         isOpen={isCartModalOpen} onClose={() => dispatch(toggleCartModal())} 
       />

@@ -2,6 +2,7 @@
   .countFilterFeaturedCont {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 25px 25px 0px 25px;
     .productCount {
     }
@@ -12,6 +13,7 @@
       .filterProductsCont {
         display: flex;
         justify-content: center;
+        padding: 5px 20px;
         gap: 10px;
         align-items: center;
         img {
@@ -20,6 +22,7 @@
         }
         .filterProductsText {
           font-size: 18px;
+          font-weight: 500;
         }
       }
       .featuredProductsCont {
@@ -30,11 +33,11 @@
           padding: 10px 20px;
           font-size: 16px;
           border: none;
+          font-weight: 500;
           cursor: pointer;
           transition: background 0.3s ease;
-
-          &:hover {
-            background: #f5f5f5;
+          span {
+            color: #6f6f6f;
           }
         }
 
@@ -44,13 +47,12 @@
           left: 0;
           background: white;
           border: 1px solid #ddd;
-          border-radius: 5px;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          width: 200px;
+          width: 100%;
           z-index: 10;
           opacity: 0;
           visibility: hidden;
-          transform: translateY(-15px); // Yukarıda başlıyor
+          transform: translateY(-15px);
           transition: opacity 0.3s ease, transform 0.3s ease,
             visibility 0.3s ease;
 
@@ -65,17 +67,27 @@
         .featuredDropdown.active {
           opacity: 1;
           visibility: visible;
-          transform: translateY(0); 
+          transform: translateY(0);
+        }
+        .featuredDropdown li.selected {
+          background-color: #f0f0f0;
+          color: black;
+          position: relative;
+
+          &::after {
+            content: "✔";
+            position: absolute;
+            right: 10px;
+            font-size: 14px;
+            color: rgb(68, 68, 68);
+          }
         }
       }
     }
   }
   .products {
     display: grid;
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(300px, 1fr)
-    ); 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 25px;
     justify-content: center;
@@ -151,7 +163,7 @@
           padding: 14px 10px;
           font-size: 0.875rem;
           text-align: center;
-          border: 1px solid rgba(198, 198, 198, 0.777);
+          border: none;
           border-radius: 25px;
           font-weight: 500;
           opacity: 0;
@@ -190,6 +202,107 @@
       }
     }
   }
+}
+
+// Media query for responsive design
+@media (max-width: 1100px) {
+  .countFilterFeaturedCont {
+    flex-direction: column;
+    gap: 10px;
+    .filterFeaturedCont {
+      width: 100%;
+      .filterProductsCont,
+      .featuredProductsCont {
+        border: 1px solid #ddd;
+        width: 100%;
+        text-align: center;
+        flex: 1;
+        .featuredDropdown.active {
+          width: 100%;
+        }
+      }
+
+      .filterProductsCont:hover {
+        background-color: black;
+        color: white;
+        img {
+          filter: invert(1);
+        }
+      }
+
+      .featuredProductsCont:hover {
+        background-color: black;
+        .featuredButton {
+          color: white;
+        }
+        .featuredDropdown.active {
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .countFilterFeaturedCont {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+    .filterFeaturedCont {
+      flex-direction: column;
+      width: 100%;
+      gap: 8px;
+      
+      .filterProductsCont {
+        width: 100%;
+        padding: 5px 20px;
+        gap: 5px;
+        justify-content: center;
+        border: 1px solid #ddd;
+        text-align: center;
+        
+        img {
+          width: 18px;
+          height: 18px;
+        }
+
+        .filterProductsText {
+          font-size: 16px;
+        }
+      }
+
+      .featuredProductsCont {
+        width: 100%;
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 5px 20px;
+
+        .featuredButton {
+          font-size: 14px;
+          padding: 5px 20px;
+        }
+
+        .featuredDropdown {
+          width: 100%;
+          left: 0;
+        }
+        .featuredDropdown.active  {
+         top: 55px;
+        }
+      }
+    }
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 25px;
+  justify-content: center;
+  margin: 0 auto;
+  // Other styles for the products grid...
 }
 
 // Medya sorguları ile küçük ekranlarda boyutları ayarlama

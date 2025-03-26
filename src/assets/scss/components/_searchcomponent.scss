@@ -1,0 +1,147 @@
+@use "../pages/mixins" as *;
+
+.searchOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  z-index: 9999;
+  overflow: hidden;
+
+  .searchContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3%;
+    padding: 25px;
+    border-radius: 20px;
+    max-height: 90vh;
+
+    .searchInputAndClose {
+      display: flex;
+      width: 600px;
+      align-items: center;
+      gap: 15px;
+
+      .searchInput {
+        flex: 1;
+        padding: 16px 22px;
+        font-size: 18px;
+        border: 2px solid #ddd;
+        border-radius: 50px;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
+
+        &:focus {
+          border-color: #222;
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .searchCloseButton {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+
+        img {
+          filter: invert(0);
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+
+    .searchSuggestionsList {
+      width: 100%;
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+      max-height: 65vh;
+      overflow-y: auto;
+     overflow-x: hidden;
+
+      .suggestionsList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+
+        .suggestionItem {
+          display: flex;
+          align-items: center;
+          padding: 15px;
+          border-radius: 12px;
+          transition: background 0.3s ease, transform 0.2s ease;
+          cursor: pointer;
+          background: #fff;
+
+          .searchProductImage {
+            img {
+              width: 100px;
+              height: 100px;
+              border-radius: 12px;
+              filter: invert(0);
+              object-fit: cover;
+              margin-right: 15px;
+            }
+          }
+
+          .searchProductInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            .searchProductBrand {
+              font-size: 13px;
+              color: #777;
+            }
+            .searchProductName {
+              font-size: 16px;
+              color: #222;
+            }
+            .searchProductPrice {
+              font-size: 16px;
+              color: #222;
+            }
+          }
+        }
+      }
+
+    }
+    
+
+    .viewAllButtonContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 0;
+      width: 100%;
+      background: white;
+
+      .viewAllButton {
+        @include aboutUsBtn;
+      }
+    }
+  }
+}
+@media (max-width: 630px) {
+  .searchOverlay {
+
+    .searchContent {
+      width: 100%;
+      padding: 20px 20px;
+      .searchInputAndClose{
+        width: 100%;
+      }
+      .searchSuggestionsList {
+        .suggestionsList {
+          grid-template-columns: 1fr;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
