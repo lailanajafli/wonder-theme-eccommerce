@@ -282,7 +282,7 @@ const products = [
     title: "Lapis Blue Tansy Face Oil",
     description: "Lapis Blue Tansy Face Oil",
     price: 170.0,
-    brand: "HERBIVORE",
+    brand: "Herbivore",
     brandImage:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/bkind_20964610-a240-4c93-9e8a-b016c9ef244b.png?v=1727383420&width=200",
     currency: "USD",

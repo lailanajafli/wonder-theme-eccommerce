@@ -15,7 +15,18 @@ const ShopProducts = ({ category }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isFeaturedOpen, setIsFeaturedOpen] = useState(false);
   const isFilterPanel = useSelector((state) => state.cart.isFilterPanel);
+  const [priceRange, setPriceRange] = useState({ minPrice: 0, maxPrice: 150 });
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
   const dispatch = useDispatch();
+
+  const [filters, setFilters] = useState({
+    brands: [],
+    minPrice: 0,
+    maxPrice: 150,
+  });
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +38,7 @@ const ShopProducts = ({ category }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [category]);
 
   const handleSortChange = (option) => {
     setSortOption(option);
@@ -35,44 +46,97 @@ const ShopProducts = ({ category }) => {
     setIsFeaturedOpen(false);
   };
 
-  let filteredProducts = products.filter(
-    (product) => product.category === category
-  );
-  
+  const handleFilterChange = (filterData) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      ...filterData,
+    }));
+  };
 
-  switch (sortOption) {
-    case "PriceLowToHigh":
-      filteredProducts.sort((a, b) => a.price - b.price);
-      break;
-    case "PriceHighToLow":
-      filteredProducts.sort((a, b) => b.price - a.price);
-      break;
-    case "Newest":
-      filteredProducts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-      break;
-    case "Oldest":
-      filteredProducts.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-      break;
-    case "AlphabeticalAZ":
-      filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case "AlphabeticalZA":
-      filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
-      break;
-    case "BestSelling":
-      filteredProducts.sort((a, b) => b.sold - a.sold);
-      break;
-    default:
-      break;
-  }
+  const getBrandCounts = () => {
+    const brandCounts = {};
+    products.forEach((product) => {
+      if (product.brand) {
+        const normalizedBrand = product.brand.toLowerCase();
+        brandCounts[normalizedBrand] = (brandCounts[normalizedBrand] || 0) + 1;
+      }
+    });
+  
+    const uniqueBrands = {};
+    Object.keys(brandCounts).forEach((brand) => {
+      const originalBrand = products.find((p) => p.brand?.toLowerCase() === brand)?.brand;
+      uniqueBrands[originalBrand] = (uniqueBrands[originalBrand] || 0) + brandCounts[brand];
+    });
+  
+    return uniqueBrands;
+  };
+
+  const brandCounts = getBrandCounts();
+
+
+  const [stockCounts, setStockCounts] = useState({ inStock: 0, outOfStock: 0 });
+
+  useEffect(() => {
+    // Filtreleme işlemi
+    const filtered = products.filter((product) => {
+      const matchesCategory = category ? product.category === category : true;
+      const matchesBrand = !filters.brands.length || filters.brands.includes(product.brand);
+      const matchesPrice = product.price >= filters.minPrice && product.price <= filters.maxPrice;
+  
+      return matchesCategory && matchesBrand && matchesPrice;
+    });
+
+    const inStockCount = filtered.filter((product) => product.stock > 0).length;
+    const outOfStockCount = filtered.length - inStockCount;
+  
+    // Sıralama işlemi
+    switch (sortOption) {
+      case "PriceLowToHigh":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "PriceHighToLow":
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case "Newest":
+        filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        break;
+      case "Oldest":
+        filtered.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+        break;
+      case "AlphabeticalAZ":
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "AlphabeticalZA":
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "BestSelling":
+        filtered.sort((a, b) => b.sold - a.sold);
+        break;
+      default:
+        break;
+    }
+  
+    setFilteredProducts(filtered);
+    setStockCounts({ inStock: inStockCount, outOfStock: outOfStockCount });
+  }, [filters, products, sortOption, category]);
+  
+  
 
   const handleDropdownSelection = (option) => {
     handleSortChange(option);
   };
 
-    const openFilterPanel = () => {
-      dispatch(toggleCartModal());
-    };
+  const openFilterPanel = () => {
+    dispatch(toggleCartModal());
+  };
+
+  const calculateBrandCounts = (products) => {
+    return products.reduce((acc, product) => {
+      acc[product.brand] = (acc[product.brand] || 0) + 1;
+      return acc;
+    }, {});
+  };
+  
 
   return (
     <div className="shopProductsContainer">
@@ -179,11 +243,14 @@ const ShopProducts = ({ category }) => {
         ))}
       </div>
       <FilterPanel
-         isOpen={isFilterOpen}
-         onClose={() => setIsFilterOpen(false)}
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+        onFilterChange={handleFilterChange}
+        brandCounts={calculateBrandCounts(filteredProducts)}
+        inStockCount={stockCounts.inStock}
+        outOfStockCount={stockCounts.outOfStock}
       />
     </div>
-    
   );
 };
 

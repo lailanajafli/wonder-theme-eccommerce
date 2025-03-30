@@ -2,8 +2,8 @@
 
 .filterPanelContainer {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
   border-top: 1px solid rgba(222, 222, 222, 0.693);
 
@@ -20,16 +20,59 @@
       background: transparent;
     }
 
+    .filterHeaderContainer{
+      display: flex;
+      margin-top: 20px;
+      width: 90%;
+      justify-content: flex-start;
+      .filterHeader{
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        .filterTitle{
+          font-weight: 500;
+
+        }
+        .selectedBrands {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 10px;
+          .selectedBrandTag {
+            background-color: #E7E7E7;
+            padding: 10px 10px;
+            border-radius: 15px;
+            font-weight: 500;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+           button {
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-size: 14px;
+              color: rgb(125, 125, 125);
+              &:hover {
+                color: #595959;
+              }
+            }
+          }
+        }
+        
+      }
+    }
+    
+    
     .cartItem {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      margin-top: 1rem;
+      width: 90%;
       flex: 1;
-      gap: 15px;
-      border-bottom: 1px solid rgb(215, 215, 215);
+
 
       .detailDropdown {
-        margin-bottom: 1rem;
         border-radius: 5px;
         width: 100%;
         flex-direction: column;
@@ -40,10 +83,10 @@
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          padding: 16px 20px;
+          padding: 20px 1px;
           cursor: pointer;
           background-color: #fff;
-          border-top: 1px solid rgb(215, 215, 215);
+          border-bottom: 1px solid rgba(222, 222, 222, 0.693);
 
           span {
             flex-grow: 1;
@@ -78,18 +121,46 @@
 
           label {
             margin: 5px 0;
+            display: flex;
             cursor: pointer;
+            align-items: center;
+            gap: 10px;
           }
 
           input[type="checkbox"] {
-            margin-right: 10px;
+            appearance: none;  // Default checkbox stilini silir
+            width: 25px;
+            height: 25px;
+            border: 1px solid #ccc; // Çərçivə rəngi
+            border-radius: 5px; // Küncləri yumşaltmaq
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+          
+            &:hover{
+              border-color: #000000;
+            }
+            &:checked {
+              background-color: #ffffff; // Checkbox dolu olduqda (seçildikdə) fon rəngi
+              border-color: #000000; // Seçildikdə çərçivənin rəngi
+              &::after {
+                content: "✔"; // Tik işarəsi əlavə edir
+                font-size: 16px;
+                color: rgb(0, 0, 0); // Tik işarəsinin rəngi
+              }
+            }
           }
+          
         }
 
         &.open {
           .detailDropdownContent {
             animation: slideDown 0.5s ease-out forwards;
-            padding: 16px 20px;
+            padding: 16px 0px;
+            flex-direction: column;
           }
 
           .dropdownIcon {
@@ -203,6 +274,24 @@
       }
     }
   }
+  .filterApplyAndReset{
+width: 100%;
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+    .filterApplyButton{
+      width: 90%;
+  @include aboutUsBtn;
+    }
+  
+    .filterResetButton{
+      margin: 16px 20px;
+      cursor: pointer;
+  @include linkHoverTwo;
+    }
+  }
+
 
   .cartFooterBottom {
     padding: 8px 12px;

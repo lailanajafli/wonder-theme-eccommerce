@@ -7,7 +7,7 @@ import { div } from "framer-motion/client";
 import { Link } from "react-router-dom";
 
 export default function SearchComponent({ onClose, showSearch }) {
-  const [searchTerm, setSearchTerm] = useState(""); // Arama terimi burada tutulur
+  const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showAll, setShowAll] = useState(false);
@@ -101,12 +101,12 @@ export default function SearchComponent({ onClose, showSearch }) {
 
   const handleSearchTermChange = (e) => {
     const newTerm = e.target.value;
-    setSearchTerm(newTerm); // Arama terimini state olarak güncelledik
+    setSearchTerm(newTerm); 
   };
 
   const handleCloseSearch = () => {
     onClose();
-    setSearchTerm(""); // Search kapandığında, arama terimi sıfırlanmaz
+    setSearchTerm(""); 
   };
 
   return (
@@ -124,7 +124,7 @@ export default function SearchComponent({ onClose, showSearch }) {
               type="text"
               className="searchInput"
               placeholder="Find a product..."
-              value={searchTerm} // value state üzerinden bağlanır
+              value={searchTerm}
               onChange={handleSearchTermChange}
               autoFocus
             />
@@ -139,6 +139,7 @@ export default function SearchComponent({ onClose, showSearch }) {
               <ul className="searchSuggestionsList">
                 <ul className="suggestionsList">
                   {displayedProducts.map((product) => (
+                    <Link to={`/detail/${product.id}`} key={product.id}>
                     <li key={product.id} className="suggestionItem">
                       <div className="searchProductImage">
                         <img
@@ -158,6 +159,7 @@ export default function SearchComponent({ onClose, showSearch }) {
                         </span>
                       </div>
                     </li>
+                    </Link>
                   ))}
                 </ul>
               </ul>

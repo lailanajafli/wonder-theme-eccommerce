@@ -10,15 +10,39 @@ const FilterPanel = ({
   onClose,
   title = "Filter",
   cartPageStyle = {},
+  onFilterChange,
+  brandCounts = {},
+  inStockCount,
+  outOfStockCount,
 }) => {
   const dispatch = useDispatch();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedAvailability, setSelectedAvailability] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(150);
 
+  const toggleAvailability = (status) => {
+    setSelectedAvailability((prev) =>
+      prev.includes(status)
+        ? prev.filter((item) => item !== status)
+        : [...prev, status]
+    );
+  };
 
+  const filteredBrandCounts = brandCounts;
+
+
+  useEffect(() => {
+    onFilterChange({
+      brands: selectedBrands,
+      minPrice,
+      maxPrice,
+      availability: selectedAvailability,
+    });
+  }, [selectedBrands, minPrice, maxPrice, selectedAvailability]);
 
   const minLimit = 0;
   const maxLimit = 150;
@@ -69,6 +93,42 @@ const FilterPanel = ({
     }));
   };
 
+  
+  const handleBrandChange = (brand) => {
+    let updatedBrands = [...selectedBrands];
+    if (updatedBrands.includes(brand)) {
+      updatedBrands = updatedBrands.filter((b) => b !== brand);
+    } else {
+      updatedBrands.push(brand);
+    }
+    setSelectedBrands(updatedBrands);
+    onFilterChange({ brands: updatedBrands });
+  };
+
+  const [tempFilters, setTempFilters] = useState({
+    brands: selectedBrands,
+    minPrice,
+    maxPrice,
+  });
+
+  const applyFilters = () => {
+    setSelectedBrands(tempFilters.brands);
+    setMinPrice(tempFilters.minPrice);
+    setMaxPrice(tempFilters.maxPrice);
+    onFilterChange(tempFilters);
+  };
+
+  const handleResetFilters = () => {
+    setSelectedBrands([]);
+    setMinPrice(minLimit);
+    setMaxPrice(maxLimit);
+    onFilterChange({ brands: [], minPrice: minLimit, maxPrice: maxLimit });
+  };
+
+  const removeBrand = (brand) => {
+    setSelectedBrands((prev) => prev.filter((b) => b !== brand));
+  };
+
   const modalStyle = {
     ...cartPageStyle,
     left: "auto",
@@ -86,7 +146,24 @@ const FilterPanel = ({
     >
       <div className="filterPanelContainer">
         <ul className="cartList">
-          {/* First Dropdown (Brand) */}
+          <div
+            style={{ display: selectedBrands.length > 0 ? "block" : "none" }}
+            className="filterHeaderContainer"
+          >
+            <div className="filterHeader">
+              {selectedBrands.length > 0 && (
+                <p className="filterTitle">Filter</p>
+              )}
+              <div className="selectedBrands">
+                {selectedBrands.map((brand) => (
+                  <span key={brand} className="selectedBrandTag">
+                    {`Brand: ${brand}`}{" "}
+                    <button onClick={() => removeBrand(brand)}>✖</button>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
           <li className="cartItem">
             <div
               className={`detailDropdown ${
@@ -100,7 +177,7 @@ const FilterPanel = ({
                 <span>Brand</span>
                 <img
                   src={openDropdownIndex === 0 ? grayminus : grayplus}
-                  alt={openDropdownIndex === 0 ? "minus" : "plus"}
+                  alt="toggle"
                   className="dropdownIcon"
                 />
               </div>
@@ -109,38 +186,26 @@ const FilterPanel = ({
                   openDropdownIndex === 0 ? "open" : ""
                 }`}
               >
-                {openDropdownIndex === 0 && (
-                  <>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedFilters?.brand?.includes("Brand A")}
-                        onChange={() => handleFilterChange("brand", "Brand A")}
-                      />
-                      Brand A
-                    </label>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedFilters?.brand?.includes("Brand B")}
-                        onChange={() => handleFilterChange("brand", "Brand B")}
-                      />
-                      Brand B
-                    </label>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedFilters?.brand?.includes("Brand C")}
-                        onChange={() => handleFilterChange("brand", "Brand C")}
-                      />
-                      Brand C
-                    </label>
-                  </>
-                )}
+                {openDropdownIndex === 0 &&
+                  (brandCounts && Object.keys(brandCounts).length > 0 ? (
+                    Object.entries(filteredBrandCounts).map(
+                      ([brand, count]) => (
+                        <label key={brand}>
+                          <input
+                            type="checkbox"
+                            checked={selectedBrands.includes(brand)}
+                            onChange={() => handleBrandChange(brand)}
+                          />
+                          {brand} ({count})
+                        </label>
+                      )
+                    )
+                  ) : (
+                    <p className="noBrandsMessage">No brands available</p>
+                  ))}
               </div>
             </div>
 
-            {/* Price Range */}
             <div
               className={`detailDropdown ${
                 openDropdownIndex === 1 ? "open" : ""
@@ -171,7 +236,7 @@ const FilterPanel = ({
                           min="0"
                           max="150"
                           value={minPrice}
-                          onChange={handleMinChange}
+                          onChange={(e) => setMinPrice(Number(e.target.value))}
                           className="range-input"
                         />
                         <input
@@ -179,7 +244,7 @@ const FilterPanel = ({
                           min="0"
                           max="150"
                           value={maxPrice}
-                          onChange={handleMaxChange}
+                          onChange={(e) => setMaxPrice(Number(e.target.value))}
                           className="range-input"
                         />
                         <div className="slider-track"></div>
@@ -212,11 +277,63 @@ const FilterPanel = ({
                 )}
               </div>
             </div>
+            <div
+              className={`detailDropdown ${
+                openDropdownIndex === 2 ? "open" : ""
+              }`}
+            >
+              <div
+                className="detailDropdownHeader"
+                onClick={() => toggleDropdown(2)}
+              >
+                <span>Availability</span>
+                <img
+                  src={openDropdownIndex === 2 ? grayminus : grayplus}
+                  alt={openDropdownIndex === 2 ? "minus" : "plus"}
+                  className="dropdownIcon"
+                />
+              </div>
+              <div
+                className={`detailDropdownContent ${
+                  openDropdownIndex === 2 ? "open" : ""
+                }`}
+              >
+                {openDropdownIndex === 2 && (
+                  <>
+                    <div className="filterSection">
+                      <label className="filterOption">
+                        <input
+                          type="checkbox"
+                          checked={selectedAvailability.includes("inStock")}
+                          onChange={() => toggleAvailability("inStock")}
+                        />
+                        In stock {inStockCount}
+                      </label>
+                      <label className="filterOption">
+                        <input
+                          type="checkbox"
+                          checked={selectedAvailability.includes("outOfStock")}
+                          onChange={() => toggleAvailability("outOfStock")}
+                        />
+                        Out of stock {outOfStockCount}
+                      </label>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </li>
         </ul>
 
         <div className="cartFooterBottom">
-          <Link to="/checkout" onClick={onClose}></Link>
+          <div className="filterApplyAndReset">
+            <button onClick={applyFilters} className="filterApplyButton">
+              Apply
+            </button>
+            <p onClick={handleResetFilters} className="filterResetButton">
+              Remove All
+            </p>
+          </div>
         </div>
       </div>
     </CustomModal>
