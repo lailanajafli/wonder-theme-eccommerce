@@ -16,10 +16,10 @@
 // Pages
 @use "./pages/shop";
 @use "./pages/checkout";
-
+//
 
 // Detail Pages
-@use "./pages//detail//detail";
+@use "./pages/detail/detail";
 @use "./pages/detail/detailproduct";
 @use "./pages/detail/detailvideo";
 @use "./pages/detail/producthighlight";
@@ -29,8 +29,8 @@
 
 
 // Shop Pages
-@use "./pages//shop/shopcare";
-@use "./pages//shop/shopproducts";
+@use "./pages/shop/shopcare";
+@use "./pages/shop/shopproducts";
 
 
 
