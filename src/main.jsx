@@ -5,7 +5,7 @@ import App from './App.jsx'
 import { BrowserRouter } from "react-router-dom";
 
 // Styles
-import "./assets/scss/index.scss";
+import "src/assets/scss/index.scss";
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
