@@ -36,6 +36,7 @@
     }
   }
 
+  // 📱 Tablet ve Mobil Tasarım
   @media (max-width: 1024px) {
     flex-direction: column;
     text-align: center;
@@ -54,7 +55,7 @@ gap: 0px;
     }
 
     .imageContainer {
-      order: 1; 
+      order: 1; // Görseli üste al
     }
   }
 

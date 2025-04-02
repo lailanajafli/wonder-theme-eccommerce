@@ -123,15 +123,15 @@
       }
 
       .addToCartButton {
-        @media (max-width: 400px) {
-          flex-wrap: wrap;
-        }
         @include aboutUsBtn;
         margin-top: 0px;
         padding: 1rem 2rem;
         width: 100%;
         min-width: max-content;
         white-space: nowrap;
+      }
+      @media (max-width: 400px) {
+        flex-wrap: wrap;
       }
     }
     .detailDescriptionListCont {
@@ -153,9 +153,6 @@
     }
 
     .featuresBanner {
-      @media (max-width: 400px) {
-        flex-wrap: wrap;
-      }
       display: flex;
       margin-bottom: 10px;
       text-align: center;
@@ -168,7 +165,9 @@
         height: 80px;
         object-fit: cover;
       }
-     
+      @media (max-width: 400px) {
+        flex-wrap: wrap;
+      }
     }
 
     .detailDropdown {

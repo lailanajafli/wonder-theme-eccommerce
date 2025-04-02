@@ -33,13 +33,13 @@
     will-change: transform;
 
     img {
+      transition: transform 0.1s ease-out;
       @media (max-width: 730px) {
        width: 430px !important;
       }
       @media (max-width: 526px) {
        width: 230px !important;
       }
-      transition: transform 0.1s ease-out;
     }
   }
   

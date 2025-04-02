@@ -62,6 +62,7 @@
     }
   }
 
+  // Tablet ve Mobil (1024px ve aşağısı)
   @media screen and (max-width: 1024px) {
     flex-direction: column;
 
@@ -94,6 +95,7 @@
     }
   }
 
+  // Kiçik Mobil (768px ve aşağısı)
   @media screen and (max-width: 768px) {
     .perfectHairLeft {
       .perfectHairProduct {
@@ -122,6 +124,7 @@
       }
     }
   }
+  // Mini Mobil (480px ve aşağısı)
   @media screen and (max-width: 480px) {
     .perfectHairLeft {
       .perfectHairProduct {
