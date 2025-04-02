@@ -91,14 +91,14 @@
   font-weight: weight;
   font-style: normal;
   transition: background 0.3s;
+  @media (max-width: 768px) {
+    padding: 0.6rem 1.5rem;
+  }
 
   &:hover {
     background-color: #222222;
   }
 
-  @media (max-width: 768px) {
-    padding: 0.6rem 1.5rem;
-  }
 }
 
 @mixin normalText($color: #000, $size: 16px, $weight: normal, $style: normal) {
