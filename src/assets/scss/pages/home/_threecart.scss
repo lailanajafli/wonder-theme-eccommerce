@@ -1,21 +1,21 @@
 .threeCartsSection {
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 900px) {
-    flex-direction: column;
-  }
   .threCartProductCard {
+    @media (max-width: 900px) {
+      width: 100%;
+    }
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
   
-    @media (max-width: 900px) {
-      width: 100%;
-    }
   
     .productImageWrapper {
       width: 100%;
