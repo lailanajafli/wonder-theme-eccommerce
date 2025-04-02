@@ -91,9 +91,6 @@
   font-weight: weight;
   font-style: normal;
   transition: background 0.3s;
-  @media (max-width: 768px) {
-    padding: 0.6rem 1.5rem;
-  }
 
   &:hover {
     background-color: #222222;
