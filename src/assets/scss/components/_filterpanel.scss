@@ -128,11 +128,11 @@
           }
 
           input[type="checkbox"] {
-            appearance: none;  // Default checkbox stilini silir
+            appearance: none; 
             width: 25px;
             height: 25px;
-            border: 1px solid #ccc; // Çərçivə rəngi
-            border-radius: 5px; // Küncləri yumşaltmaq
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -144,12 +144,12 @@
               border-color: #000000;
             }
             &:checked {
-              background-color: #ffffff; // Checkbox dolu olduqda (seçildikdə) fon rəngi
-              border-color: #000000; // Seçildikdə çərçivənin rəngi
+              background-color: #ffffff;
+              border-color: #000000; 
               &::after {
-                content: "✔"; // Tik işarəsi əlavə edir
+                content: "✔"; 
                 font-size: 16px;
-                color: rgb(0, 0, 0); // Tik işarəsinin rəngi
+                color: rgb(0, 0, 0);
               }
             }
           }

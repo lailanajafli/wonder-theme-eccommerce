@@ -306,16 +306,14 @@ margin-bottom: 80px;
   padding: 25px;
   justify-content: center;
   margin: 0 auto;
-  // Other styles for the products grid...
 }
 
-// Medya sorguları ile küçük ekranlarda boyutları ayarlama
 @media (max-width: 768px) {
   .products {
     grid-template-columns: repeat(
       auto-fill,
       minmax(240px, 1fr)
-    ); // Daha küçük ekranlar için daha küçük kartlar
+    ); 
   }
 }
 
@@ -324,10 +322,10 @@ margin-bottom: 80px;
     grid-template-columns: repeat(
       auto-fill,
       minmax(200px, 1fr)
-    ); // Küçük ekranlarda daha da küçük kartlar
+    ); 
   }
 
   .productCard {
-    padding: 15px; // Mobilde daha fazla alan bırakmak için iç padding
+    padding: 15px;
   }
 }

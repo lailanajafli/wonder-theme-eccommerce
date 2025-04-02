@@ -77,7 +77,7 @@ const ShopProducts = ({ category }) => {
   const [stockCounts, setStockCounts] = useState({ inStock: 0, outOfStock: 0 });
 
   useEffect(() => {
-    // Filtreleme işlemi
+    // Filtr
     const filtered = products.filter((product) => {
       const matchesCategory = category ? product.category === category : true;
       const matchesBrand = !filters.brands.length || filters.brands.includes(product.brand);
@@ -89,7 +89,7 @@ const ShopProducts = ({ category }) => {
     const inStockCount = filtered.filter((product) => product.stock > 0).length;
     const outOfStockCount = filtered.length - inStockCount;
   
-    // Sıralama işlemi
+  
     switch (sortOption) {
       case "PriceLowToHigh":
         filtered.sort((a, b) => a.price - b.price);
