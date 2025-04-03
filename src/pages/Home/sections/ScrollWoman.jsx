@@ -6,7 +6,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ScrollWoman = () => {
   useEffect(() => {
-    if (typeof window === "undefined") return; // SSR problemi həll olunur
+    // Sayfa ilk yüklendiğinde 1 kez yenile
+    if (!sessionStorage.getItem("scrolled")) {
+      sessionStorage.setItem("scrolled", "true");
+      window.location.reload();
+    }
 
     gsap.to(".landingSection", {
       scrollTrigger: {
@@ -55,9 +59,6 @@ const ScrollWoman = () => {
         },
       }
     );
-
-    ScrollTrigger.refresh(); // Vercel'də düzgün ölçü götürmək üçün əlavə edilir
-
   }, []);
 
   return (
