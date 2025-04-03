@@ -36,11 +36,15 @@
         width: 5px;
         background: #ffffff;
         cursor: grab;
+        cursor: -webkit-grab;
         display: flex;
         align-items: center;
         justify-content: center;
         transform: translateX(-50%);
-
+        .sliderHandle:active {
+          cursor: grabbing;
+          cursor: -webkit-grabbing; // Safari için
+        }
         .sliderCircle {
           width: 50px;
           padding: 5px;

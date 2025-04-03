@@ -13,52 +13,52 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }) => {
     const { left, width } = sliderRef.current.getBoundingClientRect();
     let newPosition = ((clientX - left) / width) * 100;
     newPosition = Math.max(0, Math.min(100, newPosition));
-    setSliderPosition(newPosition);
+
+    requestAnimationFrame(() => setSliderPosition(newPosition));
   };
 
   const handleMove = (e) => {
-    if ((!isDragging.current && !isTapDragging.current) || !sliderRef.current)
-      return;
+    if (!isDragging.current || !sliderRef.current) return;
     let clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
     if (clientX) updatePosition(clientX);
   };
 
   const handleDown = (e) => {
-    const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
-    if (clientX) updatePosition(clientX); // İlk tıklamada slider'ı hareket ettir
+    e.preventDefault();
+    isDragging.current = true;
+    let clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+    if (clientX) updatePosition(clientX);
 
-    const currentTime = new Date().getTime();
-    if (currentTime - lastTap.current < 300) {
-      isTapDragging.current = true;
-    }
-    lastTap.current = currentTime;
 
     isDragging.current = true;
     document.addEventListener("pointermove", handleMove);
     document.addEventListener("pointerup", handleUp);
+    document.addEventListener("touchmove", handleMove, { passive: false });
+    document.addEventListener("touchend", handleUp);
   };
 
   const handleUp = () => {
     isDragging.current = false;
-    isTapDragging.current = false;
     document.removeEventListener("pointermove", handleMove);
     document.removeEventListener("pointerup", handleUp);
+    document.removeEventListener("touchmove", handleMove);
+    document.removeEventListener("touchend", handleUp);
   };
 
   useEffect(() => {
+    document.addEventListener("pointermove", handleMove);
+    document.addEventListener("touchmove", handleMove, { passive: false });
+
     return () => {
       document.removeEventListener("pointermove", handleMove);
-      document.removeEventListener("pointerup", handleUp);
+      document.removeEventListener("touchmove", handleMove);
     };
   }, []);
 
   return (
     <section className="afterBeforeSection">
       <div
-        className="sliderContainer"
-        ref={sliderRef}
-        onPointerDown={handleDown} // Tıklanan yere sliderı götür
-      >
+        className="sliderContainer" ref={sliderRef} onPointerDown={handleDown}  onTouchStart={handleDown}>
         <div className="imageContainer">
           <img
             src="https://wonder-theme-beauty.myshopify.com/cdn/shop/files/beauty-after.jpg?v=1734648145&width=1500"
