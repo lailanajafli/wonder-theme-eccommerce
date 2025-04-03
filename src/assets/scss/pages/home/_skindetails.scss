@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem 3rem 3rem 3rem;
-  background-color: #F7F3EE;
+  padding: 4rem 2rem 3rem 2rem;
+  background-color: #f7f3ee;
 
   .yourDailyText {
     color: #000000;
@@ -16,7 +16,7 @@
   }
 
   .girlFace {
-    position: relative; 
+    position: relative;
     width: 100%;
     img {
       width: 100%;
@@ -71,21 +71,58 @@
     }
   }
 
-
-@media (max-width: 768px) {
-  .yourDailyText {
-    font-size: 20px;
-  }
-  .hotspot {
-    width: 15px;
-    height: 15px;
-    border-width: 4px;
-    &::after {
-      width: 18px;
-      height: 18px;
+  @media (max-width: 768px) {
+    padding: 4rem 1rem 3rem 1rem;
+    .girlFace img{
+      height: 200px;
+      object-fit: cover;
+    }
+    .routineCard {
+      width: 280px; 
+      height: 100px; 
+      padding: 9px;
+      .productInfo p {
+        font-size: 12px;
+      }
+      .dailyMiniImg img {
+        width: 70px;
+      }
+    }
+    .yourDailyText {
+      font-size: 20px;
+    }
+    .hotspot {
+      width: 15px;
+      height: 15px;
+      border-width: 4px;
+      &::after {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
-}
+  @media (max-width: 488px) {
+    .girlFace img{
+      height: 200px;
+      object-fit: cover;
+    }
+    .routineCard {
+      width: 280px; 
+      height: 87px; 
+      padding: 9px;
+      .productInfo{
+        gap: 2px;
+      }
+      .productInfo p {
+        font-size: 10px;
+      }
+      .productInfo span {
+        font-size: 10px;
+      }
+      .dailyMiniImg img {
+        width: 60px;
+      }
+    }
 
-
+  }
 }
