@@ -6,12 +6,23 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ScrollWoman = () => {
   useEffect(() => {
-    // Sayfa ilk yüklendiğinde 1 kez yenile
-    if (!sessionStorage.getItem("scrolled")) {
-      sessionStorage.setItem("scrolled", "true");
-      window.location.reload();
-    }
+    // İlk scroll kontrolü
+    const handleScroll = () => {
+      if (!sessionStorage.getItem("scrolled")) {
+        sessionStorage.setItem("scrolled", "true");
+        window.location.reload();
+      }
+    };
 
+    // Scroll event'ini dinle
+    window.addEventListener("scroll", handleScroll, { once: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     gsap.to(".landingSection", {
       scrollTrigger: {
         trigger: ".landingSection",
