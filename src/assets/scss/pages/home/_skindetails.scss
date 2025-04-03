@@ -1,4 +1,4 @@
-.dailyRoutineSection {
+.skinDailyRoutineSection {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   }
 
   .girlFace {
-    position: relative; // Hotspot'ların konumlandırılması için gerekli
+    position: relative; 
     width: 100%;
     img {
       width: 100%;

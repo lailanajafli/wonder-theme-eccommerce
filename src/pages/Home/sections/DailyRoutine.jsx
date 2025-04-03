@@ -50,7 +50,7 @@ const DailyRoutine = () => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [visibleProductIndex, setVisibleProductIndex] = useState(0);
-                                                                                                          
+
   const togglePlayPause = () => {
     if (videoRef.current.paused) {
       videoRef.current.play();
@@ -85,17 +85,39 @@ const DailyRoutine = () => {
     };
   }, []);
 
-  const handleAddToCart = useCallback((product) => {
-    dispatch(addItem({ 
-      id: product.id,
-      brand: product.brand,
-      title: product.title,  
-      price: product.price,
-      image: product.image,
-      quantity: 1
-    }));
-    dispatch(toggleCartModal());
-  }, [dispatch]);
+  const handleAddToCart = useCallback(
+    (product) => {
+      dispatch(
+        addItem({
+          id: product.id,
+          brand: product.brand,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+        })
+      );
+      dispatch(toggleCartModal());
+    },
+    [dispatch]
+  );
+
+
+
+  const getTranslateX = (index) => {
+    let baseOffset;
+  
+    if (window.innerWidth > 768) {
+      baseOffset = 350;
+    } else if (window.innerWidth > 480) {
+      baseOffset = 280;
+    } else {
+      baseOffset = 210; // 480px ve altı 
+    }
+  
+    return (index / 25 - visibleProductIndex) * baseOffset;
+  };
+  
 
   return (
     <section className="dailyRoutineSection">
@@ -118,19 +140,18 @@ const DailyRoutine = () => {
           }`}
         >
           {products.map((product, index) => (
-           <RoutineCard
-           key={product.id}
-           product={product}
-           brand={product.brand}
-           image={product.image}
-           title={product.title}
-           price={formatPrice(product.price, product.currency)}
-           style={{
-             transform: `translateX(${(index / 25 - visibleProductIndex) * 350}px)`,
-           }}
-           onCartClick={() => handleAddToCart(product)} // 🔹 Buraya əlavə et
-         />
-         
+            <RoutineCard
+              key={product.id}
+              product={product}
+              brand={product.brand}
+              image={product.image}
+              title={product.title}
+              price={formatPrice(product.price, product.currency)}
+              style={{
+                transform: `translateX(${getTranslateX(index)}px)`,
+              }}
+              onCartClick={() => handleAddToCart(product)} // 🔹 Buraya əlavə et
+            />
           ))}
         </div>
       </div>

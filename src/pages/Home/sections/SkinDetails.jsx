@@ -51,7 +51,7 @@ const SkinDetails = () => {
   };
 
   return (
-    <section className="dailyRoutineSection" onClick={handleOutsideClick}>
+    <section className="skinDailyRoutineSection" onClick={handleOutsideClick}>
       <p className="yourDailyText">Love Your Skin</p>
       <div className="girlFace">
         <img
