@@ -25,24 +25,33 @@ const FilterPanel = ({
   const [maxPrice, setMaxPrice] = useState(150);
 
   const toggleAvailability = (status) => {
-    setSelectedAvailability((prev) =>
-      prev.includes(status)
-        ? prev.filter((item) => item !== status)
-        : [...prev, status]
-    );
+    setTempFilters((prev) => {
+      const updatedAvailability = prev.availability.includes(status)
+        ? prev.availability.filter((item) => item !== status)
+        : [...prev.availability, status];
+  
+      console.log("Updated availability:", updatedAvailability); // BURADA LOG YAZ
+  
+      return {
+        ...prev,
+        availability: updatedAvailability,
+      };
+    });
   };
+  
 
   const filteredBrandCounts = brandCounts;
 
 
   useEffect(() => {
-    onFilterChange({
+    setTempFilters({
       brands: selectedBrands,
       minPrice,
       maxPrice,
       availability: selectedAvailability,
     });
   }, [selectedBrands, minPrice, maxPrice, selectedAvailability]);
+  
 
   const minLimit = 0;
   const maxLimit = 150;
@@ -95,36 +104,60 @@ const FilterPanel = ({
 
   
   const handleBrandChange = (brand) => {
-    let updatedBrands = [...selectedBrands];
-    if (updatedBrands.includes(brand)) {
-      updatedBrands = updatedBrands.filter((b) => b !== brand);
-    } else {
-      updatedBrands.push(brand);
-    }
-    setSelectedBrands(updatedBrands);
-    onFilterChange({ brands: updatedBrands });
+    setTempFilters((prev) => {
+      const isSelected = prev.brands.includes(brand);
+      const updatedBrands = isSelected
+        ? prev.brands.filter((b) => b !== brand)
+        : [...prev.brands, brand];
+  
+      // Markaların doğru şəkildə əlavə olunub-olunmadığını yoxla
+      console.log("Updated brands array:", updatedBrands);
+  
+      return {
+        ...prev,
+        brands: updatedBrands,
+      };
+    });
   };
+  
+  
 
   const [tempFilters, setTempFilters] = useState({
-    brands: selectedBrands,
-    minPrice,
-    maxPrice,
+    brands: [],
+    minPrice: minLimit,
+    maxPrice: maxLimit,
+    availability: [],
   });
-
+  
   const applyFilters = () => {
+    console.log("Applying filters:", tempFilters);
     setSelectedBrands(tempFilters.brands);
     setMinPrice(tempFilters.minPrice);
     setMaxPrice(tempFilters.maxPrice);
+    setSelectedAvailability(tempFilters.availability);
+  
     onFilterChange(tempFilters);
+    onClose(); // Paneli kapat
   };
+  
 
   const handleResetFilters = () => {
+    const cleared = {
+      brands: [],
+      minPrice: minLimit,
+      maxPrice: maxLimit,
+      availability: [],
+    };
+  
     setSelectedBrands([]);
     setMinPrice(minLimit);
     setMaxPrice(maxLimit);
-    onFilterChange({ brands: [], minPrice: minLimit, maxPrice: maxLimit });
+    setSelectedAvailability([]);
+  
+    setTempFilters(cleared);
+    onFilterChange(cleared);
   };
-
+  
   const removeBrand = (brand) => {
     setSelectedBrands((prev) => prev.filter((b) => b !== brand));
   };
@@ -166,7 +199,7 @@ const FilterPanel = ({
           </div>
           <li className="cartItem">
             <div
-              className={`detailDropdown ${
+              className={`detailDropdown ${ 
                 openDropdownIndex === 0 ? "open" : ""
               }`}
             >
@@ -193,7 +226,7 @@ const FilterPanel = ({
                         <label key={brand}>
                           <input
                             type="checkbox"
-                            checked={selectedBrands.includes(brand)}
+                            checked={tempFilters.brands.includes(brand)}
                             onChange={() => handleBrandChange(brand)}
                           />
                           {brand} ({count})
@@ -235,7 +268,7 @@ const FilterPanel = ({
                           type="range"
                           min="0"
                           max="150"
-                          value={minPrice}
+                         value={tempFilters.minPrice}
                           onChange={(e) => setMinPrice(Number(e.target.value))}
                           className="range-input"
                         />
@@ -243,7 +276,7 @@ const FilterPanel = ({
                           type="range"
                           min="0"
                           max="150"
-                          value={maxPrice}
+                          value={tempFilters.maxPrice}
                           onChange={(e) => setMaxPrice(Number(e.target.value))}
                           className="range-input"
                         />
@@ -254,7 +287,7 @@ const FilterPanel = ({
                           <span>USD</span>
                           <input
                             type="number"
-                            value={minPrice}
+                           value={tempFilters.minPrice}
                             onChange={handleMinChange}
                             min={minLimit}
                             max={maxPrice - 1}
@@ -265,7 +298,7 @@ const FilterPanel = ({
                           <span>USD</span>
                           <input
                             type="number"
-                            value={maxPrice}
+                            value={tempFilters.maxPrice}
                             onChange={handleMaxChange}
                             min={minPrice + 1}
                             max={maxLimit}
@@ -304,7 +337,7 @@ const FilterPanel = ({
                       <label className="filterOption">
                         <input
                           type="checkbox"
-                          checked={selectedAvailability.includes("inStock")}
+                          checked={tempFilters.availability.includes("inStock")}
                           onChange={() => toggleAvailability("inStock")}
                         />
                         In stock {inStockCount}
@@ -312,7 +345,7 @@ const FilterPanel = ({
                       <label className="filterOption">
                         <input
                           type="checkbox"
-                          checked={selectedAvailability.includes("outOfStock")}
+                          checked={tempFilters.availability.includes("outOfStock")}
                           onChange={() => toggleAvailability("outOfStock")}
                         />
                         Out of stock {outOfStockCount}
@@ -327,7 +360,7 @@ const FilterPanel = ({
 
         <div className="cartFooterBottom">
           <div className="filterApplyAndReset">
-            <button onClick={applyFilters} className="filterApplyButton">
+            <button onClick={  applyFilters} className="filterApplyButton">
               Apply
             </button>
             <p onClick={handleResetFilters} className="filterResetButton">
@@ -340,4 +373,4 @@ const FilterPanel = ({
   );
 };
 
-export default FilterPanel;
+export default FilterPanel;         

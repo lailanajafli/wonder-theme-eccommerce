@@ -345,6 +345,90 @@ const products = [
     created_at: "2025-02-10",
   },
   {
+    id: 16,
+    title: "Patchouli essential oil",
+    description: "Chemical-free and synthetic-free.",
+    price: 13.90,
+    brand: "MOKOSH",
+    brandImage:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/bkind_20964610-a240-4c93-9e8a-b016c9ef244b.png?v=1727383420&width=200",
+    currency: "USD",
+    image:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/pink.jpg?v=1644567419&width=1000",
+      otherImages: [
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/1260-paczuli-hq.jpg?v=1644567419&width=500",
+
+      ],
+      hoverImage:
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/1260-paczuli-hq.jpg?v=1644567419&width=500",
+    category: "Essential Care",
+    created_at: "2024-09-10",
+  },
+  {
+    id: 17,
+    title: "Argan oil for nails",
+    description: "Strengthens nails",
+    price: 19.00,
+    brand: "MOKOSH",
+    brandImage:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/bkind_20964610-a240-4c93-9e8a-b016c9ef244b.png?v=1727383420&width=200",
+    currency: "USD",
+    image:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/mokosh-argan-nail-care.jpg?v=1660679309&width=1200",
+      otherImages: [
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/argan-beauty_a7548367-e940-4495-8b64-a13b5cd30108.jpg?v=1660832651&width=1200",
+
+      ],
+      hoverImage:
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/argan-beauty_a7548367-e940-4495-8b64-a13b5cd30108.jpg?v=1660832651&width=750",
+        mlOptions: ["12 ml", "24 ml", "36 ml"],
+    category: "Essential Care",
+    created_at: "2024-12-12",
+  },
+  {
+    id: 18,
+    title: "Shampoo Bar - coily and curly hair",
+    description: "Easy to foam",
+    price: 80.00,
+    brand: "BKIND",
+    brandImage:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/bkind_20964610-a240-4c93-9e8a-b016c9ef244b.png?v=1727383420&width=200",
+    currency: "USD",
+    image:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/bkind-grey.jpg?v=1660765271&width=1680",
+      otherImages: [
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/98.webp?v=1660765271&width=500",
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/R-PAMPOU_172052c7-5ceb-4912-93b0-d1bb8e13a59b.webp?v=1660765269&width=2048"
+
+      ],
+      hoverImage:
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/98.webp?v=1660765271&width=500",
+    category: "Hair Care",
+    created_at: "2025-04-06",
+  },
+  {
+    id: 19,
+    title: "Nourishing hand balm - balsam, pine cedar",
+    description: "The balm contains essential oils of balsam, pine and cedar",
+    price: 96.00,
+    brand: "BKIND",
+    brandImage:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/bkind_20964610-a240-4c93-9e8a-b016c9ef244b.png?v=1727383420&width=200",
+    currency: "USD",
+    image:
+      "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/bkind-balm.jpg?v=1661014192&width=1200",
+      otherImages: [
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/55.webp?v=1661014192&width=500",
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/56.webp?v=1661014192&width=500",
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/bkind-2.jpg?v=1661014192&width=1200"
+
+      ],
+      hoverImage:
+        "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/55.webp?v=1661014192&width=1000",
+    category: "Hand Care",
+    created_at: "2025-03-15",
+  },
+  {
     brand: "Osea",
     brandImage:
       "https://wonder-theme-beauty.myshopify.com/cdn/shop/files/osea_249c4ef0-4671-4810-910a-54461c1a863d.png?v=1727383398&width=200",

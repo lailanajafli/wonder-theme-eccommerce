@@ -24,6 +24,7 @@ const ShopProducts = ({ category }) => {
     brands: [],
     minPrice: 0,
     maxPrice: 150,
+    availability: [],
   });
 
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -82,9 +83,15 @@ const ShopProducts = ({ category }) => {
       const matchesCategory = category ? product.category === category : true;
       const matchesBrand = !filters.brands.length || filters.brands.includes(product.brand);
       const matchesPrice = product.price >= filters.minPrice && product.price <= filters.maxPrice;
-  
-      return matchesCategory && matchesBrand && matchesPrice;
+      const matchesStock =
+      !filters.availability.length ||
+      (filters.availability.includes("inStock") && product.stock > 0) ||
+      (filters.availability.includes("outOfStock") && product.stock === 0);
+    
+    
+      return matchesCategory && matchesBrand && matchesPrice && matchesStock;
     });
+    
 
     const inStockCount = filtered.filter((product) => product.stock > 0).length;
     const outOfStockCount = filtered.length - inStockCount;
@@ -245,7 +252,11 @@ const ShopProducts = ({ category }) => {
       <FilterPanel
         isOpen={isFilterOpen}
         onClose={() => setIsFilterOpen(false)}
-        onFilterChange={handleFilterChange}
+        onFilterChange={(filters) => {
+          console.log("Gələn filterlər:", filters);
+          setFilters(filters); // <-- bu lazımdır
+        }}
+        
         brandCounts={calculateBrandCounts(filteredProducts)}
         inStockCount={stockCounts.inStock}
         outOfStockCount={stockCounts.outOfStock}
