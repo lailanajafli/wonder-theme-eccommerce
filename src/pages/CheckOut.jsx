@@ -329,7 +329,7 @@ const CheckOut = () => {
                     </span>
                   </div>
                   <span>
-                    {item.title} - ${item.price.toFixed(2)}
+                    {item.title}{item.name} - ${item.price.toFixed(2)}
                   </span>
                 </li>
               ))}

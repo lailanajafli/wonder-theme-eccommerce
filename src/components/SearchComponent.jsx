@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import close from "../assets/images/svg/close.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL, BASE_URL } from "../api/api";
+import { API_URL, BASE_URL } from "../api/constants/base_url";
 import { div } from "framer-motion/client";
 import { Link } from "react-router-dom";
 

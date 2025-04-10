@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL, BASE_URL } from "../../../api/api";
+import { API_URL, BASE_URL } from "../../../api/constants/base_url";
 import { Link } from "react-router-dom";
 import filterIcon from "../../../assets/images/svg/filterIcon.svg";
-import { toggleCartModal } from '../../../redux/slices/cartSlices';
 import { useDispatch, useSelector } from "react-redux";
 import FilterPanel from "../../../components/FilterPanel";
+import { toggleCartModal, addItem } from "../../../redux/slices/cartSlices";
 
 const ShopProducts = ({ category }) => {
   const [products, setProducts] = useState([]);
@@ -62,18 +62,20 @@ const ShopProducts = ({ category }) => {
         brandCounts[normalizedBrand] = (brandCounts[normalizedBrand] || 0) + 1;
       }
     });
-  
+
     const uniqueBrands = {};
     Object.keys(brandCounts).forEach((brand) => {
-      const originalBrand = products.find((p) => p.brand?.toLowerCase() === brand)?.brand;
-      uniqueBrands[originalBrand] = (uniqueBrands[originalBrand] || 0) + brandCounts[brand];
+      const originalBrand = products.find(
+        (p) => p.brand?.toLowerCase() === brand
+      )?.brand;
+      uniqueBrands[originalBrand] =
+        (uniqueBrands[originalBrand] || 0) + brandCounts[brand];
     });
-  
+
     return uniqueBrands;
   };
 
   const brandCounts = getBrandCounts();
-
 
   const [stockCounts, setStockCounts] = useState({ inStock: 0, outOfStock: 0 });
 
@@ -81,22 +83,21 @@ const ShopProducts = ({ category }) => {
     // Filtr
     const filtered = products.filter((product) => {
       const matchesCategory = category ? product.category === category : true;
-      const matchesBrand = !filters.brands.length || filters.brands.includes(product.brand);
-      const matchesPrice = product.price >= filters.minPrice && product.price <= filters.maxPrice;
+      const matchesBrand =
+        !filters.brands.length || filters.brands.includes(product.brand);
+      const matchesPrice =
+        product.price >= filters.minPrice && product.price <= filters.maxPrice;
       const matchesStock =
-      !filters.availability.length ||
-      (filters.availability.includes("inStock") && product.stock > 0) ||
-      (filters.availability.includes("outOfStock") && product.stock === 0);
-    
-    
+        !filters.availability.length ||
+        (filters.availability.includes("inStock") && product.stock > 0) ||
+        (filters.availability.includes("outOfStock") && product.stock === 0);
+
       return matchesCategory && matchesBrand && matchesPrice && matchesStock;
     });
-    
 
     const inStockCount = filtered.filter((product) => product.stock > 0).length;
     const outOfStockCount = filtered.length - inStockCount;
-  
-  
+
     switch (sortOption) {
       case "PriceLowToHigh":
         filtered.sort((a, b) => a.price - b.price);
@@ -105,10 +106,14 @@ const ShopProducts = ({ category }) => {
         filtered.sort((a, b) => b.price - a.price);
         break;
       case "Newest":
-        filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        filtered.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
         break;
       case "Oldest":
-        filtered.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+        filtered.sort(
+          (a, b) => new Date(a.created_at) - new Date(b.created_at)
+        );
         break;
       case "AlphabeticalAZ":
         filtered.sort((a, b) => a.name.localeCompare(b.name));
@@ -122,12 +127,10 @@ const ShopProducts = ({ category }) => {
       default:
         break;
     }
-  
+
     setFilteredProducts(filtered);
     setStockCounts({ inStock: inStockCount, outOfStock: outOfStockCount });
   }, [filters, products, sortOption, category]);
-  
-  
 
   const handleDropdownSelection = (option) => {
     handleSortChange(option);
@@ -143,7 +146,18 @@ const ShopProducts = ({ category }) => {
       return acc;
     }, {});
   };
-  
+
+  const handleAddToCart = (product) => {
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      image: `${BASE_URL}/${product.image}`,
+      price: product.price,
+      quantity: 1,
+    };
+    dispatch(addItem(cartItem));
+    dispatch(toggleCartModal());
+  };
 
   return (
     <div className="shopProductsContainer">
@@ -151,7 +165,10 @@ const ShopProducts = ({ category }) => {
         <p className="productCount">{filteredProducts.length} products</p>
 
         <div className="filterFeaturedCont">
-          <div onClick={() => setIsFilterOpen(true)} className="filterProductsCont">
+          <div
+            onClick={() => setIsFilterOpen(true)}
+            className="filterProductsCont"
+          >
             <img src={filterIcon} alt="filter Icon" />
             <p className="filterProductsText">Filter</p>
           </div>
@@ -161,7 +178,7 @@ const ShopProducts = ({ category }) => {
               className="featuredButton"
               onClick={() => setIsFeaturedOpen(!isFeaturedOpen)}
             >
-              <span>Sort by: </span> {sortOption.replace(/([A-Z])/g, ' $1')}
+              <span>Sort by: </span> {sortOption.replace(/([A-Z])/g, " $1")}
             </button>
 
             {isFeaturedOpen && (
@@ -236,9 +253,18 @@ const ShopProducts = ({ category }) => {
                   alt={product.name}
                 />
               </Link>
-              <button className="chooseOption">
-                <p>ADD TO CART</p>
-              </button>
+              {product.stock > 0 ? (
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="chooseOption"
+                >
+                  <p>ADD TO CART</p>
+                </button>
+              ) : (
+                <button className="chooseOption disabled" disabled>
+                  <p>OUT OF STOCK</p>
+                </button>
+              )}
             </div>
 
             <div className="sliderTextCont">
@@ -256,7 +282,6 @@ const ShopProducts = ({ category }) => {
           console.log("Gələn filterlər:", filters);
           setFilters(filters); // <-- bu lazımdır
         }}
-        
         brandCounts={calculateBrandCounts(filteredProducts)}
         inStockCount={stockCounts.inStock}
         outOfStockCount={stockCounts.outOfStock}

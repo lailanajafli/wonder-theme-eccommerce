@@ -319,6 +319,7 @@ const products = [
         "https://wonder-theme-beauty.myshopify.com/cdn/shop/products/MasqueRose-Claudine_Rosehandband106-modif_720x_2721450b-5319-4c17-88a7-f184fc6f88af.webp?v=1661113363&width=1000",
     category: "Hand Care",
     url: "https://wonder-theme-beauty.myshopify.com/products/bkind-algae-peel-off-mask",
+    inStock: false,
     created_at: "2025-02-10",
   },
   {

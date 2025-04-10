@@ -66,7 +66,7 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
                 </div>
                 <div className="cartProductNameContTop">
                 <h4 className="cartProductName">
-                  <Link>{item.title}</Link>
+                  <Link>{item.name}{item.title}</Link>
                 </h4>
                 <div className="counterAndPrice">
                 <div className="counterBin">
