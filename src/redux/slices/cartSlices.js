@@ -31,14 +31,24 @@ const cartSlice = createSlice({
       state.totalPrice = parseFloat(
         (state.totalPrice + newItem.price * newItem.quantity).toFixed(2)
       );
-      state.cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);
+      state.cartCount = state.cart.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
       updateLocalStorage(state);
     },
 
     removeItem: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
-      state.totalPrice = state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-      state.cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);
+      state.totalPrice = state.cart.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      );
+      state.cartCount = state.cart.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+
       updateLocalStorage(state);
     },
 
@@ -55,8 +65,14 @@ const cartSlice = createSlice({
           state.cart = state.cart.filter((cartItem) => cartItem.id !== id);
         }
 
-        state.totalPrice = state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-        state.cartCount = state.cart.reduce((acc, item) => acc + item.quantity, 0);
+        state.totalPrice = state.cart.reduce(
+          (acc, item) => acc + item.price * item.quantity,
+          0
+        );
+        state.cartCount = state.cart.reduce(
+          (acc, item) => acc + item.quantity,
+          0
+        );
         updateLocalStorage(state);
       }
     },
@@ -76,8 +92,36 @@ const cartSlice = createSlice({
     closeCartModal: (state) => {
       state.isCartModalOpen = false;
     },
+
+    syncCartWithProducts: (state, action) => {
+      const availableProducts = action.payload;
+      const filteredCart = state.cart.filter((cartItem) =>
+        availableProducts.some((product) => product.id === cartItem.id)
+      );
+
+      state.cart = filteredCart;
+      state.cartCount = filteredCart.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+      state.totalPrice = parseFloat(
+        filteredCart
+          .reduce((acc, item) => acc + item.price * item.quantity, 0)
+          .toFixed(2)
+      );
+
+      updateLocalStorage(state);
+    },
   },
 });
 
-export const { addItem, removeItem, increaseDecrease, clearCart, toggleCartModal, closeCartModal } = cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  increaseDecrease,
+  clearCart,
+  toggleCartModal,
+  closeCartModal,
+  syncCartWithProducts,
+} = cartSlice.actions;
 export default cartSlice.reducer;

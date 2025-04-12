@@ -7,7 +7,7 @@ import "swiper/css";
 import { useDispatch } from "react-redux";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import { addItem, toggleCartModal } from "../../../redux/slices/cartSlices"; // 🔹 Redux Action-ları import edildi
+import { addItem, toggleCartModal } from "../../../redux/slices/cartSlices"; 
 
 
 export default function VideoSlider({ style, showRoutineCard = true, useStaticData = false, title = "Best Skincare Products" }) {

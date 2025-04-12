@@ -1,45 +1,79 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { API_URL, BASE_URL } from "../../../api/constants/base_url";
 import { addItem, toggleCartModal } from "../../../redux/slices/cartSlices";
-import products from "../../../db/products";
+import productsData from "../../../db/products";
 import grayminus from "../../../assets/images/svg/grayminus.svg";
 import grayplus from "../../../assets/images/svg/grayplus.svg";
 import plus from "../../../assets/images/svg/plus.svg";
 import minus from "../../../assets/images/svg/minus.svg";
+import axios from "axios";
 
 export default function DetailProduct({ title, items }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(1);
-
   const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id));
 
-  if (!product) return <h2>Məhsul tapılmadı</h2>;
-
-  const thumbnails = product.otherImages
-    ? [product.image, ...product.otherImages]
-    : [product.image];
-
+  // Tüm hook'ları en başta tanımladık
+  const [quantity, setQuantity] = useState(1);
+  const [productD, setProduct] = useState(null); // Məhsul məlumatlarını saxlayacaq state
+  const [loading, setLoading] = useState(true); // Yükləmə vəziyyəti
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animClass, setAnimClass] = useState("");
+  const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
 
-  const increaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
-  };
+  // API'den veri çekme işlemi ve ürün bulma işlemi
+  useEffect(() => {
+    const localProduct = productsData.find((p) => p.id === id);
 
-  const decreaseQuantity = () => {
-    setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
-  };
+    
+    if (localProduct) {
+      setProduct(localProduct);
+      setLoading(false);
+    } else {
+      axios
+        .get(`${API_URL}/products/${id}`)
+        .then((response) => {
+          setProduct(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Məhsul tapılmadı:", error);
+          setLoading(false);
+        });
+    }
+  }, [id]); // `id` dəyişdikdə yenidən işləsin
+
+  // Eğer ürün yüklendiyse işlemler yapılır
+  if (loading) {
+    return <h2>Yüklənir...</h2>;
+  }
+
+  if (!productD) return <h2>Məhsul tapılmadı</h2>;
+
+  const thumbnails =
+  productD.otherImages && productD.otherImages.length > 0
+    ? [productD.image, ...productD.otherImages]
+    : [productD.image];
+
+// URL-ləri düzəlt (backdən gələnlər üçün)
+const thumbnailsWithUrl = thumbnails.map((img) =>
+  img.startsWith("http")
+    ? img
+    : `${BASE_URL}/${img.replace(/\\/g, "/")}`
+);
+
+
+  // Artırma ve azaltma fonksiyonları
+  const increaseQuantity = () => setQuantity((prev) => prev + 1);
+  const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
 
   const handleAddToCart = () => {
-    dispatch(addItem({ ...product, quantity }));
+    dispatch(addItem({ ...productD, quantity }));
     dispatch(toggleCartModal());
   };
-
-  const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
 
   const toggleDropdown = (index) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
@@ -49,22 +83,20 @@ export default function DetailProduct({ title, items }) {
     {
       title: "Description",
       content:
-        "Firming face oil serum made of orange flower macerate and fig opuntia macerate, with natural orange and tea tree essential oils effectively supports the process of fighting the lack of skin firmness and the passage of time. Orange flower and fig opuntia macerates revitalize the skin, soothe irritation and redness, and improve the structure of the hydrolipid coat. In addition, orange essential oil has a positive effect on skin elasticity, while tea tree oil has antibacterial properties, reducing the risk of inflammation. Natural vegetable oils: argan, evening primrose and sweet almonds moisturize the skin and have antioxidant properties.This is a demo store. You can buy products like this from Mokosh.",
+        "Firming face oil serum made of orange flower macerate and fig opuntia macerate...",
     },
     {
       title: "How to use",
-      content:
-        "Use the lotion after every hand wash and when you feel dry and tight hand skin. Depending on your needs, spread 2-4 pumps of lotion on your hands. Remember the skin between the fingers, wrists and the cuticles around the nails.",
+      content: "Use the lotion after every hand wash and when you feel dry skin...",
     },
     {
       title: "Ingredients",
-      content:
-        "Aqua, Coco-Caprylate Caprate••, Glycerin••, Aloe Barbadensis Leaf Juice, Cucumis Sativus (Cucumber) Seed Oil, Glyceryl Stearate Citarate••, Rhus Verniciflua Peel Cera, Macadamia Ternifolia Seed Oil, Sorbitol, Xylitylglucoside••, Simmondsia Chinensis (Jojoba) Seed Oil, Cetearyl Olivate, Sorbitan Olivate, Anhydroxylitol••",
+      content: "Aqua, Coco-Caprylate Caprate, Glycerin, Aloe Barbadensis Leaf Juice...",
     },
     {
       title: "Delivery and return policy",
       content:
-        "Our team will ship your order within 5 business days. The time it takes to receive your order depends on the shipping method chosen at checkout. We hope you to love it, but if you need to make a return, breathe easy. Returns are always free and can be done in person or by mail. ",
+        "Our team will ship your order within 5 business days. Returns are always free...",
     },
   ];
 
@@ -72,14 +104,12 @@ export default function DetailProduct({ title, items }) {
     <div className="productDetailContainer">
       <div className="productGallery">
         <div className="thumbnailContainer">
-          {thumbnails.map((image, index) => (
+          {thumbnailsWithUrl.map((image, index) => (
             <img
               key={index}
               src={image}
               alt={`Thumbnail ${index + 1}`}
-              className={`thumbnailImage ${
-                currentIndex === index ? "active" : ""
-              }`}
+              className={`thumbnailImage ${currentIndex === index ? "active" : ""}`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}
@@ -87,8 +117,8 @@ export default function DetailProduct({ title, items }) {
 
         <div className="mainImageContainer">
           <img
-            src={thumbnails[currentIndex]}
-            alt={product.title}
+            src={thumbnailsWithUrl[currentIndex]}
+            alt={productD.title}
             className={`mainImage ${animClass}`}
             onAnimationEnd={() => setAnimClass("")}
           />
@@ -112,13 +142,11 @@ export default function DetailProduct({ title, items }) {
       </div>
 
       <div className="productInfo">
-        {product.brandImage && <p className="brandLogo">{product.brand}</p>}
-        <h1 className="productTitle">{product.title}</h1>
+        {productD.brandImage && <p className="brandLogo">{productD.brand}</p>}
+        <h1 className="productTitle">{productD.name}{productD.title}</h1>
         <div className="priceContainer">
-          {product.oldPrice && (
-            <span className="oldPrice">${product.oldPrice}</span>
-          )}
-          <span className="newPrice">${product.price}</span>
+          {productD.oldPrice && <span className="oldPrice">${productD.oldPrice}</span>}
+          <span className="newPrice">${productD.price}</span>
           <p style={{ fontSize: "11px" }}>Tax included</p>
         </div>
 
@@ -162,30 +190,16 @@ export default function DetailProduct({ title, items }) {
         </div>
 
         <div className="featuresBanner">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4951.png?v=16701941850"
-            alt="vegan image"
-          />
-          <img
-            src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4950.png?v=1670194155"
-            alt="shipping image"
-          />
-          <img
-            src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4949.png?v=1670194125"
-            alt="natural image"
-          />
-          <img
-            src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4948.png?v=1670194084"
-            alt="recycle image"
-          />
+          <img src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4951.png?v=16701941850" alt="vegan image" />
+          <img src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4950.png?v=1670194155" alt="shipping image" />
+          <img src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4949.png?v=1670194125" alt="natural image" />
+          <img src="https://cdn.shopify.com/s/files/1/0566/2657/7608/files/Group_4948.png?v=1670194084" alt="recycle image" />
         </div>
 
         {dropdownData.map((item, index) => (
           <div
             key={index}
-            className={`detailDropdown ${
-              openDropdownIndex === index ? "open" : ""
-            }`}
+            className={`detailDropdown ${openDropdownIndex === index ? "open" : ""}`}
           >
             <div
               className="detailDropdownHeader"
@@ -198,15 +212,9 @@ export default function DetailProduct({ title, items }) {
                 className="dropdownIcon"
               />
             </div>
-            <div
-              className={`detailDropdownContent ${
-                openDropdownIndex === index ? "open" : ""
-              }`}
-            >
+            <div className={`detailDropdownContent ${openDropdownIndex === index ? "open" : ""}`}>
               {openDropdownIndex === index &&
-                item.content
-                  .split("\n")
-                  .map((line, lineIndex) => <p key={lineIndex}>{line}</p>)}
+                item.content.split("\n").map((line, lineIndex) => <p key={lineIndex}>{line}</p>)}
             </div>
           </div>
         ))}

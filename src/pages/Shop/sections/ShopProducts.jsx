@@ -33,13 +33,13 @@ const ShopProducts = ({ category }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}/products`);
-        setProducts(response.data);
+        dispatch(setProducts(response.data));
       } catch (error) {
         console.error("ERROR:", error);
       }
     };
     fetchData();
-  }, [category]);
+  }, [category, dispatch]);
 
   const handleSortChange = (option) => {
     setSortOption(option);

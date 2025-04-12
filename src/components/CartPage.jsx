@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CustomModal from "./CustomModal";
+import { API_URL, BASE_URL } from "../api/constants/base_url";
 import grayminus from "../assets/images/svg/grayminus.svg";
 import grayplus from "../assets/images/svg/grayplus.svg";
 import binImg from "../assets/images/svg/bin.svg";
@@ -9,8 +10,10 @@ import cartSvg from "../assets/images/svg/cart.svg";
 import {
   removeItem,
   increaseDecrease,
-  toggleCartModal,
+  toggleCartModal, syncCartWithProducts
 } from "../redux/slices/cartSlices";
+import axios from "axios";
+
 
 const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
   const dispatch = useDispatch();
@@ -23,6 +26,22 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    const fetchAndSyncProducts = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/products`);
+        const allProducts = response.data;
+  
+        dispatch(syncCartWithProducts(allProducts)); // 👉 Burada çağırılır
+      } catch (error) {
+        console.error("Məhsulları sinxronizasiya edərkən xəta:", error);
+      }
+    };
+  
+    fetchAndSyncProducts();
+  }, [dispatch]);
+  
 
   const totalPrice = cart.reduce(
     (acc, item) => acc + (item.price ? item.price * item.quantity : 0),
@@ -62,50 +81,67 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
             {cart.map((item, index) => (
               <li className="cartItem" key={item.id || index}>
                 <div className="cartProductImg">
-                  <img src={item.image} alt={item.title} />
-                </div>
-                <div className="cartProductNameContTop">
-                <h4 className="cartProductName">
-                  <Link>{item.name}{item.title}</Link>
-                </h4>
-                <div className="counterAndPrice">
-                <div className="counterBin">
-                  <div className="counter">
-                    <img
-                      src={grayminus}
-                      alt="grayminus"
-                      className="plusminusImg"
-                      onClick={() => {
-                        if (item.quantity > 1) {
-                          dispatch(
-                            increaseDecrease({ id: item.id, type: "decrement" })
-                          );
-                        } else {
-                          dispatch(removeItem(item.id));
-                        }
-                      }}
-                    />
-                    <span>{item.quantity}</span>
-                    <img
-                      src={grayplus}
-                      alt="grayplus"
-                      className="plusminusImg"
-                      onClick={() =>
-                        dispatch(
-                          increaseDecrease({ id: item.id, type: "increment" })
-                        )
-                      }
-                    />
-                  </div>
                   <img
-                    src={binImg}
-                    alt="bin image"
-                    className="removecartProduct"
-                    onClick={() => dispatch(removeItem(item.id))}
+                    src={
+                      item.image.startsWith("http") ||
+                      item.image.startsWith("/")
+                        ? item.image
+                        : `${BASE_URL}/${item.image.replace(/\\/g, "/")}`
+                    }
+                    alt={item.title}
                   />
                 </div>
-                <span className="cartProductPrice">${item.price}</span>
-                </div>
+                <div className="cartProductNameContTop">
+                  <h4 className="cartProductName">
+                    <Link>
+                      {item.name}
+                      {item.title}
+                    </Link>
+                  </h4>
+                  <div className="counterAndPrice">
+                    <div className="counterBin">
+                      <div className="counter">
+                        <img
+                          src={grayminus}
+                          alt="grayminus"
+                          className="plusminusImg"
+                          onClick={() => {
+                            if (item.quantity > 1) {
+                              dispatch(
+                                increaseDecrease({
+                                  id: item.id,
+                                  type: "decrement",
+                                })
+                              );
+                            } else {
+                              dispatch(removeItem(item.id));
+                            }
+                          }}
+                        />
+                        <span>{item.quantity}</span>
+                        <img
+                          src={grayplus}
+                          alt="grayplus"
+                          className="plusminusImg"
+                          onClick={() =>
+                            dispatch(
+                              increaseDecrease({
+                                id: item.id,
+                                type: "increment",
+                              })
+                            )
+                          }
+                        />
+                      </div>
+                      <img
+                        src={binImg}
+                        alt="bin image"
+                        className="removecartProduct"
+                        onClick={() => dispatch(removeItem(item.id))}
+                      />
+                    </div>
+                    <span className="cartProductPrice">${item.price}</span>
+                  </div>
                 </div>
               </li>
             ))}

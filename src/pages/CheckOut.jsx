@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { API_URL, BASE_URL } from "../api/constants/base_url";
 import { Link } from "react-router-dom";
 import checkoutHeaderCart from "../assets/images/svg/checkoutHeaderCart.svg";
 import { Slide, toast } from "react-toastify";
@@ -61,7 +62,7 @@ const CheckOut = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      toast.success('Payment Successful!', {
+      toast.success("Payment Successful!", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -71,7 +72,7 @@ const CheckOut = () => {
         progress: undefined,
         theme: "colored",
         transition: Slide,
-        });
+      });
     }
   };
 
@@ -223,7 +224,6 @@ const CheckOut = () => {
                 />
                 {errors.zip && <span className="errorText">{errors.zip}</span>}
               </div>
-              
             </div>
             <label>
               <input
@@ -232,7 +232,7 @@ const CheckOut = () => {
                 checked={formData.DeliverysaveInfo}
                 onChange={handleChange}
               />{" "}
-            Save this information for next time
+              Save this information for next time
             </label>
             <h2>Payment</h2>
             <div className="paymentCreditCart">
@@ -323,13 +323,25 @@ const CheckOut = () => {
               {cart.map((item) => (
                 <li key={item.id}>
                   <div className="checkoutItemImg">
-                    <img src={item.image} alt={item.name} />
+                    <img
+                      src={
+                        item.image.startsWith("http") ||
+                        item.image.startsWith("/")
+                          ? item.image
+                          : `${BASE_URL}/${item.image.replace(/\\/g, "/")}`
+                      }
+                      alt={item.name}
+                    />
                     <span className="checkoutItemQuantity">
                       {item.quantity}
                     </span>
                   </div>
                   <span>
-                    {item.title}{item.name} - ${item.price.toFixed(2)}
+                    {item.title}
+                    {item.name} - $
+                    {item.price && !isNaN(item.price)
+                      ? parseFloat(item.price).toFixed(2)
+                      : "0.00"}
                   </span>
                 </li>
               ))}
