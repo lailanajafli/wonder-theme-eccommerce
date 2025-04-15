@@ -33,7 +33,7 @@ const ShopProducts = ({ category }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}/products`);
-        dispatch(setProducts(response.data));
+        setProducts(response.data);
       } catch (error) {
         console.error("ERROR:", error);
       }
@@ -80,7 +80,6 @@ const ShopProducts = ({ category }) => {
   const [stockCounts, setStockCounts] = useState({ inStock: 0, outOfStock: 0 });
 
   useEffect(() => {
-    // Filtr
     const filtered = products.filter((product) => {
       const matchesCategory = category ? product.category === category : true;
       const matchesBrand =

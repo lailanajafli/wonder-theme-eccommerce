@@ -70,6 +70,7 @@ export default function VideoSlider({ style, showRoutineCard = true, useStaticDa
   const [muted, setMuted] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0); 
   const videoRefs = useRef([]);
+  const swiperRef = useRef(null);  // Swiper referansı ekle
 
   const toggleMute = () => {
     setMuted((prev) => !prev);
@@ -78,9 +79,13 @@ export default function VideoSlider({ style, showRoutineCard = true, useStaticDa
     });
   };
 
+
+
   const handleSlideClick = (index) => {
     setActiveSlide(index);
+    swiperRef.current?.slideToLoop(index); // aktif slayta kaydır
   };
+  
 
 
     const handleAddToCart = useCallback((product) => {
@@ -100,6 +105,7 @@ export default function VideoSlider({ style, showRoutineCard = true, useStaticDa
       <div className="videosContainer">
         <p className="bestSkincareText">{title}</p>
         <Swiper
+         onSwiper={(swiper) => (swiperRef.current = swiper)}
           modules={[Navigation]}
           spaceBetween={20}
           slidesPerGroup={1}
@@ -124,7 +130,7 @@ export default function VideoSlider({ style, showRoutineCard = true, useStaticDa
         >
           {filteredProducts.map((product, index) => (
             <SwiperSlide key={product.id} className={index === activeSlide ? "activeSlide" : ""} onClick={() => handleSlideClick(index)}>
-              <div className="slider-card">
+              <div className={`slider-card ${index === activeSlide ? "activeSlide" : ""}`}>
                 <div className="videoSlide">
                   <video
                     ref={(el) => (videoRefs.current[index] = el)}

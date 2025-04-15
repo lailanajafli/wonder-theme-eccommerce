@@ -16,17 +16,15 @@ export default function DetailProduct({ title, items }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // Tüm hook'ları en başta tanımladık
   const [quantity, setQuantity] = useState(1);
-  const [productD, setProduct] = useState(null); // Məhsul məlumatlarını saxlayacaq state
-  const [loading, setLoading] = useState(true); // Yükləmə vəziyyəti
+  const [productD, setProduct] = useState(null); 
+  const [loading, setLoading] = useState(true); 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animClass, setAnimClass] = useState("");
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
 
-  // API'den veri çekme işlemi ve ürün bulma işlemi
   useEffect(() => {
-    const localProduct = productsData.find((p) => p.id === id);
+    const localProduct = productsData.find((p) => p.id == id);
 
     
     if (localProduct) {
@@ -44,9 +42,8 @@ export default function DetailProduct({ title, items }) {
           setLoading(false);
         });
     }
-  }, [id]); // `id` dəyişdikdə yenidən işləsin
+  }, [id]); 
 
-  // Eğer ürün yüklendiyse işlemler yapılır
   if (loading) {
     return <h2>Yüklənir...</h2>;
   }
@@ -58,7 +55,6 @@ export default function DetailProduct({ title, items }) {
     ? [productD.image, ...productD.otherImages]
     : [productD.image];
 
-// URL-ləri düzəlt (backdən gələnlər üçün)
 const thumbnailsWithUrl = thumbnails.map((img) =>
   img.startsWith("http")
     ? img
@@ -66,7 +62,6 @@ const thumbnailsWithUrl = thumbnails.map((img) =>
 );
 
 
-  // Artırma ve azaltma fonksiyonları
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
 
@@ -125,7 +120,7 @@ const thumbnailsWithUrl = thumbnails.map((img) =>
           {currentIndex > 0 && (
             <button
               className="prevButton"
-              onClick={() => setCurrentIndex((prev) => prev - 1)}
+              onClick={() => { setAnimClass("slide-right"); setCurrentIndex((prev) => prev - 1)}}
             >
               &#10094;
             </button>
@@ -133,7 +128,10 @@ const thumbnailsWithUrl = thumbnails.map((img) =>
           {currentIndex < thumbnails.length - 1 && (
             <button
               className="nextButton"
-              onClick={() => setCurrentIndex((prev) => prev + 1)}
+              onClick={() => {
+                setAnimClass("slide-left");
+                setCurrentIndex((prev) => prev + 1);
+              }}
             >
               ❯
             </button>
