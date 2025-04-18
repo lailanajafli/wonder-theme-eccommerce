@@ -104,7 +104,7 @@ export default function VideoSlider({ style, showRoutineCard = true, useStaticDa
     <div className="videoReels" style={style}>
       <div className="videosContainer">
         <p className="bestSkincareText">{title}</p>
-        <Swiper
+        <Swiper 
          onSwiper={(swiper) => (swiperRef.current = swiper)}
           modules={[Navigation]}
           spaceBetween={20}
@@ -148,7 +148,7 @@ export default function VideoSlider({ style, showRoutineCard = true, useStaticDa
                         image={product.image}
                         title={product.title}
                         price={`${"$"}${product.price} `}
-                        style={{ border: "1px solid #c9c9c975", width: "auto", marginTop: "10px" }}
+                        style={{ border: "1px solid #c9c9c975", width: "auto", marginTop: "10px", marginBottom: "33px" }}
                         onCartClick={() => handleAddToCart(product)}
                       />
                     ) : (

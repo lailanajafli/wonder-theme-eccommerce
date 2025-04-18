@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import RoutineCard from "../../../components/RoutineCard";
 
 const DetailVideo = () => {
   const videoRef = useRef(null);

@@ -28,7 +28,7 @@ export default function Detail() {
       <DetailProduct />
       <DetailVideo/>
       <ProductHighLight/>
-      <VideoSlider title= "Your Daily Routine" useStaticData={true} showRoutineCard={false} style={{marginBottom: "0px", backgroundColor: "#ECF9F8", padding: "50px 0px 40px 0px"}}/>
+      <VideoSlider title= "Your Daily Routine" useStaticData={true} showRoutineCard={false} style={{marginBottom: "0px", backgroundColor: "#ECF9F8", padding: "0px 0px 40px 0px"}}/>
       {/* <DetailWomenSlider/> */}
       <FeaturesBanner/>
       <AfterBeforeSlider/>
