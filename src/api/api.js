@@ -1,28 +1,6 @@
 const $api = (service, params) => {
     const services = {
-      selected_services: "selected-services",
-      get_all_services: "services",
-      get_service: "/getService/{service_id}",
-      get_campaign: "/get-campaign",
-      get_most_seller: "/most-sels-product",
       get_product_details: "/productDetail/{products_id}",
-      get_phone_prefix: "/get-phone-prefix",
-      get_all_blogs: "/blogs",
-      get_blog_by_id: "/blogs/{blog_id}",
-      post_login: "/login",
-      post_logout: "/logout",
-      get_all_videos: "/videos",
-      get_adress: "/branches",
-      get_vacancies: "/vacancy",
-      create_vacancy: "/vacancy/{id}",
-      show_product: '/products/{id}',
-      get_all_partners: "/partners",
-      get_all_basket: "/basket",
-      favorites: "/wishlist",
-      remove_favorites: "/wishlist/{id}",
-      get_offer_week: "/weekly-picks",
-      last_view_products: "/products/reliated-products",
-      get_profile_data: "/profile"
     };
   
     if (typeof services[service] === "string") {

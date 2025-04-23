@@ -90,8 +90,10 @@ const ShopProducts = ({ category }) => {
         !filters.availability.length ||
         (filters.availability.includes("inStock") && product.stock > 0) ||
         (filters.availability.includes("outOfStock") && product.stock === 0);
+        const matchesBestSeller =
+        sortOption === "BestSelling" ? product.bestSeller === true : true;
 
-      return matchesCategory && matchesBrand && matchesPrice && matchesStock;
+      return matchesCategory && matchesBrand && matchesPrice && matchesStock && matchesBestSeller;
     });
 
     const inStockCount = filtered.filter((product) => product.stock > 0).length;
