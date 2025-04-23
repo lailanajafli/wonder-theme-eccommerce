@@ -155,7 +155,7 @@ const DailyRoutine = () => {
           ))}
         </div>
       </div>
-      <Link className="viewAllProducts" to="/shop">
+      <Link className="viewAllProducts" to="/shop/face-care">
         <p>VIEW ALL PRODUCTS</p>
       </Link>
     </section>

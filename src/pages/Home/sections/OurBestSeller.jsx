@@ -72,7 +72,7 @@ const OurBestSeller = () => {
       <div className="swiper-scrollbar"></div>
 
       <div className="viewAllContainer">
-        <Link className="viewAllButton" to="/shop">
+        <Link className="viewAllButton" to="/shop/face-care">
           <p>VIEW ALL</p>
         </Link>
       </div>
