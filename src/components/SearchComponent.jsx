@@ -139,7 +139,7 @@ export default function SearchComponent({ onClose, showSearch }) {
               <ul className="searchSuggestionsList">
                 <ul className="suggestionsList">
                   {displayedProducts.map((product) => (
-                    <Link to={`/detail/${product.id}`} key={product.id}>
+                    <Link onClick={handleCloseSearch} to={`/detail/${product.id}`} key={product.id}>
                     <li key={product.id} className="suggestionItem">
                       <div className="searchProductImage">
                         <img
