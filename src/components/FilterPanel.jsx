@@ -110,7 +110,7 @@ const FilterPanel = ({
         ? prev.brands.filter((b) => b !== brand)
         : [...prev.brands, brand];
   
-      // Markaların doğru şəkildə əlavə olunub-olunmadığını yoxla
+      // Markaların doğru şəkildə əlavə olunub-olunmadığı
       console.log("Updated brands array:", updatedBrands);
   
       return {
@@ -137,7 +137,7 @@ const FilterPanel = ({
     setSelectedAvailability(tempFilters.availability);
   
     onFilterChange(tempFilters);
-    onClose(); // Paneli kapat
+    onClose(); 
   };
   
 

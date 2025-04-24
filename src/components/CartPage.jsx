@@ -33,7 +33,7 @@ const CartPage = ({ isOpen, title = "Your Cart", cartPageStyle = {} }) => {
         const response = await axios.get(`${API_URL}/products`);
         const allProducts = response.data;
   
-        dispatch(syncCartWithProducts(allProducts)); // 👉 Burada çağırılır
+        dispatch(syncCartWithProducts(allProducts));
       } catch (error) {
         console.error("Məhsulları sinxronizasiya edərkən xəta:", error);
       }

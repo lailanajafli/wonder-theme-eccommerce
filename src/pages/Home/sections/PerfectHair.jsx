@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PerfectHair = () => {
   const product = {
-    id: 5, // ✅ Məhsulun ID-sini buradan idarə edə bilərsən
+    id: 5,
   };
 
   return (
