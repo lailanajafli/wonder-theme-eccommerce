@@ -5,22 +5,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ScrollWoman = () => {
-  useEffect(() => {
-    // İlk scroll kontrolü
-    const handleScroll = () => {
-      if (!sessionStorage.getItem("scrolled")) {
-        sessionStorage.setItem("scrolled", "true");
-        window.location.reload();
-      }
-    };
+  // useEffect(() => {
+  //   // İlk scroll kontrolü
+  //   const handleScroll = () => {
+  //     if (!sessionStorage.getItem("scrolled")) {
+  //       sessionStorage.setItem("scrolled", "true");
+  //       window.location.reload();
+  //     }
+  //   };
 
-    // Scroll event'ini dinle
-    window.addEventListener("scroll", handleScroll, { once: true });
+  //   // Scroll event'ini dinle
+  //   window.addEventListener("scroll", handleScroll, { once: true });
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
   useEffect(() => {
     gsap.to(".landingSection", {
