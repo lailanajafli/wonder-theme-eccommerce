@@ -44,6 +44,17 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
   }, [isHomePage]);
 
   useEffect(() => {
+    if (isHomePage) {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY <= 0) {
+        setIsScrolled(false);
+        setIsVideoPassed(false);
+      }
+    }
+  }, [isHomePage]);
+  
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -69,7 +80,12 @@ const isCartModalOpen = useSelector((state) => state.cart.isCartModalOpen);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [videoHeight, lastScrollY, isHomePage]);
-
+  useEffect(() => {
+    if (!isHomePage) {
+      setIsScrolled(true);
+    }
+  }, [isHomePage]);
+  
   if (isCheckoutPage) {
     return null; 
   }

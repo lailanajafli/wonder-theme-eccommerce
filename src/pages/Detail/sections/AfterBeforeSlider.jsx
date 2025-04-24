@@ -84,8 +84,8 @@ const BeforeAfterSlider = ({ beforeSrc, afterSrc }) => {
               <img src={leftRightIcon} alt="Slider Handle" />
             </div>
           </div>
-          {/* <div className="imageLabel beforeLabel">Before</div>
-          <div className="imageLabel afterLabel">After</div> */}
+          <div className="imageLabel beforeLabel">Before</div>
+          <div className="imageLabel afterLabel">After</div>
         </div>
       </div>
       <div className="afterBeforeLeftSide">
